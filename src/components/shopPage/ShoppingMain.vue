@@ -205,7 +205,10 @@ export default {
       },
       coupon_code: '',
       visibility: 'all',
-      isLoading: false
+      isLoading: false,
+      quantity: 0,
+      duplicate: false,
+      duplicateID: ''
     }
   },
   methods: {
@@ -244,22 +247,51 @@ export default {
     addCart (id, qty = 1) {
       const vm = this
       vm.productStatus.loading = id
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
-      const cart = {
-        product_id: id,
-        qty
-      }
-      vm.$http.post(api, { data: cart }).then(response => {
-        if (response.data.success) {
-          $('#productModal').modal('hide')
-          vm.productStatus.loading = ''
-          vm.$bus.$emit('message:push', 'item added successfully', 'success')
-          vm.getCart()
-        } else {
-          vm.$bus.$emit('message:push', 'connection fail', 'danger')
-          vm.productStatus.loading = ''
+      vm.cartList.data.carts.filter(function (item) {
+        if (vm.productStatus.loading === item.product_id) {
+          vm.duplicate = true
+          vm.duplicateID = item.product_id
+          vm.quantity = qty + item.qty
         }
       })
+      if (vm.duplicate) {
+        console.log('duplicate')
+        const del = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${id}`
+        const add = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
+        const duplicateItem = {
+          product_id: id,
+          qty: vm.quantity
+        }
+        // vm.$http.delete(del).then(response => {
+        //   console.log(response)
+        //   vm.getCart()
+        // })
+        vm.$http.delete(del).then(() => {
+          return vm.$http.post(add, { data: duplicateItem })
+        }).then((item) => {
+          vm.$bus.$emit('message:push', 'item added successfully', 'success')
+          vm.getCart()
+          vm.productStatus.loading = ''
+        })
+      } else {
+        console.log('new')
+        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
+        const cart = {
+          product_id: id,
+          qty
+        }
+        vm.$http.post(api, { data: cart }).then(response => {
+          if (response.data.success) {
+            $('#productModal').modal('hide')
+            vm.productStatus.loading = ''
+            vm.$bus.$emit('message:push', 'item added successfully', 'success')
+            vm.getCart()
+          } else {
+            vm.$bus.$emit('message:push', 'connection fail', 'danger')
+            vm.productStatus.loading = ''
+          }
+        })
+      }
     },
     removeCart (id) {
       const vm = this
