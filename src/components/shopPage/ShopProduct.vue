@@ -129,17 +129,12 @@ export default {
         }
       })
       if (vm.duplicate) {
-        console.log('duplicate')
         const del = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${vm.duplicateID}`
         const add = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
         const duplicateItem = {
           product_id: id,
           qty: vm.quantity
         }
-        // vm.$http.delete(del).then(response => {
-        //   console.log(response)
-        //   vm.getCart()
-        // })
         vm.$http.delete(del).then(() => {
           return vm.$http.post(add, { data: duplicateItem })
         }).then((item) => {
@@ -148,7 +143,6 @@ export default {
           vm.productStatus.loading = ''
         })
       } else {
-        console.log('new')
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
         const cart = {
           product_id: id,
