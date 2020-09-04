@@ -124,13 +124,13 @@ export default {
       vm.cartList.data.carts.filter(function (item) {
         if (vm.productStatus.loading === item.product_id) {
           vm.duplicate = true
-          vm.duplicateID = item.product_id
+          vm.duplicateID = item.id
           vm.quantity = qty + item.qty
         }
       })
       if (vm.duplicate) {
         console.log('duplicate')
-        const del = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${id}`
+        const del = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${vm.duplicateID}`
         const add = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
         const duplicateItem = {
           product_id: id,
