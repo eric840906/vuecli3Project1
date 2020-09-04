@@ -255,19 +255,13 @@ export default {
         }
       })
       if (vm.duplicate) {
-        console.log('duplicate')
         const del = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${vm.duplicateID}`
         const add = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
         const duplicateItem = {
           product_id: id,
           qty: vm.quantity
         }
-        // vm.$http.delete(del).then(response => {
-        //   console.log(response)
-        //   vm.getCart()
-        // })
         vm.$http.delete(del).then(response => {
-          console.log(response)
           if (response.data.success) {
             return vm.$http.post(add, { data: duplicateItem })
           }
@@ -278,7 +272,6 @@ export default {
           vm.duplicate = false
         })
       } else {
-        console.log('new')
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
         const cart = {
           product_id: id,
@@ -303,7 +296,6 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${id}`
       vm.$http.delete(api).then(response => {
         if (response.data.success) {
-          console.log(response)
           vm.$bus.$emit('message:push', 'item removed', 'danger')
           vm.getCart()
           vm.productStatus.loading = ''
