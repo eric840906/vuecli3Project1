@@ -43,8 +43,8 @@
                   style="height: 250px; background-size: cover; background-position: center"
                   :style="{ backgroundImage: `url(${item.imageUrl})` }"
                 ></div>
-              <div class="cover">
-                <a class="btn" @click="toProduct(item.id)">view</a>
+              <div class="cover" @click="toProduct(item.id)">
+                <div style="color:white; transform: translateY(450%);">View Product</div>
               </div>
             </div>
           <template slot="next"><font-awesome-icon class="next" :icon="['fas', 'chevron-right']" style="height: 100%;" /></template>
@@ -241,6 +241,7 @@ export default {
   position: relative;
   padding: 0px 10px;
   .cover{
+    text-align: center;
     left: 0;
     top: 0;
     display: none;
@@ -248,13 +249,7 @@ export default {
     width: 100%;
     height: 100%;
     background-color: #0000006b;
-    .btn{
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 42%;
-      background-color: #f6fbffbf;
-    }
+    cursor: pointer;
   }
   &:hover{
     .cover{

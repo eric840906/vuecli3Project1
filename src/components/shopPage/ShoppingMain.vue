@@ -113,12 +113,14 @@
           class="col-md-6 mb-4 col-lg-4"
           v-for="item in filterProducts"
           :key="item.id"
-          style="height:390px"
+          style="height:390px; cursor:pointer;"
         >
           <div class="card border-0 shadow-sm" style="height: 100%;">
-            <div class="cover">
-              <div class="shopping-buttons">
-                <button
+            <div class="cover" @click="toProduct(item.id)">
+              <div style="color: aliceblue; transform: translateY(220%);">More Detail</div>
+            </div>
+            <div class="shopping-buttons">
+                <!-- <button
                   :disabled='productStatus.loading == item.id'
                   type="button"
                   class="btn btn-sm shop-btn border-right"
@@ -134,7 +136,7 @@
                     :icon="['fas', 'spinner']"
                   />
                   View More
-                </button>
+                </button> -->
                 <button
                   :disabled='productStatus.loading == item.id'
                   type="button"
@@ -153,7 +155,6 @@
                   Add to Cart
                 </button>
               </div>
-            </div>
             <div
               style="height: 150px; background-size: cover; background-position: center"
               :style="{ backgroundImage: `url(${item.imageUrl})` }"
@@ -310,6 +311,10 @@ export default {
       vm.tempProducts = vm.products.filter(function (item, index, array) {
         return item.category === value
       })
+    },
+    toProduct (id) {
+      const vm = this
+      vm.$router.push(`product/${id}`)
     }
   },
   created () {
@@ -378,16 +383,18 @@ export default {
 .card{
   position: relative;
   .cover{
+    text-align: center;
     display: none;
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 90%;
     background-color: #0000006b;
-    .shopping-buttons{
+  }
+  .shopping-buttons{
+      display: none;
       background-color: white;
       width: 100%;
       position: absolute;
-      display: flex;
       justify-content: space-around;
       bottom: 0%;
       button{
@@ -398,11 +405,13 @@ export default {
         }
       }
     }
-  }
   &:hover{
     .cover{
       display: block;
       transition: 0.5s all;
+    }
+    .shopping-buttons{
+      display: flex;
     }
   }
 }
