@@ -234,7 +234,7 @@ export default {
 
 .info {
   border-radius: 5px;
-  padding: 10px 14px 0 14px;
+  padding: 10px 14px;
   margin-bottom: 20px;
 }
 .btn {
@@ -249,7 +249,7 @@ export default {
 
 @media (max-width: 769px) {
   .info-list {
-    height: 34vh;
+    height: 30vh;
     overflow-y: hidden;
   }
   .rwd-info-scroll {
