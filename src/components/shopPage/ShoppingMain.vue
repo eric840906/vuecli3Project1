@@ -58,7 +58,7 @@
     <div class="row">
       <nav
         id="sidebarMenu"
-        class="col-xl-3 col-sm-2 d-md-block bg-light sidebar collapse"
+        class="col-md-3 col-sm-2 d-md-block bg-light sidebar collapse"
       >
         <div class="sidebar-sticky pt-3">
           <div style="height: 70px;"></div>

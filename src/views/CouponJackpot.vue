@@ -17,7 +17,7 @@
       <div class="album py-5 bg-light">
         <div class="container">
           <div class="window-cards card-deck mb-3 text-center justify-content-center">
-            <div class="card mb-4 shadow-sm card-background" v-for="item in randomCoupons" :key="item.id">
+            <div class="card mb-4 shadow-sm" v-for="item in randomCoupons" :key="item.id">
               <div class="front face"></div>
               <div class="back">
                 <div
@@ -133,7 +133,7 @@
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <div class="card mb-4 shadow-sm card-background">
+                  <div class="card mb-4 shadow-sm">
                     <div class="front face"></div>
                     <div class="back">
                       <div
@@ -187,7 +187,7 @@
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <div class="card mb-4 shadow-sm card-background">
+                  <div class="card mb-4 shadow-sm">
                     <div class="front face"></div>
                     <div class="back">
                       <div
@@ -241,7 +241,7 @@
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <div class="card mb-4 shadow-sm card-background">
+                  <div class="card mb-4 shadow-sm">
                     <div class="front face"></div>
                     <div class="back">
                       <div
@@ -572,29 +572,25 @@ export default {
 
 .card {
   @include flip();
+  height: 490px;
   cursor: pointer;
   display: inline-block;
   width: auto !important;
   border-radius: 15px;
   font-family: "cwTeXYen", sans-serif;
+  .front {
+    background-position: center;
+    background-image: url(https://i.pinimg.com/564x/c1/59/b4/c159b4738dae9c9d8d6417228024de8d.jpg);
+  }
+  .back{
+      height: 100%;
+      background-color: antiquewhite;
+      border-radius: 15px;
+  }
 }
 
-.card-background {
-  background: antiquewhite;
-}
-
-.front {
-  background-position: center;
-  background-image: url(https://i.pinimg.com/564x/c1/59/b4/c159b4738dae9c9d8d6417228024de8d.jpg);
-}
 .slick-slide {
   margin: 0 10px;
-}
-
-@media (min-width: 1024px) {
-  .card {
-    height: 490px;
-  }
 }
 
 //loading effect
