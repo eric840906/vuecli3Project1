@@ -134,38 +134,6 @@ export default {
   created () {
     this.getProducts()
     this.getCart()
-  },
-
-  computed: {
-    filterProducts () {
-      if (this.visibility === 'all') {
-        return this.products
-      } else if (this.visibility === '冰棒') {
-        const newFilter = []
-        this.products.forEach(element => {
-          if (element.category === '冰棒') {
-            newFilter.push(element)
-          }
-        })
-        return newFilter
-      } else if (this.visibility === '冰淇淋') {
-        const newFilter = []
-        this.products.forEach(element => {
-          if (element.category === '冰淇淋') {
-            newFilter.push(element)
-          }
-        })
-        return newFilter
-      } else if (this.visibility === '精品') {
-        const newFilter = []
-        this.products.forEach(element => {
-          if (element.category === '精品系列') {
-            newFilter.push(element)
-          }
-        })
-        return newFilter
-      }
-    }
   }
 }
 </script>
