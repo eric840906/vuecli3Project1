@@ -159,7 +159,7 @@
               <h3>
                 "Sometimes all you need is love... Oh wait! And ice cream, and chocolate to go along with it as nowadays love is anything but sweet."
               </h3>
-              <router-link to="shoppage/product/-MCw7P4EHY5KYhZQFJnl" class="btn notice-btn"><font-awesome-icon class="moving-arrow-left" :icon="['fas', 'angle-double-left']"/>More Info<font-awesome-icon class="moving-arrow-right" :icon="['fas', 'angle-double-right']"/></router-link>
+              <router-link to="shoppage/product/-MCw7P4EHY5KYhZQFJnl" class="btn btn-primary notice-btn"><font-awesome-icon class="moving-arrow-left" :icon="['fas', 'angle-double-left']"/>More Info<font-awesome-icon class="moving-arrow-right" :icon="['fas', 'angle-double-right']"/></router-link>
               <!-- <a class="notice-btn btn" href="#">Learn more</a> -->
             </div>
           </div>

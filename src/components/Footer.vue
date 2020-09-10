@@ -1,6 +1,6 @@
 <template>
     <div style="font-family: 'Tangerine', cursive;">
-        <footer class="pt-4 pt-md-5" style="background-color: #f5f5f5;">
+        <footer class="pt-4 pt-md-5 bg-light">
             <div class="container">
                 <div class="row">
                     <div class="footer-item text-muted col-md-5 store-info">
@@ -14,7 +14,7 @@
                         <div>
                             <form action="" style="margin: 40px 0" class="subscription">
                                 <input type="text" id="email" class="email-input" placeholder="Enter Your E-mail" v-model="email">
-                                <button class="subscribe-btn" :disabled="!email" @click.prevent="toSubscribe">Subscribe</button>
+                                <button class="subscribe-btn bg-secondary" :disabled="!email" @click.prevent="toSubscribe">Subscribe</button>
                             </form>
                         </div>
                         <h3>Follow Us</h3>
@@ -102,7 +102,6 @@ export default {
         .subscribe-btn{
         padding-bottom: 3px;
         font-size: 20px;
-        background-color: #696969;
         color: white;
         border:none;
         border-radius: 0 37px 37px 0;

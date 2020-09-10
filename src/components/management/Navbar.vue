@@ -29,7 +29,6 @@
 
 <script>
 export default {
-  name: 'Navbar',
   methods: {
     signOut () {
       const vm = this

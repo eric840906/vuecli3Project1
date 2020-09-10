@@ -123,7 +123,7 @@
                 <button
                   :disabled='productStatus.loading == item.id'
                   type="button"
-                  class="btn  btn-sm shop-btn"
+                  class="btn btn-primary btn-sm shop-btn"
                   @click="addCart(item.id)"
                 >
                   <font-awesome-icon
@@ -340,6 +340,7 @@ export default {
 </script>
 
 <style lang="scss">
+$hover-color: #ffdf76;
 
 .sidebar {
   top: 0;
@@ -375,7 +376,6 @@ export default {
   }
   .shopping-buttons{
       display: none;
-      background-color: white;
       width: 100%;
       position: absolute;
       justify-content: space-around;
@@ -384,7 +384,7 @@ export default {
         flex: 1;
         padding: 10px 0 10px 0;
         &:hover{
-        background-color: #ffdf76;
+        background-color: $hover-color;
         }
       }
     }
