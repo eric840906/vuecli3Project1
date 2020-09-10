@@ -300,7 +300,7 @@ export default {
 <style lang="scss" scope>
 .checkout-list{
   margin: 30px auto;
-  width:70%
+  width:50%
 }
 
 .mt-100 {
@@ -310,7 +310,6 @@ export default {
 @media (max-width: 320px) {
   .checkout-list{
   margin: 30px -31px;
-  width:70%
   }
 }
 </style>
