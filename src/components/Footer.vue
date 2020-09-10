@@ -14,7 +14,7 @@
                         <div>
                             <form action="" style="margin: 40px 0" class="subscription">
                                 <input type="text" id="email" class="email-input" placeholder="Enter Your E-mail" v-model="email">
-                                <button class="subscribe-btn" :disabled="!email">Subscribe</button>
+                                <button class="subscribe-btn" :disabled="!email" @click.prevent="toSubscribe">Subscribe</button>
                             </form>
                         </div>
                         <h3>Follow Us</h3>
@@ -46,6 +46,13 @@ export default {
   data () {
     return {
       email: ''
+    }
+  },
+  methods: {
+    toSubscribe () {
+      const vm = this
+      vm.$bus.$emit('message:push', 'Thanks for your subscription!', 'success')
+      vm.email = ''
     }
   }
 }

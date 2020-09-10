@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Alert></Alert>
     <Navbar></Navbar>
     <main role="main">
       <section
@@ -111,6 +112,7 @@
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 import Navbar from '../components/HomeNav.vue'
 import Footer from '../components/Footer'
+import Alert from '../components/Alert.vue'
 export default {
   name: 'MyAwesomeMap',
   components: {
@@ -118,7 +120,8 @@ export default {
     Footer,
     LMap,
     LTileLayer,
-    LMarker
+    LMarker,
+    Alert
   },
   data () {
     return {

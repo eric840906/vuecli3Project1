@@ -66,8 +66,9 @@ export default {
 }
 </script>
 
-<style scope>
+<style scope lang="scss">
 .message-alert {
+  font-family: "cwTeXYen", sans-serif;
   position: fixed;
   max-width: 50%;
   top: 56px;

@@ -120,23 +120,6 @@
               <div style="color: aliceblue; transform: translateY(220%);">More Detail</div>
             </div>
             <div class="shopping-buttons">
-                <!-- <button
-                  :disabled='productStatus.loading == item.id'
-                  type="button"
-                  class="btn btn-sm shop-btn border-right"
-                  @click="getProduct(item.id)"
-                >
-                  <font-awesome-icon
-                    v-if="productStatus.loading !== item.id"
-                    :icon="['far', 'list-alt']"
-                  />
-                  <font-awesome-icon
-                    class="fa-pulse"
-                    v-else
-                    :icon="['fas', 'spinner']"
-                  />
-                  View More
-                </button> -->
                 <button
                   :disabled='productStatus.loading == item.id'
                   type="button"
@@ -324,9 +307,7 @@ export default {
 
   computed: {
     filterProducts () {
-      if (this.visibility === 'all') {
-        return this.products
-      } else if (this.visibility === 'Popsicle') {
+      if (this.visibility === 'Popsicle') {
         const newFilter = []
         this.products.forEach(element => {
           if (element.category === 'Popsicle') {
@@ -350,6 +331,8 @@ export default {
           }
         })
         return newFilter
+      } else {
+        return this.products
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar></Navbar>
-
+    <Alert></Alert>
     <main role="main">
       <div
         id="myCarousel"
@@ -14,21 +14,24 @@
             class="carousel-item embed-responsive-item active"
             style="backgroundImage:url(https://images.unsplash.com/photo-1560801619-01d71da0f70c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80); background-size: cover; background-position: bottom;"
           >
+          <div class="banner-cover">
             <div class="container">
-              <div class="carousel-caption">
-                <h1>Lächeln</h1>
-                <h3>Facts are irrelevant</h3>
-                <h3>What matters is what the consumer believes</h3>
-              </div>
+                <div class="carousel-caption">
+                  <h1>Lächeln</h1>
+                  <h3>Facts are irrelevant</h3>
+                  <h3>What matters is what the consumer believes</h3>
+                </div>
             </div>
+          </div>
           </router-link>
           <router-link
             to="/shoppage/shoppingmain"
             class="carousel-item embed-responsive-item"
             style="backgroundImage:url(https://images.unsplash.com/photo-1560801530-34efebfecba8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80); background-size: cover; background-position: center;"
           >
+          <div class="banner-cover">
             <div class="container">
-              <div class="carousel-caption text-center dark-cover">
+              <div class="carousel-caption text-center">
                 <h1 class="responsive-mt">Delicacies</h1>
                 <h3>You can't buy happiness,</h3>
                 <h3>
@@ -42,22 +45,24 @@
                 >
               </div>
             </div>
+          </div>
           </router-link>
           <router-link
             to="/couponjackpot"
             class="carousel-item embed-responsive-item"
             style="backgroundImage:url(https://images.unsplash.com/photo-1515037028865-0a2a82603f7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1321&q=80); background-size: cover; background-position: bottom;"
           >
+          <div class="banner-cover">
             <div class="container">
-              <div class="carousel-caption text-right">
+              <div class="carousel-caption">
                 <h1>Event</h1>
-                <h2>Life is like an ice cream,</h2>
-                <h2>enjoy it before it melts</h2>
+                <h2>Life is like an ice cream, enjoy it before it melts</h2>
                 <router-link class="btn top-notice-btn" to="/couponjackpot"
                   ><h2 class="mr-0">Grab a coupon</h2></router-link
                 >
               </div>
             </div>
+          </div>
           </router-link>
         </div>
         <a
@@ -205,12 +210,13 @@ import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import Navbar from '../components/HomeNav.vue'
 import Footer from '../components/Footer.vue'
+import Alert from '../components/Alert.vue'
 
 export default {
   components: {
     Navbar,
-    Footer
-    // VueSlickCarousel
+    Footer,
+    Alert
   },
   data () {
     return {
@@ -476,10 +482,11 @@ body {
   border: none;
   color: white;
 }
-.dark-cover{
+.banner-cover{
   position: absolute;
-  background: radial-gradient(#00000000, #00000080);
+  background: radial-gradient(#00000099, #ffffff57);
   height: 100%;
+  width: 100%;
   text-align: center;
   bottom: 0;
 }
@@ -622,6 +629,12 @@ body {
 @media (max-width: 425px) {
   .mb-10 {
     margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .carousel-caption{
+    bottom: 10rem;
   }
 }
 </style>

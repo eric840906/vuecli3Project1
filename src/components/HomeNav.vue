@@ -1,7 +1,7 @@
 <template>
   <div style="font-family: 'Tangerine', cursive;">
     <header>
-      <nav class="main-nav navbar navbar-expand-md navbar-dark fixed-top black" style="width: 100%;">
+      <nav class="main-nav navbar navbar-expand-md navbar-dark fixed-top bg-black" style="width: 100%;">
         <a
           class="navbar-brand"
           href="#"
@@ -46,9 +46,9 @@ export default {
   mounted () {
     $(window).on('scroll', function () {
       if ($(window).scrollTop()) {
-        $('.main-nav').addClass('top-nav')
+        $('.main-nav').addClass('bg-trans-bl')
       } else {
-        $('.main-nav').removeClass('top-nav')
+        $('.main-nav').removeClass('bg-trans-bl')
       }
     })
   }
@@ -65,13 +65,8 @@ export default {
   box-shadow: none;
   font-size: 30px;
 }
-
-.black {
-  background-color: black;
+.main-nav{
   transition: 0.5s;
 }
 
-.top-nav {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
 </style>
