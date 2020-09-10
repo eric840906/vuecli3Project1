@@ -197,7 +197,6 @@ export default {
       vm.isLoading = true;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/products`; //'https://vue-course-api.hexschool.io/api/eric840906/products'
       this.$http.get(api).then(response => {
-        console.log(response.data);
         vm.isLoading = false;
         vm.products = response.data.products;
       });
@@ -207,7 +206,6 @@ export default {
       vm.productStatus.loading = id;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/product/${id}`;
       this.$http.get(api).then(response => {
-        console.log(response.data);
         if (response.data.success) {
           vm.product = response.data.product;
           vm.productStatus.loading = "";
@@ -224,7 +222,6 @@ export default {
         qty
       };
       this.$http.post(api, { data: cart }).then(response => {
-        console.log(response.data);
         if (response.data.success) {
           $("#productModal").modal("hide");
           vm.productStatus.loading = "";
@@ -240,7 +237,6 @@ export default {
       vm.isLoading = true
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart` //'https://vue-course-api.hexschool.io/api/eric840906/products'
       this.$http.get(api).then(response => {
-        console.log(response.data);
         vm.isLoading = false;
         vm.cartList = response.data;
       });
@@ -249,9 +245,7 @@ export default {
       const vm = this;
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${id}`
       this.$http.delete(api).then(response => {
-        console.log(response.data);
         if (response.data.success) {
-          console.log("刪除成功");
           this.getCart();
         }
       });
@@ -263,7 +257,6 @@ export default {
       };
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/coupon`; //'https://vue-course-api.hexschool.io/api/eric840906/products'
       this.$http.post(api, { data: coupon }).then(response => {
-        console.log(response);
         vm.isLoading = true;
         if (response.data.success) {
           vm.getCart();

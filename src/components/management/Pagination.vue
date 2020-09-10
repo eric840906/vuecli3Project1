@@ -44,7 +44,6 @@ export default {
   methods: {
     pageShift (page) {
       this.$emit('pageChange', page)
-      console.log(page)
     }
   }
 }

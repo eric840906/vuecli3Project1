@@ -70,14 +70,11 @@ router.beforeEach((to, from, next) => {
     const api = `${process.env.VUE_APP_APIPATH}/api/user/check` // 用API抓使用者資料確認登入權限
     // 原來的this.$http.get(api)只能在元件使用，若要在.js裡面抓api資料的話要用axios.post(api)
     axios.post(api).then((response) => {
-      console.log(response.data)
       if (!response.data.success) {
-        alert('請登入')
         next({
           path: '/login'
         })
       } else {
-        console.log('已登入')
         next()
       }
     })

@@ -361,7 +361,6 @@ export default {
           $('#addProduct').modal('hide')
           vm.getProducts()
         } else {
-          console.log(response)
           $('#addProduct').modal('hide')
           vm.getProducts()
           alert('新增失敗')
@@ -384,7 +383,6 @@ export default {
           }
         })
         .then(response => {
-          console.log(response.data)
           vm.status.isUploading = false
           if (response.data.success) {
             // vm.tempProduct.image=response.data.imageUrl 只寫到這測試的時候會發現圖片連結確實有存到，但沒有getter和setter，這時候要用$set強制寫入才能確保圖片雙向綁定
@@ -395,18 +393,11 @@ export default {
           }
         })
     },
-    //  原刪除判定(已改為使用switch判定併入openModal())
-    // deletConfirm(item){
-    //     this.tempProduct=Object.assign({},item);
-    //     $('#delProductModal').modal('show')
-    // },
     deleteProduct () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/admin/product/${vm.tempProduct.id}`
       this.$http.delete(api).then(response => {
-        console.log(response.data)
         if (response.data.success) {
-          console.log('刪除成功')
           vm.getProducts()
           $('#delProductModal').modal('hide')
           vm.$bus.$emit(
