@@ -1,6 +1,6 @@
 <template>
     <div style="font-family: 'Tangerine', cursive;">
-        <footer class="pt-4 pt-md-5 bg-light">
+        <footer class="pt-4 pt-md-5 bg-gray">
             <div class="container">
                 <div class="row">
                     <div class="footer-item text-muted col-md-5 store-info">

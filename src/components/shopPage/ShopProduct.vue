@@ -24,7 +24,7 @@
 
         <button
           :disabled='productStatus.loading == product.id'
-          class="addCart-btn"
+          class="addCart-btn btn-shop"
           @click="addCart(product.id, product.quantity)"
         >
           Add to Cart
@@ -208,16 +208,6 @@ export default {
   margin: 70px 0;
   width: 100%;
   border-style: none;
-  transition: 0.3s all;
-
-  &:hover {
-    background-color: #ffdf76;
-    color: #292929;
-  }
-  &:focus {
-    background-color: #292929;
-    color: #ffdf76;
-  }
 }
 .productsCarousel{
   position: relative;

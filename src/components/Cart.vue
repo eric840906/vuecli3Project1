@@ -75,7 +75,7 @@
           </div>
 
           <a
-            class="pay-btn text-decoration-none"
+            class="pay-btn btn-shop text-decoration-none"
             @click.prevent="toPay"
             >&emsp;Checkout&emsp;</a
           >
@@ -237,15 +237,7 @@ export default {
   width: 100%;
   text-align: center;
   margin-top: 20px;
-  background-color: white;
-  transition: 0.3s;
-  &:hover {
-    background-color: #292929;
-    color: #ffdf76;
-  }
-  &:focus {
-    outline: 0;
-  }
+  cursor: pointer;
 }
 
 .show {

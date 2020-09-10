@@ -123,8 +123,9 @@
                 <button
                   :disabled='productStatus.loading == item.id'
                   type="button"
-                  class="btn btn-primary btn-sm shop-btn"
+                  class="btn-shop lower-radius"
                   @click="addCart(item.id)"
+                  style="font-size: 0.875rem;"
                 >
                   <font-awesome-icon
                     v-if="productStatus.loading !== item.id"
@@ -143,9 +144,12 @@
               :style="{ backgroundImage: `url(${item.imageUrl})` }"
             ></div>
             <div class="card-body">
-              <span class="badge badge-secondary float-right ml-2">{{
+              <span class="badge badge-product float-right">
+                <span style="position: absolute; top: -62px; transform: rotate(-46deg); left: 6px;">
+                {{
                 item.category
-              }}</span>
+                }}</span>
+              </span>
               <h5 class="card-title">
                 <a href="#" class="text-dark">{{ item.title }}</a>
               </h5>
@@ -340,7 +344,6 @@ export default {
 </script>
 
 <style lang="scss">
-$hover-color: #ffdf76;
 
 .sidebar {
   top: 0;
@@ -363,6 +366,22 @@ $hover-color: #ffdf76;
     }
   }
 }
+.badge{
+  padding: 0;
+}
+.badge-product{
+  position: absolute;
+  border-color: #0f0f0fab transparent transparent transparent;
+  border-style: solid solid solid solid;
+  border-width: 90px 90px 0px 0px;
+  top: 0;
+  left: 0;
+  border-radius: 0;
+}
+
+.lower-radius{
+  border-radius: 0;
+}
 
 .card{
   position: relative;
@@ -383,9 +402,6 @@ $hover-color: #ffdf76;
       button{
         flex: 1;
         padding: 10px 0 10px 0;
-        &:hover{
-        background-color: $hover-color;
-        }
       }
     }
   &:hover{
