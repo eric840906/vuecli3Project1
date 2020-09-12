@@ -69,7 +69,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
 html,
 body {
   height: 100%;
@@ -82,7 +84,7 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+  background-color: $white;
 }
 
 .form-signin {

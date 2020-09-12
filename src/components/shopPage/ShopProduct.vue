@@ -199,10 +199,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
 .image-frame{
   height: 200px;
   width: 200px;
-  margin-left:auto; margin-right:auto;
+  margin:0 auto;
 }
 .addCart-btn {
   margin: 70px 0;
@@ -238,7 +240,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #0000006b;
+    background-color: $cover;
     cursor: pointer;
   }
   &:hover{

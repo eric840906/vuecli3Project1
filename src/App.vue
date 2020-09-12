@@ -13,6 +13,5 @@ export default {
 
 </script>
 <style lang="scss">
-$hover-color: #ffdf76;
 @import "./assets/all";
 </style>

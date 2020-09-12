@@ -2,22 +2,6 @@
 //
 // Variables should follow the `$component-state-property-size` formula for
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
-.btn-shop {
-  color: $black;
-  background-color: $white;
-  border:none; /*set the color you want here*/
-  transition: all .3s;
-  &:hover{
-      background-color: $yellow;
-  }
-  &:focus{
-      color: $yellow;
-      background-color: $black;
-  }
-}
-.badge-product{
-  color: $yellow;
-}
 // Color system
 
 $white:    #fff !default;
@@ -49,11 +33,11 @@ $grays: map-merge(
   $grays
 );
 
-$blue:    #007bff !default;
+$blue:    blue !default;
 $indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
+$purple:  rgb(135, 32, 219) !default;
 $pink:    #e83e8c !default;
-$red:     #dc3545 !default;
+$red:     #aa2735 !default;
 $orange:  #fd7e14 !default;
 $yellow:  #ffdf76 !default;
 $green:   #28a745 !default;
@@ -61,6 +45,13 @@ $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 $black:   #000;
 $trans-bl: #00000080;
+$special-link: #777777;
+$card-background: antiquewhite;
+$normal-prize: #6dbcfe;
+$epic-prize: #8d8dfc;
+$legend-prize: #ff9a00;
+$cover: #0000006b;
+
 
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default

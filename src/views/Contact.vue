@@ -18,7 +18,7 @@
         </div>
       </section>
 
-      <div class="album py-5 bg-light">
+      <div class="album py-5">
         <div class="container">
           <div class="row overflow-auto flex-nowrap cards">
             <div class="col-md-4 row mr-auto ml-auto card-frame">
@@ -390,100 +390,73 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
 * {
   font-family: "cwTeXYen", sans-serif;
-}
-
-.jumbotron {
-  height: 400px;
-  margin-top: 22px;
-  h1 {
-    display: inline-block;
   }
-}
-.card-footer {
-  font-size: xx-large;
-  background: black;
-  a {
-    color: #777777;
-    transition: ease-out 0.3s;
-    &:hover {
-      color: white;
+
+  .card-footer {
+    font-size: xx-large;
+    background: $black;
+    a {
+      color: $special-link;
+      transition: ease-out 0.3s;
+      &:hover {
+        color: $white;
+      }
     }
   }
-}
 
-#left-arrow {
-  display: none;
-  position: absolute;
-  top: 85%;
-  left: 0%;
-  z-index: 99999999999999999;
-}
-
-#right-arrow {
-  display: none;
-  position: absolute;
-  top: 85%;
-  right: 0%;
-  z-index: 99999999999999999;
-}
-#carouselTeam {
-  display: none;
-  position: absolute;
-}
-.position {
-  border: 1px solid black;
-  border-radius: 7px;
-  margin-bottom: 5px;
-  padding: 5px 8px;
-  background-color: black;
-  color: #ffdb27;
-}
-
-@media (max-width: 425px) {
-  .card-frame {
-    flex: 0 0 100%;
-    max-width: 100%;
+  #left-arrow {
+    display: none;
+    position: absolute;
+    top: 85%;
+    left: 0%;
+    z-index: 99999999999999999;
   }
-  .cards {
+
+  #right-arrow {
+    display: none;
+    position: absolute;
+    top: 85%;
+    right: 0%;
+    z-index: 99999999999999999;
+  }
+  #carouselTeam {
     display: none;
     position: absolute;
   }
-  #left-arrow,
-  #right-arrow {
-    display: block;
+  .position {
+    border: 1px solid $black;
+    border-radius: 7px;
+    margin-bottom: 5px;
+    padding: 5px 8px;
+    background-color: $black;
+    color: $yellow;
   }
-  #carouselTeam {
-    display: block;
-    position: relative;
-  }
-}
 
-// 留言區css
-.mr-10 {
-  margin-right: 10px;
-}
-
-.top-notice-btn {
-  font-size: 20px;
-  background-color: transparent;
-  border: none;
-  color: black;
-  &:hover {
-    color: #ffdf76;
-    background-color: #00000075;
+  @media (max-width: 425px) {
+    .card-frame {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    .cards {
+      display: none;
+      position: absolute;
+    }
+    #left-arrow,
+    #right-arrow {
+      display: block;
+    }
+    #carouselTeam {
+      display: block;
+      position: relative;
+    }
   }
-}
 
-.submit-msg-btn{
-  font-size: 20px;
-  background-color: transparent;
-  border: none;
-  color: #ffdf76;
-  background-color: #00000075;
-  &:hover {
-    background-color: black;
+  // 留言區css
+  .mr-10 {
+    margin-right: 10px;
   }
-}
 </style>

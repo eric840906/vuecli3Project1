@@ -1,7 +1,15 @@
-@import "./helpers/customBtn.scss";
 @import "~bootstrap/scss/functions";
 @import "./helpers/_variables";
 @import "./dashboard.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);    
 @import url(https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap);
+@import "./helpers/customBtn.scss";
+.jumbotron {
+    height: 400px;
+    margin-top: 22px;
+    h1 {
+      display: inline-block;
+    }
+}
+

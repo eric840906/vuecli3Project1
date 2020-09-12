@@ -14,7 +14,7 @@
         </div>
       </section>
 
-      <div class="album py-5 bg-light">
+      <div class="album py-5">
         <div class="container">
           <div class="window-cards card-deck mb-3 text-center justify-content-center">
             <div class="card mb-4 shadow-sm" v-for="item in randomCoupons" :key="item.id">
@@ -54,75 +54,18 @@
                   />
                   <h3>Expiration:{{ item.due_date }}</h3>
                   <a
-                    class="btn btn-lg btn-block btn-outline-primary margin-auto"
+                    class="btn btn-lg notice-btn"
                     @click.prevent="copyCode"
                     >Copy</a
                   >
-                </div>
-
-                <div class="card-footer">
                   <router-link
-                    class="btn btn-lg btn-block btn-outline-primary margin-auto"
-                    to="/shoppage/shoppingmain"
-                    >Shopping</router-link
+                  class="btn btn-lg notice-btn"
+                  to="/shoppage/shoppingmain"
+                  >Shopping</router-link
                   >
                 </div>
               </div>
             </div>
-            <!-- <VueSlickCarousel v-bind="settings">
-              <div class="card mb-4 shadow-sm card-background" v-for="item in randomCoupons" :key="item.id">
-                <div class="front face"></div>
-                <div class="back">
-                  <div
-                    class="card-header"
-                    :class="{
-                      'small-discount-title': item.discount <= 20,
-                      'big-discount-title': item.discount >= 50,
-                      'normal-discount-title':
-                        item.discount < 50 && item.discount > 20
-                    }"
-                  >
-                    <h4 class="my-0 font-weight-normal">
-                      {{ item.title }}
-                    </h4>
-                  </div>
-                  <div
-                    class="card-body"
-                    :class="{
-                      'small-discount-title': item.discount <= 20,
-                      'big-discount-title': item.discount >= 50,
-                      'normal-discount-title':
-                        item.discount < 50 && item.discount > 20
-                    }"
-                  >
-                    <h1 class="card-title pricing-card-title">
-                      {{ item.discount }}%off
-                    </h1>
-                    <h2>優惠代碼</h2>
-                    <input
-                      type="text"
-                      class="code"
-                      :value="item.code"
-                      readonly="readonly"
-                    />
-                    <h3>使用期限:{{ item.due_date }}</h3>
-                    <a
-                      class="btn btn-lg btn-block btn-outline-primary margin-auto"
-                      @click.prevent="copyCode"
-                      >複製優惠碼</a
-                    >
-                  </div>
-
-                  <div class="card-footer">
-                    <router-link
-                      class="btn btn-lg btn-block btn-outline-primary margin-auto"
-                      to="/shoppage/shoppingmain"
-                      >前往購物區</router-link
-                    >
-                  </div>
-                </div>
-              </div>
-            </VueSlickCarousel> -->
           </div>
           <div class="responsive-cards card-deck mb-3 text-center justify-content-center">
             <div id="carouselCards" class="carousel slide" data-ride="carousel">
@@ -170,15 +113,12 @@
                         />
                         <h3>Expiration:{{ randomCoupons[0].due_date }}</h3>
                         <a
-                          class="btn btn-lg btn-block btn-outline-primary margin-auto"
+                          class="btn btn-lg notice-btn"
                           @click.prevent="copyCode"
                           >Copy</a
                         >
-                      </div>
-
-                      <div class="card-footer">
                         <router-link
-                          class="btn btn-lg btn-block btn-outline-primary margin-auto"
+                          class="btn btn-lg notice-btn"
                           to="/shoppage/shoppingmain"
                           >Shopping</router-link
                         >
@@ -224,15 +164,12 @@
                         />
                         <h3>Expiration:{{ randomCoupons[1].due_date }}</h3>
                         <a
-                          class="btn btn-lg btn-block btn-outline-primary margin-auto"
+                          class="btn btn-lg notice-btn"
                           @click.prevent="copyCode"
                           >Copy</a
                         >
-                      </div>
-
-                      <div class="card-footer">
                         <router-link
-                          class="btn btn-lg btn-block btn-outline-primary margin-auto"
+                          class="btn btn-lg notice-btn"
                           to="/shoppage/shoppingmain"
                           >Shopping</router-link
                         >
@@ -278,15 +215,12 @@
                         />
                         <h3>Expiration:{{ randomCoupons[2].due_date }}</h3>
                         <a
-                          class="btn btn-lg btn-block btn-outline-primary margin-auto"
+                          class="btn btn-lg notice-btn"
                           @click.prevent="copyCode"
                           >Copy</a
                         >
-                      </div>
-
-                      <div class="card-footer">
                         <router-link
-                          class="btn btn-lg btn-block btn-outline-primary margin-auto"
+                          class="btn btn-lg notice-btn"
                           to="/shoppage/shoppingmain"
                           >Shopping</router-link
                         >
@@ -329,37 +263,15 @@
 import $ from 'jquery'
 import Navbar from '../components/HomeNav.vue'
 import Footer from '../components/Footer.vue'
-// import VueSlickCarousel from 'vue-slick-carousel'
 import Alert from '../components/Alert.vue'
 export default {
   components: {
     Navbar,
     Footer,
-    // VueSlickCarousel,
     Alert
   },
   data () {
     return {
-      settings: {
-        arrows: false,
-        dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        autoplay: false,
-        speed: 300,
-        autoplaySpeed: 1000,
-        cssEase: 'linear',
-        responsive: [
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 1, // 一次顯示1個
-              slidesToScroll: 1 // 切換下一頁時移動1個
-            }
-          }
-        ]
-      },
       coupons: [
         {
           due_date: '2020-09-06',
@@ -479,11 +391,6 @@ export default {
     $('body').click(function (e) {
       $('#start-modal').modal('hide')
     })
-
-    // $(".copybtn").click(function(e){
-    //     e.preventDefault();
-    //     $(e.currentTarget).closest('.code').document.execCommand('copy');
-    // })
   },
   created () {
     this.shuffleCoupon()
@@ -493,17 +400,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url(https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap);
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
 
 .page-title{
    font-family: 'Tangerine', cursive;
-}
-.jumbotron {
-  height: 400px;
-  margin-top: 22px;
-  h1 {
-    display: inline-block;
-  }
 }
 
 .start-btn {
@@ -518,7 +419,7 @@ export default {
   .carousel-indicators{
     bottom: -28px;
     li{
-      background-color: #6dbcfe;
+      background-color: $blue;
       width: 10px;
       height: 10px;
       border-radius: 10px;
@@ -584,7 +485,7 @@ export default {
   }
   .back{
       height: 100%;
-      background-color: antiquewhite;
+      background-color: $card-background;
       border-radius: 15px;
   }
 }
@@ -595,10 +496,10 @@ export default {
 
 //loading effect
 .start-modal {
-  background-color: #000000;
+  background-color: $black;
   .loading-text {
     font-family: "cwTeXYen", sans-serif;
-    color: white;
+    color: $white;
   }
 }
 
@@ -612,7 +513,7 @@ export default {
   height: 64px;
   margin: 8px;
   border-radius: 50%;
-  background: #fff;
+  background: $white;
   animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 
@@ -644,15 +545,15 @@ export default {
 //優惠css
 
 .small-discount-title {
-  color: #007bff;
+  color: $normal-prize;
 }
 
 .normal-discount-title {
-  color: rgb(141, 141, 252);
+  color: $epic-prize;
 }
 
 .big-discount-title {
-  color: #ff9a00;
+  color: $legend-prize;
 }
 
 .code {
@@ -661,14 +562,9 @@ export default {
   background: none;
 }
 .btn {
-  width: 70%;
-  &:hover {
-    background-color: black;
-    border: none;
-    color: #ffdf76;
-  }
-}
-.margin-auto {
-  margin: 0 auto;
+  border: solid;
+  color: inherit;
+  margin: 10% auto 0 auto;
+  width: 100%;
 }
 </style>

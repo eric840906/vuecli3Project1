@@ -32,17 +32,10 @@
           <div class="banner-cover">
             <div class="container">
               <div class="carousel-caption text-center">
-                <h1 class="responsive-mt">Delicacies</h1>
+                <h1>Delicacies</h1>
                 <h3>You can't buy happiness,</h3>
-                <h3>
-                  but you can buy ice cream and that is pretty much the same
-                  thing
-                </h3>
-                <router-link
-                  class="btn top-notice-btn"
-                  to="/shoppage/shoppingmain"
-                  ><h2 class="mr-0">View Products</h2></router-link
-                >
+                <h3>but you can buy ice cream and that is pretty much the same thing</h3>
+                <h2>View Products</h2>
               </div>
             </div>
           </div>
@@ -57,9 +50,7 @@
               <div class="carousel-caption">
                 <h1>Event</h1>
                 <h2>Life is like an ice cream, enjoy it before it melts</h2>
-                <router-link class="btn top-notice-btn" to="/couponjackpot"
-                  ><h2 class="mr-0">Grab a coupon</h2></router-link
-                >
+                <h2>Grab a coupon</h2>
               </div>
             </div>
           </div>
@@ -139,7 +130,6 @@
                 If life is a bowl of dark ice cream, small moments we enjoyed
                 are colorful sprinkles all over it.
               </h2>
-              <!-- <a class="notice-btn btn" href="#">Learn more</a> -->
             </div>
           </div>
         </div>
@@ -152,15 +142,13 @@
           <div class="row featurette hottest">
             <div class="col-md-5">
               <img class="img-fluid" src="https://images.unsplash.com/photo-1485217939211-45a6241d40a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80" alt="">
-              <!-- <a class="notice-btn btn" href="#">Learn more</a> -->
             </div>
             <div class="col-md-7 hot-product-info">
               <h2>Vanilla Storm</h2>
               <h3>
                 "Sometimes all you need is love... Oh wait! And ice cream, and chocolate to go along with it as nowadays love is anything but sweet."
               </h3>
-              <router-link to="shoppage/product/-MCw7P4EHY5KYhZQFJnl" class="btn btn-primary notice-btn"><font-awesome-icon class="moving-arrow-left" :icon="['fas', 'angle-double-left']"/>More Info<font-awesome-icon class="moving-arrow-right" :icon="['fas', 'angle-double-right']"/></router-link>
-              <!-- <a class="notice-btn btn" href="#">Learn more</a> -->
+              <router-link to="shoppage/product/-MCw7P4EHY5KYhZQFJnl" class="btn notice-btn"><font-awesome-icon class="moving-arrow-left" :icon="['fas', 'angle-double-left']"/>More Info<font-awesome-icon class="moving-arrow-right" :icon="['fas', 'angle-double-right']"/></router-link>
             </div>
           </div>
         </div>
@@ -205,7 +193,6 @@
 
 <script>
 import $ from 'jquery'
-// import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import Navbar from '../components/HomeNav.vue'
@@ -220,27 +207,6 @@ export default {
   },
   data () {
     return {
-      settings: {
-        arrows: false,
-        dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        speed: 2000,
-        autoplaySpeed: 2000,
-        cssEase: 'linear',
-        responsive: [
-          {
-            breakpoint: 500,
-            settings: {
-              autoplay: true,
-              slidesToShow: 1, // 一次顯示1個
-              slidesToScroll: 1 // 切換下一頁時移動1個
-            }
-          }
-        ]
-      },
       UserComments: [
         {
           data: {}
@@ -322,11 +288,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
 /* GLOBAL STYLES
 
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
-@import url(https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap);
 * {
   font-family: "Tangerine", cursive;
 }
@@ -438,7 +405,7 @@ body {
 }
 .grading {
   margin: 8px 0;
-  color: #ffc900;
+  color: $yellow;
   font-size: 25px;
 }
 
@@ -464,24 +431,6 @@ body {
   background-size: cover;
 }
 
-.notice-btn {
-  font-size: 20px;
-  background-color: transparent;
-  border: 1px solid black;
-  color: black;
-  &:hover {
-    border-color: white;
-    color: #ffdf76;
-    background-color: #494848;
-  }
-}
-
-.top-notice-btn {
-  font-size: 20px;
-  background-color: transparent;
-  border: none;
-  color: white;
-}
 .banner-cover{
   position: absolute;
   background: radial-gradient(#00000099, #ffffff57);
@@ -499,8 +448,6 @@ body {
   display: flex;
   flex-direction: column;
   .notice-btn{
-    border: none;
-    overflow: hidden;
     .moving-arrow-right{
       transform: translateX(33px);
       animation: color-change 0.5s infinite;
@@ -531,10 +478,10 @@ body {
     color: transparent;
   }
   50% {
-    color: rgb(139, 34, 1);
+    color: $red;
   }
   75% {
-    color: white;
+    color: $white;
   }
   100% {
     color: transparent;

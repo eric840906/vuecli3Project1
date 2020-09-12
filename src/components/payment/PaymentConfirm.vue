@@ -136,16 +136,18 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
 .mt-100 {
   margin-top: 100px;
 }
 
 //loading effect
 .loading-modal {
-  background-color: #000000;
+  background-color: $black;
   .loading-text {
     font-family: "cwTeXYen", sans-serif;
-    color: white;
+    color: $white;
   }
 }
 
@@ -160,7 +162,7 @@ export default {
   position: absolute;
   left: 8px;
   width: 16px;
-  background: #fff;
+  background: $white;
   animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
 .lds-facebook div:nth-child(1) {
@@ -199,7 +201,7 @@ export default {
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: #fff;
+  background: $white;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {

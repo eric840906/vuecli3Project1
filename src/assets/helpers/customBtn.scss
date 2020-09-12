@@ -1,17 +1,39 @@
 /*This is modifying the btn-primary colors but you could create your own .btn-something class as well*/
-$yellow:  #ffdf76;
-$white: #fff;
-$black: #000;
-.btn-primary {
-    color: $black;
-    background-color: $white;
-    border:none; /*set the color you want here*/
-    transition: all .3s;
-    &:hover{
-        background-color: $yellow;
-    }
-    &:focus{
-        color: $yellow;
-        background-color: $black;
-    }
+.btn-shop {
+  color: $black;
+  background-color: $white;
+  border:none; /*set the color you want here*/
+  transition: all .3s;
+  &:hover{
+      background-color: $yellow;
+  }
+  &:focus{
+      color: $yellow;
+      background-color: $black;
+  }
 }
+.badge-product{
+  color: $yellow;
+}
+
+.notice-btn{
+  border: none;
+  overflow: hidden;
+  font-size: 20px;
+  background-color: transparent;
+  color: $black;
+  &:hover{
+    border-color: $white;
+    color: $yellow;
+    background-color: $black;
+  }
+}
+
+.submit-msg-btn{
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  color: $yellow;
+  background-color: $black;
+}
+

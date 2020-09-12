@@ -344,24 +344,24 @@ export default {
 </script>
 
 <style lang="scss">
-
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
 .sidebar {
   top: 0;
   bottom: 0;
   left: 0;
   z-index: 100; /* Behind the navbar */
   padding: 48px 0 0; /* Height of navbar */
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 
   .nav-item {
-    color: #ffdf76;
+    color: $yellow;
     &:hover {
-      background-color: #ffdf76;
+      background-color: $yellow;
     }
     .active {
-      background-color: #292929;
+      background-color: $black;
       .nav-link a {
-        color: #ffdf76;
+        color: $yellow;
       }
     }
   }
@@ -391,7 +391,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 90%;
-    background-color: #0000006b;
+    background-color: $cover;
   }
   .shopping-buttons{
       display: none;
@@ -419,6 +419,15 @@ export default {
   font-size: 1.25rem;
 }
 
+.top-select {
+  display: none;
+  .top-select-item {
+    .active {
+      border: 1px solid $black;
+    }
+  }
+}
+
 @media (max-width: 767.98px) {
   .sidebar {
     top: 5rem;
@@ -437,21 +446,15 @@ export default {
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
+@supports (position: sticky) {
   .sidebar-sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 }
 
 .sidebar .nav-link {
   font-weight: 500;
-  color: #333;
-}
-
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
+  color: $gray-800;
 }
 
 .sidebar .nav-link:hover .feather,
@@ -463,4 +466,9 @@ export default {
   font-size: 0.75rem;
   text-transform: uppercase;
 }
+
+.sidebar .nav-item .nav-link.active {
+  color: $yellow; // for example
+}
+
 </style>

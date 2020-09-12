@@ -74,10 +74,10 @@
             </div>
           </div>
 
-          <a
+          <button
             class="pay-btn btn-shop text-decoration-none"
             @click.prevent="toPay"
-            >&emsp;Checkout&emsp;</a
+            >&emsp;Checkout&emsp;</button
           >
         </div>
       </div>
@@ -149,6 +149,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
 .mb-5 {
   margin-bottom: 5rem !important;
 }
@@ -166,8 +168,8 @@ export default {
 }
 
 .scroll-menu::-webkit-scrollbar-thumb {
-  background-image: radial-gradient(#ffba5c, transparent);
-  outline: 1px solid white;
+  background-image: radial-gradient($legend-prize, transparent);
+  outline: 1px solid $white;
   border-radius: 135px;
 }
 
@@ -178,11 +180,11 @@ export default {
   height: 23px;
   width: 23px;
   z-index: 10000;
-  border: 1px solid black;
-  background-color: black;
+  border: 1px solid $black;
+  background-color: $black;
   border-radius: 25px;
   .cartcounter {
-    color: #ffdf76;
+    color: $yellow;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -190,14 +192,14 @@ export default {
 }
 
 .cartframe {
-  border: 1px solid black;
+  border: 1px solid $black;
   border-radius: 153px;
   height: 50px;
   width: 50px;
   position: fixed;
   right: 20px;
   bottom: 20px;
-  box-shadow: 0px 0px 11px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 11px $cover;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   z-index: 10;
   .carticon {
@@ -206,7 +208,7 @@ export default {
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: 25px;
-    color: black;
+    color: $black;
   }
 .shop-list{
   margin: 30px auto;
@@ -214,16 +216,15 @@ export default {
 }
 
   &:hover {
-    background-color: black;
-    box-shadow: 0px 0px 11px rgba(255, 255, 255, 1);
-    .carticon {
-      color: #ceb669;
+    box-shadow: 0px 0px 11px $white;
+    .carticon{
+      color: $yellow;
     }
   }
 }
 
 .cartlist {
-  background: white;
+  background: $white;
   position: absolute;
   right: 0;
   bottom: 95px;
@@ -233,11 +234,8 @@ export default {
 }
 
 .pay-btn {
-  display: inline-block;
   width: 100%;
-  text-align: center;
   margin-top: 20px;
-  cursor: pointer;
 }
 
 .show {

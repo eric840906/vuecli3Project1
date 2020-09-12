@@ -18,7 +18,7 @@
         </div>
       </section>
 
-      <div class="album py-5 bg-light">
+      <div class="album py-5">
         <div class="container">
           <div class="row">
             <div class="col-md-4 info-list">
@@ -204,8 +204,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url(https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap);
-
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
 * {
   font-family: "cwTeXYen", sans-serif;
 }
@@ -218,8 +218,8 @@ export default {
 }
 
 .info-list::-webkit-scrollbar-thumb {
-  background-image: radial-gradient(#ffb95c8c, transparent);
-  outline: 1px solid white;
+  background-image: radial-gradient($yellow, transparent);
+  outline: 1px solid $white;
 }
 
 .jumbotron {
@@ -244,9 +244,9 @@ export default {
   width: 100%;
   margin-top: 10px;
   &:hover {
-    background-color: black;
+    background-color: $black;
     border: none;
-    color: #ffdf76;
+    color: $yellow;
   }
 }
 
