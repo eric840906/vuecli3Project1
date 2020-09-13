@@ -222,14 +222,6 @@ export default {
   outline: 1px solid $white;
 }
 
-.jumbotron {
-  height: 400px;
-  margin-top: 22px;
-  h1 {
-    display: inline-block;
-  }
-}
-
 .info-list {
   overflow: scroll;
   height: 50vh;
