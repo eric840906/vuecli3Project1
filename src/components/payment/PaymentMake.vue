@@ -48,7 +48,7 @@
       <div class="my-5 row justify-content-center">
         <form class="col-md-6" @submit.prevent="buildOrder">
           <div class="form-group">
-            <label for="useremail">Email</label>
+            <label for="useremail">Email*</label>
             <input
               type="email"
               class="form-control"
@@ -64,7 +64,7 @@
           </div>
 
           <div class="form-group">
-            <label for="username">Name</label>
+            <label for="username">Name*</label>
             <input
               type="text"
               class="form-control"
@@ -92,7 +92,7 @@
           </div>
 
           <div class="form-group">
-            <label for="useraddress">Address</label>
+            <label for="useraddress">Address*</label>
             <input
               type="text"
               class="form-control"
@@ -119,12 +119,11 @@
             ></textarea>
           </div>
           <div class="row"></div>
-          <!--Grid row-->
 
           <hr />
 
           <div class="d-block my-3">
-            <label for="paymentMethod">Payment Options</label>
+            <label for="paymentMethod">Payment Options*</label>
             <div class="custom-control custom-radio">
               <input
                 id="method1"
@@ -160,7 +159,7 @@
           </div>
           <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="cc-name">Name</label>
+              <label for="cc-name">Name*</label>
               <input
                 type="text"
                 name="cardName"
@@ -178,7 +177,7 @@
               </div>
             </div>
             <div class="col-md-6 mb-3">
-              <label for="cc-number">Card Number</label>
+              <label for="cc-number">Card Number*</label>
               <input
                 type="text"
                 name="credit_field"
@@ -197,7 +196,7 @@
           </div>
           <div class="row">
             <div class="col-md-3 mb-3 col-6">
-              <label for="cc-expiration">Expiration</label>
+              <label for="cc-expiration">Expiration*</label>
               <input
                 type="text"
                 class="form-control"
@@ -210,7 +209,7 @@
               </div>
             </div>
             <div class="col-md-3 mb-3 col-6">
-              <label for="cc-expiration">CVC</label>
+              <label for="cc-expiration">CVC*</label>
               <input
                 type="text"
                 class="form-control"
@@ -270,7 +269,7 @@ export default {
           vm.$bus.$emit('message:push', 'please fill the form properly', 'danger')
         }
       })
-      this.getCart()
+      vm.getCart()
     },
     getCart () {
       const vm = this
@@ -286,7 +285,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${id}`
       vm.$http.delete(api).then(response => {
         if (response.data.success) {
-          this.getCart()
+          vm.getCart()
         }
       })
     }
@@ -298,6 +297,7 @@ export default {
 </script>
 
 <style lang="scss" scope>
+
 .checkout-list{
   margin: 30px auto;
   width:50%

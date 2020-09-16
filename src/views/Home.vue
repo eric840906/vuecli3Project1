@@ -32,7 +32,7 @@
           <div class="banner-cover">
             <div class="container">
               <div class="carousel-caption text-center">
-                <h1>Delicacies</h1>
+                <h1 class="xs-left">Delicacies</h1>
                 <h3>You can't buy happiness,</h3>
                 <h3>but you can buy ice cream and that is pretty much the same thing</h3>
                 <h2>View Products</h2>
@@ -76,10 +76,6 @@
         </a>
       </div>
 
-      <!-- Marketing messaging and featurettes
-  ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
-
       <hr class="featurette-divider" />
       <div class="container marketing">
         <h2>Environment</h2>
@@ -118,7 +114,6 @@
         </div>
       </div>
       <hr class="featurette-divider" />
-      <!-- START THE FEATURETTES -->
       <section
         style="backgroundImage:url(https://images.unsplash.com/photo-1589880442905-546b351e81dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80); background-size: cover; background-attachment: fixed; padding: 160px 0px;background-position: center; background-repeat: no-repeat;"
       >
@@ -135,7 +130,6 @@
         </div>
       </section>
       <hr class="featurette-divider" />
-      <!-- START THE FEATURETTES -->
       <section>
         <div class="container marketing">
           <h2>Hottest Product</h2>
@@ -157,7 +151,7 @@
       <hr class="featurette-divider" />
       <div class="container marketing">
         <h2>Customer Comments</h2>
-       <carousel :responsive="{0:{items:1, dots:false},600:{items:3}}" :nav="false" :autoplay="true" :loop="true" :rewind="true" v-if="randomCarousel.length>0">
+       <carousel :responsive="{ 0:  {items: 1, dots: false }, 600: { items: 3 } }" :nav="false" :autoplay="true" :loop="true" :rewind="true" v-if="randomCarousel.length>0">
           <div v-for="item in randomCarousel" :key="item.id">
             <div class="col-12 text-center">
               <img
@@ -180,12 +174,6 @@
       </div>
 
       <hr class="featurette-divider" style="border:none" />
-
-      <!-- /END THE FEATURETTES -->
-
-      <!-- /.container -->
-
-      <!-- Footer -->
       <Footer></Footer>
     </main>
   </div>
@@ -221,12 +209,12 @@ export default {
     commentGet () {
       const vm = this
       const api = 'https://json-server-test999.herokuapp.com/posts'
-      this.$http.get(api).then(response => {
+      vm.$http.get(api).then(response => {
         vm.comparisonA = Math.random()
         vm.comparisonB = Math.random()
         vm.UserComments = response.data
-        this.shuffleCarousel()
-        this.getNewCarousel()
+        vm.shuffleCarousel()
+        vm.getNewCarousel()
       })
     },
     shuffleCarousel () {
@@ -294,21 +282,14 @@ export default {
 
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
-* {
-  font-family: "Tangerine", cursive;
+*{
+  font-family: 'Berkshire Swash', cursive;
 }
 h1 {
-  font-size: 4.5rem;
+  font-size: 3.5rem;
 }
 .mr-0 {
   margin: 0;
-}
-.comments,
-.section-title {
-  font-family: "cwTeXYen", sans-serif;
-}
-.user-name {
-  font-family: "cwTeXYen", sans-serif;
 }
 
 body {
@@ -433,7 +414,7 @@ body {
 
 .banner-cover{
   position: absolute;
-  background: radial-gradient(#00000099, #ffffff57);
+  background: radial-gradient(#000000ab, #0000004f);
   height: 100%;
   width: 100%;
   text-align: center;
@@ -576,6 +557,11 @@ body {
 @media (max-width: 425px) {
   .mb-10 {
     margin-bottom: 10px;
+  }
+}
+@media (max-width: 320px) {
+  .xs-left{
+    transform: translateX(-6%);
   }
 }
 

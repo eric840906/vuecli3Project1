@@ -9,23 +9,23 @@
           List Price: {{ product.origin_price | currency }}
         </h4>
         <h5>Quantity</h5>
-        <select name="" class="form-control" v-model="product.quantity">
+        <select name="" class="form-control" v-model="quantity">
           <option v-for="item in 10" :value="item" :key="item"
             >{{ item }}{{ product.unit }}</option
           >
         </select>
         <br />
-        <h5>
-          Total: {{ (product.origin_price * product.quantity) | currency }}
+        <h5 v-if="quantity">
+          Total: {{ (quantity * product.price) | currency }}
         </h5>
         <br />
         <h5>Description</h5>
         <p>{{ product.description }}</p>
 
         <button
-          :disabled='productStatus.loading == product.id'
+          :disabled='productStatus.loading == product.id || !quantity'
           class="addCart-btn btn-shop"
-          @click="addCart(product.id, product.quantity)"
+          @click="addCart(product.id, quantity)"
         >
           Add to Cart
         </button>
@@ -36,7 +36,7 @@
     </div>
     <div class="productsCarousel">
       <h5>Other Products</h5>
-        <carousel :responsive="{0:{items:1, dots:false},600:{items:3}}" :nav="false" :autoplay="true" :loop="false" :rewind="true" v-if="products.length>0">
+        <carousel :responsive="{ 0: { items:1, dots:false }, 600: { items:3 } }" :nav="false" :autoplay="true" :loop="false" :rewind="true" v-if="products.length>0">
           <template slot="prev"><font-awesome-icon class="prev" :icon="['fas', 'chevron-left']" style="height: 100%;" /></template>
             <div v-for="item in products" :key="item.id">
               <div
@@ -75,6 +75,7 @@ export default {
       productStatus: {
         loading: ''
       },
+      quantity: 1,
       cartList: {
         data: {
           carts: []
@@ -93,7 +94,7 @@ export default {
       // 參數直接寫page=1代表page預設值為1
       const vm = this
       vm.isLoading = true
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/products` // 'https://vue-course-api.hexschool.io/api/eric840906/products'
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/products`
       vm.$http.get(api).then(response => {
         vm.isLoading = false
         vm.products = response.data.products
@@ -112,7 +113,7 @@ export default {
     getCart () {
       const vm = this
       vm.isLoading = true
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart` // 'https://vue-course-api.hexschool.io/api/eric840906/products'
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
       vm.$http.get(api).then(response => {
         vm.isLoading = false
         vm.cartList = response.data
@@ -160,6 +161,7 @@ export default {
           }
         })
       }
+      vm.quantity = 1
     },
     removeCart (id) {
       const vm = this
@@ -190,7 +192,7 @@ export default {
     }
   },
   created () {
-    this.productId = this.$route.params.productId // 這裡的$router.params.orderId是對應到我們在index.js的customercheckout後面自訂義的動態orderId(就是訂單建立後給的ID)
+    this.productId = this.$route.params.productId // 這裡的$router.params.orderId是對應到我們在index.js的customercheckout後面自定義的動態orderId(就是訂單建立後給的ID)
     this.getProduct()
     this.getProducts()
     this.getCart()
@@ -210,6 +212,7 @@ export default {
   margin: 70px 0;
   width: 100%;
   border-style: none;
+  border: 1px solid;
 }
 .productsCarousel{
   position: relative;

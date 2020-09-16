@@ -7,10 +7,8 @@
         class="jumbotron text-center"
         style="border-radius: 0; padding-bottom: 104px;; margin-bottom:0; backgroundImage:url(https://images.unsplash.com/photo-1481437156560-3205f6a55735?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1371&q=80); background-size: cover; background-position: center;"
       >
-        <div class="page-title" style="margin-top:30px;">
-          <h1
-            style="font-family: 'Tangerine', cursive; font-size: 4.5rem; color: brown;"
-          >
+        <div class="page-title" style="color: brown;">
+          <h1>
             Information
           </h1>
           <br />
@@ -40,9 +38,7 @@
                       >
                     </li>
                     <li>
-                      <font-awesome-icon icon="map-marker-alt" /> {{
-                        item.address
-                      }}
+                      <font-awesome-icon icon="map-marker-alt" /> {{ item.address }}
                     </li>
                     <a
                       href="#"
@@ -114,7 +110,6 @@ import Navbar from '../components/HomeNav.vue'
 import Footer from '../components/Footer'
 import Alert from '../components/Alert.vue'
 export default {
-  name: 'MyAwesomeMap',
   components: {
     Navbar,
     Footer,
@@ -207,7 +202,7 @@ export default {
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
 * {
-  font-family: "cwTeXYen", sans-serif;
+  font-family: 'Berkshire Swash', cursive;
 }
 .info-list::-webkit-scrollbar {
   width: 0.5em;

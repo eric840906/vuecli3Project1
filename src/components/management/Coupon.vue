@@ -202,9 +202,8 @@ export default {
         } else {
           $('#couponModal').modal('hide')
           vm.getCoupon()
-          alert('新增失敗')
+          vm.$bus.$emit('message:push', '新增失敗', 'danger')
         }
-        // vm.products=response.data.products;
       })
     },
     deleteCoupon (id) {

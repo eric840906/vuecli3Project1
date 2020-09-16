@@ -26,3 +26,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scope>
+*{
+  font-family: 'Berkshire Swash', cursive;
+}
+</style>

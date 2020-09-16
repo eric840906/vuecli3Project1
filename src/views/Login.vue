@@ -54,13 +54,13 @@ export default {
     signin () {
       // signin
       const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/admin/signin` // 'https://vue-course-api.hexschool.io/api/eric840906/products'
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
       vm.$http.post(api, vm.user).then(response => {
         if (response.data.success) {
           vm.$bus.$emit('message:push', response.data.message, 'success')
           vm.$router.push('/admin/products')
         } else {
-          alert('登入失敗')
+          vm.$bus.$emit('message:push', '登入失敗', 'danger')
         }
       })
     }

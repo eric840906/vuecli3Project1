@@ -21,7 +21,6 @@ import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 // optional style for arrows & dots
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import VeeValidate from 'vee-validate'
-import zhTWValidate from 'vee-validate/dist/locale/zh_TW'
 import currencyFilter from './filters/currency.js'
 import { Icon } from 'leaflet'
 import App from './App.vue'
@@ -49,8 +48,6 @@ Vue.use(VueAxios, axios)
 Vue.use(VeeValidate, {
   events: 'input|blur'
 })
-VeeValidate.Validator.localize('zh_TW', zhTWValidate)
-
 delete Icon.Default.prototype._getIconUrl
 Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),

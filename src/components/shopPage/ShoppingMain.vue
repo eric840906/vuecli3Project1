@@ -60,55 +60,52 @@
         id="sidebarMenu"
         class="col-md-3 col-sm-2 d-md-block bg-light sidebar collapse"
       >
-        <div class="sidebar-sticky pt-3">
-          <div style="height: 70px;"></div>
-          <h3 style="margin-bottom: 2rem;">Product List</h3>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a
-                class="nav-link "
-                href="#"
-                @click.prevent="visibility = 'all'"
-                :class="{ active: visibility == 'all' }"
-              >
-                All
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#"
-                @click.prevent="visibility = 'Popsicle'"
-                :class="{ active: visibility == 'Popsicle' }"
-              >
-                Popsicle
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#"
-                @click.prevent="visibility = 'Ice Cream'"
-                :class="{ active: visibility == 'Ice Cream' }"
-              >
-                Ice Cream
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#"
-                @click.prevent="visibility = 'High Class'"
-                :class="{ active: visibility == 'High Class' }"
-              >
-                High Class
-              </a>
-            </li>
-          </ul>
-        </div>
+        <ul class="nav flex-column sticky-top">
+          <li><h3 style="margin-bottom: 2rem;">Product List</h3></li>
+          <li class="nav-item">
+            <a
+              class="nav-link "
+              href="#"
+              @click.prevent="visibility = 'all'"
+              :class="{ active: visibility == 'all' }"
+            >
+              All
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              @click.prevent="visibility = 'Popsicle'"
+              :class="{ active: visibility == 'Popsicle' }"
+            >
+              Popsicle
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              @click.prevent="visibility = 'Ice Cream'"
+              :class="{ active: visibility == 'Ice Cream' }"
+            >
+              Ice Cream
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              @click.prevent="visibility = 'High Class'"
+              :class="{ active: visibility == 'High Class' }"
+            >
+              High Class
+            </a>
+          </li>
+        </ul>
       </nav>
 
-      <div class="col-md-9 row">
+      <div class="col-md-9" style="display: flex; flex-wrap: wrap;">
         <div
           class="col-md-6 mb-4 col-lg-4"
           v-for="item in filterProducts"
@@ -146,17 +143,16 @@
             <div class="card-body">
               <span class="badge badge-product float-right">
                 <span style="position: absolute; top: -62px; transform: rotate(-46deg); left: 6px;">
-                {{
-                item.category
-                }}</span>
+                {{ item.category }}
+                </span>
               </span>
               <h5 class="card-title">
                 <a href="#" class="text-dark">{{ item.title }}</a>
               </h5>
               <p class="card-text">{{ item.description }}</p>
             </div>
-            <div class="card-footer d-flex">
-              <div class="price-tag">{{ item.price | currency}} each</div>
+            <div class="card-footer d-flex justify-content-end">
+              <div class="price-tag">{{ item.price | currency }}</div>
             </div>
           </div>
         </div>
@@ -189,7 +185,7 @@ export default {
       cartList: {
         data: {
           carts: []
-        } // 沒事先訂義的話會跳錯誤說carts undefined(雖然還是抓得到資料啦)
+        } // 沒事先定義的話會跳錯誤說carts undefined(雖然還是抓得到資料啦)
       },
       coupon_code: '',
       visibility: 'all',
@@ -226,7 +222,7 @@ export default {
     getCart () {
       const vm = this
       vm.isLoading = true
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart` // 'https://vue-course-api.hexschool.io/api/eric840906/products'
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
       vm.$http.get(api).then(response => {
         vm.isLoading = false
         vm.cartList = response.data
@@ -351,7 +347,7 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
+  padding: 0; /* Height of navbar */
 
   .nav-item {
     color: $yellow;
@@ -365,6 +361,10 @@ export default {
       }
     }
   }
+}
+.sticky-top{
+    margin-top: -125px;
+    padding-top: 125px;
 }
 .badge{
   padding: 0;
@@ -415,7 +415,7 @@ export default {
   }
 }
 .price-tag{
-  margin: 5px 0;
+  margin: 5px 10px;
   font-size: 1.25rem;
 }
 

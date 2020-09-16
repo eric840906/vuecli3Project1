@@ -66,34 +66,34 @@
 export default {
   data () {
     return {
-      orderId: "",
+      orderId: '',
       orders: {
         products: {},
         user: {}
       }
-    };
+    }
   },
   methods: {
     getOrder () {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/order/${vm.orderId}` //'https://vue-course-api.hexschool.io/api/eric840906/products'
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/order/${vm.orderId}`
       vm.$http.get(api).then(response => {
         vm.orders = response.data.order
       })
     },
     payConfirm () {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/pay/${vm.orderId}`; //'https://vue-course-api.hexschool.io/api/eric840906/products'
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/pay/${vm.orderId}`
       vm.$http.post(api).then(response => {
         if (response.data.success) {
-          this.getOrder();
+          vm.getOrder()
         }
-      });
+      })
     }
   },
-  created() {
-    this.orderId = this.$route.params.orderId; //這裡的$router.params.orderId是對應到我們在index.js的customercheckout後面自訂義的動態orderId(就是訂單建立後給的ID)
-    this.getOrder();
+  created () {
+    this.orderId = this.$route.params.orderId
+    this.getOrder()
   }
-};
+}
 </script>

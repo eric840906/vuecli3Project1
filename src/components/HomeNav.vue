@@ -1,10 +1,11 @@
 <template>
-  <div style="font-family: 'Tangerine', cursive;">
+  <div>
     <header>
       <nav class="main-nav navbar navbar-expand-md navbar-dark fixed-top bg-black" style="width: 100%;">
         <a
           class="navbar-brand"
           href="#"
+          style="font-family: 'Tangerine', cursive"
           >Lächeln</a
         >
         <button
@@ -57,7 +58,7 @@ export default {
 
 <style lang="scss">
 .top-links {
-  font-size: 25px;
+  font-size: 18px;
 }
 .navbar-brand {
   background-color: transparent;

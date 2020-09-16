@@ -31,7 +31,7 @@
                 <td class="align-middle text-center">
                   {{ item.qty }}{{ item.product.unit }}
                 </td>
-                <td class="align-middle text-center">{{ item.final_total | currency}}</td>
+                <td class="align-middle text-center">{{ item.final_total | currency }}</td>
               </tr>
             </tbody>
             <tfoot>
@@ -110,16 +110,16 @@ export default {
       const coupon = {
         code: vm.coupon_code
       }
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/coupon` // 'https://vue-course-api.hexschool.io/api/eric840906/products'
-      this.$http.post(api, { data: coupon }).then(response => {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/coupon`
+      vm.$http.post(api, { data: coupon }).then(response => {
         vm.isLoading = true
         if (response.data.success) {
           vm.refreshCart()
           vm.isLoading = false
-          this.$bus.$emit('message:push', 'Coupon code successfully applied', 'success')
+          vm.$bus.$emit('message:push', 'Coupon code successfully applied', 'success')
         } else {
           vm.isLoading = false
-          this.$bus.$emit('message:push', 'Cant\'t find coupon code', 'danger')
+          vm.$bus.$emit('message:push', 'Cant\'t find coupon code', 'danger')
         }
       })
     },
@@ -187,18 +187,19 @@ export default {
     color: $yellow;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-18%);
   }
 }
 
 .cartframe {
   border: 1px solid $black;
   border-radius: 153px;
+  background-color: $white;
   height: 50px;
   width: 50px;
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 10px;
+  bottom: 80px;
   box-shadow: 0px 0px 11px $cover;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   z-index: 10;
@@ -252,14 +253,18 @@ export default {
 
 @media (max-width: 425px) {
   .cartlist {
-    right: -34px;
+    left: -32px;
+  }
+  .cartframe {
+  left: 10px;
+  bottom: 80px;
   }
 }
 
 @media (max-width: 320px) {
   .cartlist {
     width: 364px;
-    right: -42px;
+    left: -42px;
   }
   .shop-list{
     margin: 30px 13px;

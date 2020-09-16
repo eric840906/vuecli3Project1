@@ -1,10 +1,10 @@
 <template>
-    <div style="font-family: 'Tangerine', cursive;">
+    <div style="font-family: 'Berkshire Swash', cursive;">
         <footer class="pt-4 pt-md-5 bg-gray" style="margin-top: 60px;">
             <div class="container">
                 <div class="row">
                     <div class="footer-item text-muted col-md-5 store-info">
-                        <div class="footer-logo">Lächeln</div>
+                        <div class="footer-logo" style="font-family: 'Tangerine', cursive;">Lächeln</div>
                         <p style="margin: 20px 0">Exercitation ullamco laboris nisi ut aliquip ex commodo consequat. Duis aute irure</p>
                         <div><a class="text-muted" href="mailto: info@Lächeln.Icecreram"><font-awesome-icon style="font-size: 14px; margin-right:0.5rem;" :icon="['far', 'envelope']" />info@Lächeln.Icecreram</a></div>
                     </div>
@@ -33,7 +33,7 @@
         </footer>
         <div>
             <div class="container" style="margin-top: 10px;">
-                <div class="row justify-content-center" style="font-size:25px">
+                <div class="row justify-content-center" style="font-size:16px">
                 <small class="d-block mb-3 text-muted">&copy; <span style="color: black;">Lächeln</span>  - Only for Self learning purpose</small>
                 </div>
             </div>
@@ -71,6 +71,9 @@ export default {
   &:nth-child(2){
     text-align: right;
   }
+  h3{
+    font-size: 1.5rem;
+  }
 }
 .social-item{
   margin-left: 10px;
@@ -81,13 +84,14 @@ export default {
 }
 .subscription{
   .email-input{
+    padding: 2px;
     border-width: thin;
     border-radius: 37px 0 0 37px;
     width: 35%;
   }
   .subscribe-btn{
-    padding-bottom: 3px;
-    font-size: 20px;
+    padding: 3px;
+    font-size: 17px;
     color: $white;
     border:none;
     border-radius: 0 37px 37px 0;
@@ -99,7 +103,7 @@ ul{
   line-height: 40px;
 }
 .store-info{
-  font-size: 25px;
+  font-size: 16px;
   .footer-logo{
     font-size: 40px;
   }
@@ -111,6 +115,26 @@ ul{
     }
     .subscribe-btn{
       width: 26%;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
+  .subscription{
+    .email-input{
+      padding: 1px;
+    }
+    .subscribe-btn{
+      padding: 2px;
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 425px){
+  .footer-item{
+    &:nth-child(2){
+      margin-top: 20px;
     }
   }
 }

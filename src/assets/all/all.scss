@@ -1,10 +1,11 @@
 @import "~bootstrap/scss/functions";
-@import "./helpers/_variables";
-@import "./dashboard.scss";
+@import "../helpers/_variables";
+@import '@/assets/helpers/dashboard.scss';
 @import "~bootstrap/scss/bootstrap.scss";
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);    
 @import url(https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap);
-@import "./helpers/customBtn.scss";
+@import url(https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap);
+@import "../helpers/customBtn.scss";
 .jumbotron {
     height: 400px;
     margin-top: 22px;
@@ -12,4 +13,7 @@
       display: inline-block;
     }
 }
-
+.page-title{
+  font-size: 3.5rem;
+  margin-top: 30px;
+}

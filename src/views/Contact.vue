@@ -8,8 +8,8 @@
         style="border-radius: 0; padding-bottom: 104px;; margin-bottom:0; backgroundImage:url(https://images.unsplash.com/photo-1551806235-6692cbfc690b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80); background-size: cover; background-position:center;"
       >
         <div class="banner-cover">
-          <div class="page-title" style="margin-top:30px; color:white;">
-            <h1 style="font-family: 'Tangerine', cursive; font-size: 4.5rem;">
+          <div class="page-title" style="color:white;">
+            <h1>
               Contact Us
             </h1>
             <br />
@@ -238,7 +238,7 @@
         </div>
         <hr>
         <div class="container">
-            <h3>Leave Your Message</h3>
+            <h3>Feedback</h3>
           <form @submit.prevent="commentPost">
             <div class="d-flex">
               <div class="form-group">
@@ -393,8 +393,8 @@ export default {
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
 * {
-  font-family: "cwTeXYen", sans-serif;
-  }
+  font-family: 'Berkshire Swash', cursive;
+}
 
   .card-footer {
     font-size: xx-large;
@@ -458,5 +458,10 @@ export default {
   // 留言區css
   .mr-10 {
     margin-right: 10px;
+  }
+  .submit-msg-btn{
+    &:hover{
+      color: $yellow;
+    }
   }
 </style>

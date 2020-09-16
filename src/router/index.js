@@ -1,12 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import CouponJackpot from '../views/CouponJackpot.vue'
-import Storeinfo from '../views/Storeinfo.vue'
-import Contact from '../views/Contact.vue'
-import PaymentPage from '../views/PaymentPage.vue'
-import Login from '../views/Login.vue'
-import Dashboard from '../views/Dashboard.vue'
 
 Vue.use(VueRouter)
 
@@ -19,15 +12,12 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('../views/Home.vue')
   },
   {
     path: '/shoppage',
     name: 'ShopPage',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ShopPage.vue'),
+    component: () => import('../views/ShopPage.vue'),
     children: [
       {
         path: 'shoppingmain',
@@ -44,22 +34,22 @@ const routes = [
   {
     path: '/couponjackpot',
     name: 'CouponJackpot',
-    component: CouponJackpot
+    component: () => import('../views/CouponJackpot.vue')
   },
   {
     path: '/storeinfo',
     name: 'Storeinfo',
-    component: Storeinfo
+    component: () => import('../views/Storeinfo.vue')
   },
   {
     path: '/contact',
     name: 'Contact',
-    component: Contact
+    component: () => import('../views/Contact.vue')
   },
   {
     path: '/paymentpage',
     name: 'PaymentPage',
-    component: PaymentPage,
+    component: () => import('../views/PaymentPage.vue'),
     children: [
       {
         path: 'paymentmake',
@@ -76,12 +66,12 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/admin',
     name: 'Dashboard',
-    component: Dashboard,
+    component: () => import('../views/Dashboard.vue'),
     meta: { requiresAuth: true }, // 加入這段表示需要驗證才能進入的頁面
     children: [
       {

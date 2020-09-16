@@ -59,12 +59,6 @@
         </div>
       </form>
     </div>
-
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loadingModal">
-        Launch demo modal
-        </button>         -->
-
     <!-- Modal -->
     <div
       class="modal fade"
@@ -107,7 +101,7 @@ export default {
     getOrder () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/order/${vm.orderId}` // 'https://vue-course-api.hexschool.io/api/eric840906/products'
-      this.$http.get(api).then(response => {
+      vm.$http.get(api).then(response => {
         vm.orders = response.data.order
       })
     },
@@ -116,11 +110,11 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/pay/${vm.orderId}`// 'https://vue-course-api.hexschool.io/api/eric840906/products'
       $('#loadingModal').modal('toggle')
       vm.loadingMessage = 'Sending Order'
-      this.$http.post(api).then(response => {
+      vm.$http.post(api).then(response => {
         if (response.data.success) {
           vm.loadingMessage = 'Payment comfirmed, back to homepage'
           setTimeout(() => $('#loadingModal').modal('toggle'), 10000)
-          this.getOrder()
+          vm.getOrder()
           setTimeout(() => vm.$router.push('/'), 5000)
         } else {
           vm.loadingMessage = 'Connection fail'
@@ -129,7 +123,7 @@ export default {
     }
   },
   created () {
-    this.orderId = this.$route.params.orderId // 這裡的$router.params.orderId是對應到我們在index.js的customercheckout後面自訂義的動態orderId(就是訂單建立後給的ID)
+    this.orderId = this.$route.params.orderId // 這裡的$router.params.orderId是對應到我們在index.js的customercheckout後面自定義的動態orderId(就是訂單建立後給的ID)
     this.getOrder()
   }
 }
@@ -138,6 +132,7 @@ export default {
 <style lang="scss">
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+
 .mt-100 {
   margin-top: 100px;
 }
@@ -146,7 +141,7 @@ export default {
 .loading-modal {
   background-color: $black;
   .loading-text {
-    font-family: "cwTeXYen", sans-serif;
+    font-family: 'Berkshire Swash', cursive;
     color: $white;
   }
 }

@@ -15,8 +15,7 @@
           <td>{{ item.user.email }}</td>
           <td class="text-right">
             <div v-for="item in item.products" :key="item.id">
-              {{ item.product.title }}{{ item.product.num
-              }}{{ item.product.unit }}
+              {{ item.product.title }}{{ item.product.num }}{{ item.product.unit }}
             </div>
           </td>
           <td class="text-right">{{ item.total | currency }}</td>

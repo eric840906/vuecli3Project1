@@ -51,23 +51,6 @@
     </table>
 
     <Pagination :pageInfo="pagination" @pageChange="getProducts"></Pagination>
-    <!-- <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item" :class="{'disabled': !pagination.has_pre}">
-                    <a class="page-link" href="#" aria-label="Previous" @click.prevent="getProducts(pagination.current_page-1)">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                    </li>
-                    <li class="page-item" v-for="page in pagination.total_pages" :key="page" :class="{'active':pagination.current_page==page}">
-                        <a class="page-link" href="#" @click.prevent="getProducts(page)">{{page}}</a>
-                    </li>
-                    <li class="page-item" :class="{'disabled': !pagination.has_next}">
-                    <a class="page-link" href="#" aria-label="Next" @click.prevent="getProducts(pagination.current_page+1)">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                    </li>
-                </ul>
-            </nav> -->
     <div
       class="modal fade"
       id="addProduct"
@@ -297,7 +280,6 @@ import $ from 'jquery'
 import Pagination from './Pagination.vue'
 
 export default {
-  // 使用export才能讓其他元件使用這裡的東西
   components: {
     Pagination
   },
@@ -320,7 +302,7 @@ export default {
       const vm = this
       vm.isLoading = true
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/products?page=${page}` // 'https://vue-course-api.hexschool.io/api/eric840906/products'
-      this.$http.get(api).then(response => {
+      vm.$http.get(api).then(response => {
         vm.isLoading = false
         vm.products = response.data.products
         vm.pagination = response.data.pagination
@@ -363,15 +345,15 @@ export default {
         } else {
           $('#addProduct').modal('hide')
           vm.getProducts()
-          alert('新增失敗')
+          vm.$bus.$emit('message:push', '新增失敗', 'danger')
         }
       })
     },
     uploadImage () {
       // 步驟: 1取出檔案(uploadedImage) 2.建立一個formData 3.以formData將檔案加入(符合API存放的位置) 4.送出檔案
       // console.log(this) 透過這個可以在console看到上傳圖片被放在哪(this.$ref.files.files[0])
-      const uploadedImage = this.$refs.files.files[0]
       const vm = this
+      const uploadedImage = vm.$refs.files.files[0]
       vm.status.isUploading = true
       const formData = new FormData() // https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData         可將資料以表單方式傳送的WEB API
       formData.append('file-to-upload', uploadedImage) // (傳出去後存放的位置，看API)
@@ -396,7 +378,7 @@ export default {
     deleteProduct () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/admin/product/${vm.tempProduct.id}`
-      this.$http.delete(api).then(response => {
+      vm.$http.delete(api).then(response => {
         if (response.data.success) {
           vm.getProducts()
           $('#delProductModal').modal('hide')

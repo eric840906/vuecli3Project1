@@ -17,7 +17,6 @@
             </h5>
             <p class="card-text">{{ item.description }}</p>
             <div class="d-flex justify-content-between align-items-baseline">
-              <!-- <div class="h5">2,800 元</div> -->
               <del class="h6">原價 {{ item.origin_price }} 元</del>
               <div class="h5">現在只要 {{ item.price }} 元</div>
             </div>
@@ -174,106 +173,104 @@
 </template>
 
 <script>
-import $ from "jquery";
+import $ from 'jquery'
 export default {
-  data() {
+  data () {
     return {
       products: [],
       product: {},
       productStatus: {
-        loading: ""
+        loading: ''
       },
       cartList: {
-        data: {} //沒事先訂義的話會跳錯誤說carts undefined(雖然還是抓得到資料啦)
+        data: {}
       },
-      coupon_code: ""
-    };
+      coupon_code: ''
+    }
   },
   methods: {
-    getProducts(page = 1) {
-      //參數直接寫page=1代表page預設值為1
-
-      const vm = this;
-      vm.isLoading = true;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/products`; //'https://vue-course-api.hexschool.io/api/eric840906/products'
-      this.$http.get(api).then(response => {
-        vm.isLoading = false;
-        vm.products = response.data.products;
-      });
+    getProducts (page = 1) {
+      const vm = this
+      vm.isLoading = true
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/products`
+      vm.$http.get(api).then(response => {
+        vm.isLoading = false
+        vm.products = response.data.products
+      })
     },
-    getProduct(id) {
-      const vm = this;
-      vm.productStatus.loading = id;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/product/${id}`;
-      this.$http.get(api).then(response => {
+    getProduct (id) {
+      const vm = this
+      vm.productStatus.loading = id
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/product/${id}`
+      vm.$http.get(api).then(response => {
         if (response.data.success) {
-          vm.product = response.data.product;
-          vm.productStatus.loading = "";
-          $("#productModal").modal("show");
+          vm.product = response.data.product
+          vm.productStatus.loading = ''
+          $('#productModal').modal('show')
         }
-      });
+      })
     },
-    addCart(id, qty = 1) {
-      const vm = this;
-      vm.productStatus.loading = id;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`;
+    addCart (id, qty = 1) {
+      const vm = this
+      vm.productStatus.loading = id
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
       const cart = {
         product_id: id,
         qty
-      };
-      this.$http.post(api, { data: cart }).then(response => {
+      }
+      vm.$http.post(api, { data: cart }).then(response => {
         if (response.data.success) {
-          $("#productModal").modal("hide");
-          vm.productStatus.loading = "";
-          this.getCart();
+          $('#productModal').modal('hide')
+          vm.productStatus.loading = ''
+          vm.getCart()
         } else {
-          alert("加入失敗");
-          vm.productStatus.loading = "";
+          vm.$bus.$emit('message:push', '加入失敗', 'danger')
+          vm.productStatus.loading = ''
         }
-      });
+      })
     },
-    getCart() {
+    getCart () {
       const vm = this
       vm.isLoading = true
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart` //'https://vue-course-api.hexschool.io/api/eric840906/products'
-      this.$http.get(api).then(response => {
-        vm.isLoading = false;
-        vm.cartList = response.data;
-      });
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
+      vm.$http.get(api).then(response => {
+        vm.isLoading = false
+        vm.cartList = response.data
+      })
     },
-    removeCart(id) {
-      const vm = this;
-      let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${id}`
-      this.$http.delete(api).then(response => {
+    removeCart (id) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${id}`
+      vm.$http.delete(api).then(response => {
         if (response.data.success) {
-          this.getCart();
+          vm.getCart()
         }
-      });
+      })
     },
-    applyCoupon() {
-      const vm = this;
+    applyCoupon () {
+      const vm = this
       const coupon = {
         code: vm.coupon_code
-      };
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/coupon`; //'https://vue-course-api.hexschool.io/api/eric840906/products'
-      this.$http.post(api, { data: coupon }).then(response => {
-        vm.isLoading = true;
+      }
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/coupon`
+      vm.$http.post(api, { data: coupon }).then(response => {
+        vm.isLoading = true
         if (response.data.success) {
-          vm.getCart();
-          vm.isLoading = false;
-          this.$bus.$emit("message:push", "優惠碼套用成功", "success");
+          vm.getCart()
+          vm.isLoading = false
+          vm.$bus.$emit('message:push', '優惠碼套用成功', 'success')
         } else {
-          vm.isLoading = false;
-          this.$bus.$emit("message:push", "查無優惠碼", "danger");
+          vm.isLoading = false
+          vm.$bus.$emit('message:push', '查無優惠碼', 'danger')
         }
-      });
+      })
     }
   },
-  created() {
-    this.getProducts();
-    this.getCart();
+  created () {
+    this.getProducts()
+    this.getCart()
   }
-};
+}
 </script>
 
 <style lang="scss">

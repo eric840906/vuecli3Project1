@@ -27,7 +27,7 @@ export default {
   height: 50px;
   width: 50px;
   position: fixed;
-  left: 20px;
+  right: 10px;
   bottom: 20px;
   box-shadow: 0px 0px 11px $black;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -45,6 +45,13 @@ export default {
     .gotopicon {
       color: $yellow;
     }
+  }
+}
+
+@media (max-width:425px)  {
+  .gotopframe {
+    left: 10px;
+    bottom: 20px;
   }
 }
 </style>

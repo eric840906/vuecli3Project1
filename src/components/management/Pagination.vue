@@ -18,9 +18,7 @@
           :key="page"
           :class="{ active: pageInfo.current_page == page }"
         >
-          <a class="page-link" href="#" @click.prevent="pageShift(page)">{{
-            page
-          }}</a>
+          <a class="page-link" href="#" @click.prevent="pageShift(page)">{{ page }}</a>
         </li>
 
         <li class="page-item" :class="{ disabled: !pageInfo.has_next }">

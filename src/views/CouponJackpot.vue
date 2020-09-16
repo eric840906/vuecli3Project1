@@ -7,10 +7,8 @@
         class="jumbotron text-center"
         style="border-radius: 0; padding-bottom: 104px;; margin-bottom:0; backgroundImage:url(https://images.unsplash.com/photo-1577218546063-5e53e820851e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80); background-size: cover; background-position: center;"
       >
-        <div class="page-title" style="margin-top:30px; color:white;">
-          <h1 style="font-size: 4.5rem;">
-            Get the party started
-          </h1>
+        <div class="page-title" style="color:white;">
+          <h1>Get the party started</h1>
         </div>
       </section>
 
@@ -384,8 +382,7 @@ export default {
   mounted () {
     $('.card').click(function (e) {
       $(e.currentTarget).addClass('flip')
-
-      $('.card').off() // 翻一張牌之後停止對所有兄弟的監聽
+      $('.card').off()
     })
     $('#start-modal').modal('show')
     $('body').click(function (e) {
@@ -402,6 +399,9 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+* {
+  font-family: 'Berkshire Swash', cursive;
+}
 
 .page-title{
    font-family: 'Tangerine', cursive;
@@ -498,7 +498,6 @@ export default {
 .start-modal {
   background-color: $black;
   .loading-text {
-    font-family: "cwTeXYen", sans-serif;
     color: $white;
   }
 }
