@@ -251,6 +251,7 @@
                   v-model="UserComments.email"
                   placeholder="Enter e-mail"
                   v-validate="'required|email'"
+                  required
                 />
               </div>
 
@@ -263,6 +264,7 @@
                   id="username"
                   v-model="UserComments.name"
                   placeholder="Enter nickname"
+                  required
                 />
               </div>
             </div>
