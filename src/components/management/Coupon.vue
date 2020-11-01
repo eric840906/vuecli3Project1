@@ -178,6 +178,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/admin/coupons?page=${page}`
       vm.$http.get(api).then(response => {
+        console.log(response)
         vm.coupons = response.data.coupons
         vm.pagination = response.data.pagination
       })

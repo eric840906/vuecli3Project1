@@ -49,17 +49,17 @@
       </h6>
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
-          <router-link class="nav-link" to="/dashboard/customerorder"
+          <router-link class="nav-link" to="/admin/customerorder"
             ><i class="fas fa-cart-plus"></i>模擬訂單</router-link
           >
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/dashboard/paypage"
+          <router-link class="nav-link" to="/admin/customercheckout"
             ><i class="fas fa-cart-plus"></i>模擬結帳</router-link
           >
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/dashboard/commentmanage"
+          <router-link class="nav-link" to="/admin/commentmanage"
             ><i class="fas fa-cart-plus"></i>留言管理</router-link
           >
         </li>
