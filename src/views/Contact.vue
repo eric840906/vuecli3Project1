@@ -14,11 +14,11 @@
                   class="card-img-top"
                   alt=""
                 />
-                <h5 class="card-title">{{item.name}}</h5>
+                <h5 class="staff-title">{{item.name}}</h5>
                 <p class="card-text">
                   {{item.intro}}
                 </p>
-                <div class="card-footer staff-links">
+                <div class="staff-links">
                   <a href=""
                     ><font-awesome-icon :icon="['fab', 'facebook']"
                   /></a>
@@ -53,7 +53,7 @@
                   </p>
                   </transition>
                   <transition name="trans">
-                  <div :key="cardShow" class="card-footer staff-links">
+                  <div :key="cardShow" class="staff-links">
                     <a href=""
                       ><font-awesome-icon :icon="['fab', 'facebook']"
                     /></a>
@@ -429,19 +429,32 @@ export default {
     min-width: 285px;
     height: 60vh;
     flex: 0 0 25.333333%;
-    padding: 5px;
     margin: 10px;
     border: 5px double $yellow;
     background-color: #e9d2b1;
+    color: hsl(35, 56%, 30%);
     img{
       width: 150px;
       height: 150px;
       border-radius: 150px;
     }
+    .staff-title{
+      margin: 0.75rem;
+    }
     .staff-links{
       width: 100%;
       display: flex;
       justify-content: space-around;
+      background: hsl(35, 56%, 70%);
+      padding: 0 1.25rem;
+      border: none;
+      font-size: xx-large;
+      a{
+        color: hsl(35, 56%, 20%);
+        &:hover{
+          color: hsl(35, 56%, 80%);
+        }
+      }
     }
     }
   }
@@ -461,12 +474,12 @@ export default {
   }
   .card-footer {
     font-size: xx-large;
-    background: $black;
+    background: $yellow;
     a {
-      color: $special-link;
+      color: $black;
       transition: ease-out 0.3s;
       &:hover {
-        color: $white;
+        color: #e9d2b1;
       }
     }
   }
@@ -498,7 +511,6 @@ export default {
     width: 50%;
     border: 5px double $yellow;
     border-top: none;
-    margin-top: -9px;
     box-shadow: 0px -9px 0px 3px #ffffff;
   }
   @media (max-width: 425px) {
