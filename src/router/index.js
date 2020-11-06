@@ -104,6 +104,18 @@ const routes = [
         name: 'CommentManage',
         component: () => import('../components/management/CommentManage.vue'),
         meta: { requiresAuth: true }
+      },
+      {
+        path: 'customerorder', // 子元件不用加斜線
+        name: 'CustomerOrder',
+        component: () => import('../components/management/CustomerOrder.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'customercheckout', // 子元件不用加斜線
+        name: 'CustomerCheckout',
+        component: () => import('../components/management/CustomerCheckout.vue'),
+        meta: { requiresAuth: true }
       }
     ]
   }

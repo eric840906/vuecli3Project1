@@ -150,8 +150,8 @@
       <hr class="featurette-divider" />
       <div class="container marketing">
         <h2>Customer Comments</h2>
-       <carousel :responsive="{ 0:  {items: 1, dots: false }, 600: { items: 3 } }" :nav="false" :autoplay="true" :loop="true" :rewind="true" v-if="randomCarousel.length>0">
-          <div v-for="item in randomCarousel" :key="item.id">
+       <carousel :responsive="{ 0:  {items: 1, dots: false }, 600: { items: 3 } }" :nav="false" :autoplay="true" :loop="true" :rewind="true" v-if="UserComments.length>0">
+          <div v-for="item in UserComments" :key="item.id">
             <div class="col-12 text-center">
               <img
                 src="../assets/image/profile.png"
@@ -208,7 +208,7 @@ export default {
         vm.comparisonB = Math.random()
         vm.UserComments = response.data
         vm.shuffleCarousel()
-        vm.getNewCarousel()
+        // vm.getNewCarousel()
       })
     },
     shuffleCarousel () {

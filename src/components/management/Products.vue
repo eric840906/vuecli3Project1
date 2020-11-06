@@ -331,6 +331,7 @@ export default {
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/admin/product` // 'https://vue-course-api.hexschool.io/api/eric840906/products'
       let httpMedthod = 'post'
       if (!vm.isNew) {
+        console.log('not new')
         httpMedthod = 'put'
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/admin/product/${vm.tempProduct.id}`
         // 把vm.tempProduct包起來加一個data屬性符合目標api的資料格式才不會出錯
