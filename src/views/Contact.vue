@@ -1,108 +1,24 @@
 <template>
   <div>
     <Alert></Alert>
-    <Navbar></Navbar>
     <main role="main">
-      <section
-        class="jumbotron text-center"
-        style="border-radius: 0; padding-bottom: 104px;; margin-bottom:0; backgroundImage:url(https://images.unsplash.com/photo-1551806235-6692cbfc690b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80); background-size: cover; background-position:center;"
-      >
-        <div class="banner-cover">
-          <div class="page-title" style="color:white;">
-            <h1>
-              Contact Us
-            </h1>
-            <br />
-            <p class="lead"></p>
-          </div>
-        </div>
-      </section>
-
+      <Banner :picture="bannerImg" :title="pageTitle"></Banner>
       <div class="album py-5">
         <div class="container">
-          <div class="row overflow-auto flex-nowrap cards">
-            <div class="col-md-4 row mr-auto ml-auto card-frame">
-              <div class="card">
+          <div class="staff-cards">
+            <div class="staff-carousel">
+              <div v-for="item in staffInfo" :key="item.name" class="staff-card">
+                <h6 class="position">{{item.position}}</h6>
                 <img
-                  src="https://images.unsplash.com/photo-1585418244931-4cb811b61092?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                  :src="item.profile"
                   class="card-img-top"
                   alt=""
                 />
-                <div class="card-body">
-                  <div class="d-flex">
-                    <h5 class="card-title">B.H.Valdez</h5>
-                    <h6 class="position ml-auto">CEO</h6>
-                  </div>
-                  <hr style="margin-top:0;" />
-                  <p class="card-text">
-                    A brand is no longer what we tell the consumer it is -- it
-                    is what consumers tell each other it is
-                  </p>
-                </div>
-                <div class="card-footer d-flex justify-content-around">
-                  <a href=""
-                    ><font-awesome-icon :icon="['fab', 'facebook']"
-                  /></a>
-                  <a href=""><font-awesome-icon :icon="['fab', 'twitter']"/></a>
-                  <a href=""
-                    ><font-awesome-icon :icon="['fab', 'instagram']"
-                  /></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 row mr-auto ml-auto card-frame">
-              <div class="card">
-                <div class="picture">
-                  <img
-                    src="https://images.unsplash.com/photo-1547147607-6eab7b49f3ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                    class="card-img-top img-fluid"
-                    alt=""
-                  />
-                </div>
-
-                <div class="card-body">
-                  <div class="d-flex">
-                    <h5 class="card-title">M.L.Valencia</h5>
-                    <h6 class="position ml-auto">COO</h6>
-                  </div>
-                  <hr style="margin-top:0;" />
-                  <p class="card-text">
-                    People often say that motivation doesn’t last. Well, neither
-                    does bathing. That’s why we recommend it daily
-                  </p>
-                </div>
-                <div class="card-footer d-flex justify-content-around">
-                  <a href=""
-                    ><font-awesome-icon :icon="['fab', 'facebook']"
-                  /></a>
-                  <a href=""><font-awesome-icon :icon="['fab', 'twitter']"/></a>
-                  <a href=""
-                    ><font-awesome-icon :icon="['fab', 'instagram']"
-                  /></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 row mr-auto ml-auto card-frame">
-              <div class="card">
-                <img
-                  src="https://images.unsplash.com/photo-1551467302-8e70f83e8ec6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                  class="card-img-top"
-                  alt=""
-                />
-                <div class="card-body">
-                  <div class="d-flex">
-                    <h5 class="card-title">C.S.Cassidy</h5>
-                    <h6 class="position ml-auto">CMO</h6>
-                  </div>
-                  <hr style="margin-top:0;" />
-                  <p class="card-text">
-                    If you are an artist, learn science. If you are a scientist,
-                    cultivate art
-                  </p>
-                </div>
-                <div class="card-footer d-flex justify-content-around">
+                <h5 class="card-title">{{item.name}}</h5>
+                <p class="card-text">
+                  {{item.intro}}
+                </p>
+                <div class="card-footer staff-links">
                   <a href=""
                     ><font-awesome-icon :icon="['fab', 'facebook']"
                   /></a>
@@ -114,7 +30,7 @@
               </div>
             </div>
           </div>
-          <div id="carouselTeam" class="carousel slide" data-ride="carousel" data-interval="false">
+          <!-- <div id="carouselTeam" class="carousel slide" data-ride="carousel" data-interval="false">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <div class="card">
@@ -234,7 +150,7 @@
               ></span>
               <span class="sr-only">Next</span>
             </a>
-          </div>
+          </div> -->
         </div>
         <hr>
         <div class="container">
@@ -347,7 +263,6 @@
           </form>
         </div>
       </div>
-      <Footer></Footer>
     </main>
     <Gotop></Gotop>
   </div>
@@ -355,18 +270,40 @@
 
 <script>
 import Alert from '../components/Alert.vue'
-import Navbar from '../components/HomeNav.vue'
 import Gotop from '../components/GoTop.vue'
-import Footer from '../components/Footer.vue'
+import Banner from '../components/Banner'
 export default {
   components: {
     Alert,
-    Navbar,
     Gotop,
-    Footer
+    Banner
   },
   data () {
     return {
+      bannerImg: {
+        backgroundImage: "url('https://images.unsplash.com/photo-1551806235-6692cbfc690b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')"
+      },
+      pageTitle: 'Contact Us',
+      staffInfo: [
+        {
+          name: 'B.H.Valdez',
+          profile: 'https://images.unsplash.com/photo-1604152087112-5b1acd817c87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+          position: 'CEO',
+          intro: 'A brand is no longer what we tell the consumer it is -- it is what consumers tell each other it is'
+        },
+        {
+          name: 'M.L.Valencia',
+          profile: 'https://images.unsplash.com/photo-1556664154-dc98b1d795e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+          position: 'COO',
+          intro: 'People often say that motivation doesn’t last. Well, neither does bathing. That’s why we recommend it daily'
+        },
+        {
+          name: 'C.S.Cassidy',
+          profile: 'https://images.unsplash.com/photo-1597236957537-fae1335cde2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+          position: 'CMO',
+          intro: 'If you are an artist, learn science. If you are a scientist, cultivate art'
+        }
+      ],
       UserComments: {}
     }
   },
@@ -392,10 +329,37 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
-* {
-  font-family: 'Berkshire Swash', cursive;
-}
-
+  .staff-carousel{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .staff-cards{
+    text-align: center;
+    .staff-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 285px;
+    height: 60vh;
+    flex: 0 0 25.333333%;
+    padding: 5px;
+    margin: 10px;
+    border: 5px double $yellow;
+    background-color: #e9d2b1;
+    img{
+      width: 150px;
+      height: 150px;
+      border-radius: 150px;
+    }
+    .staff-links{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+    }
+  }
   .card-footer {
     font-size: xx-large;
     background: $black;
@@ -428,15 +392,29 @@ export default {
     position: absolute;
   }
   .position {
-    border: 1px solid $black;
-    border-radius: 7px;
-    margin-bottom: 5px;
+    background-color: white;
+    text-align: center;
     padding: 5px 8px;
-    background-color: $black;
-    color: $yellow;
+    color: $black;
+    width: 50%;
+    border: 5px double $yellow;
+    border-top: none;
+    margin-top: -9px;
+    box-shadow: 0px -9px 0px 3px #ffffff;
   }
-
   @media (max-width: 425px) {
+    .staff-cards{
+      overflow-x: auto;
+      overflow-y: hidden;
+      .staff-carousel{
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        .staff-card{
+          max-width: 300px;
+          flex: 0 0 100%;
+        }
+      }
+    }
     .card-frame {
       flex: 0 0 100%;
       max-width: 100%;

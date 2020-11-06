@@ -3,7 +3,7 @@
     <header>
       <nav class="main-nav navbar navbar-expand-md navbar-dark fixed-top bg-black" style="width: 100%;">
         <a
-          class="navbar-brand"
+          class="logo"
           href="#"
           style="font-family: 'Tangerine', cursive"
           >Lächeln</a
@@ -57,6 +57,16 @@ export default {
 </script>
 
 <style lang="scss">
+
+.logo{
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 30px;
+  &:hover{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
 .top-links {
   font-size: 18px;
 }

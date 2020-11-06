@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar></Navbar>
     <Alert></Alert>
     <main role="main">
       <div
@@ -174,7 +173,6 @@
       </div>
 
       <hr class="featurette-divider" style="border:none" />
-      <Footer></Footer>
     </main>
   </div>
 </template>
@@ -183,14 +181,10 @@
 import $ from 'jquery'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
-import Navbar from '../components/HomeNav.vue'
-import Footer from '../components/Footer.vue'
 import Alert from '../components/Alert.vue'
 
 export default {
   components: {
-    Navbar,
-    Footer,
     Alert
   },
   data () {
@@ -282,9 +276,6 @@ export default {
 
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
-*{
-  font-family: 'Berkshire Swash', cursive;
-}
 h1 {
   font-size: 3.5rem;
 }

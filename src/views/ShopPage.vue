@@ -1,28 +1,20 @@
 <template>
   <div>
     <Alert></Alert>
-    <Navbar></Navbar>
     <main role="main">
-      <section
-        class="jumbotron text-center"
-        style="border-radius: 0; padding-bottom: 104px;; margin-bottom:0; backgroundImage:url(https://images.unsplash.com/photo-1573991288363-aa2067bc6a73?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80); background-size: cover; background-position: center;"
-      >
+      <Banner :picture="bannerImg" :title="pageTitle"></Banner>
+      <!-- <section class="banner"
+        :style="bannerImg">
         <div class="page-title">
-          <h1
-            style="color: cornsilk;"
-          >
-            Choose Your Favourites
-          </h1>
+          <h1>{{pageTitle}}</h1>
           <br />
           <h1 class="lead"></h1>
         </div>
-      </section>
-
+      </section> -->
       <div class="album pt-5 bg-light">
         <div class="container">
           <router-view></router-view>
         </div>
-        <Footer></Footer>
         <GoTop></GoTop>
       </div>
     </main>
@@ -30,17 +22,23 @@
 </template>
 
 <script>
-import Navbar from '../components/HomeNav.vue'
 import GoTop from '../components/GoTop.vue'
 import Alert from '../components/Alert.vue'
-import Footer from '../components/Footer.vue'
+import Banner from '../components/Banner.vue'
 
 export default {
   components: {
-    Navbar,
     GoTop,
     Alert,
-    Footer
+    Banner
+  },
+  data () {
+    return {
+      bannerImg: {
+        backgroundImage: "url('https://images.unsplash.com/photo-1573991288363-aa2067bc6a73?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80')"
+      },
+      pageTitle: 'Choose Your Favourites'
+    }
   }
 }
 </script>
@@ -48,10 +46,13 @@ export default {
 <style lang="scss">
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
-body {
-  font-family: 'Berkshire Swash', cursive;
+.banner{
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+  display: flex;
+  align-items: center;
 }
-
 .border-right {
   border-right: 1px solid $black;
 }
@@ -60,9 +61,16 @@ body {
   padding: 0;
 }
 .page-title {
-  color: $black;
-  padding: 96px 0;
-  background-image: radial-gradient(#f0b3b3a8, #ffffff00);
+  display: flex;
+  flex: 0 0 100%;
+  text-align: center;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #0000007d;
+  h1{
+    color: #e0ddff;
+  }
 }
 
 .top-select {

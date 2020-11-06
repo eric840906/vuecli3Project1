@@ -1,6 +1,6 @@
 <template>
     <div style="font-family: 'Berkshire Swash', cursive;">
-        <footer class="pt-4 pt-md-5 bg-gray" style="margin-top: 60px;">
+        <footer class="bg-gray">
             <div class="container">
                 <div class="row">
                     <div class="footer-item text-muted col-md-5 store-info">
@@ -61,6 +61,11 @@ export default {
 <style lang="scss" scope>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+
+footer{
+  background-color: #e1e1e1;
+  padding-top: 60px;
+}
 
 .footer-item{
   &:nth-child(1){

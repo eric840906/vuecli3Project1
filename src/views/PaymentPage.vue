@@ -1,7 +1,6 @@
 <template>
   <div>
     <Alert></Alert>
-    <Navbar></Navbar>
     <div class="container-fluid">
       <div class="row">
         <main
@@ -16,19 +15,14 @@
 </template>
 
 <script>
-import Navbar from '../components/HomeNav.vue'
 import Alert from '../components/Alert.vue'
 
 export default {
   components: {
-    Navbar,
     Alert
   }
 }
 </script>
 
 <style lang="scss" scope>
-*{
-  font-family: 'Berkshire Swash', cursive;
-}
 </style>

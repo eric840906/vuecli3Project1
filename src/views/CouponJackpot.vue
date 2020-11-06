@@ -1,17 +1,8 @@
 <template>
   <div>
     <Alert></Alert>
-    <Navbar></Navbar>
     <main role="main">
-      <section
-        class="jumbotron text-center"
-        style="border-radius: 0; padding-bottom: 104px;; margin-bottom:0; backgroundImage:url(https://images.unsplash.com/photo-1577218546063-5e53e820851e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80); background-size: cover; background-position: center;"
-      >
-        <div class="page-title" style="color:white;">
-          <h1>Get the party started</h1>
-        </div>
-      </section>
-
+      <Banner :picture="bannerImg" :title="pageTitle"></Banner>
       <div class="album py-5">
         <div class="container">
           <div class="window-cards card-deck mb-3 text-center justify-content-center">
@@ -252,24 +243,24 @@
         </div>
       </div>
     </div>
-
-    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import $ from 'jquery'
-import Navbar from '../components/HomeNav.vue'
-import Footer from '../components/Footer.vue'
 import Alert from '../components/Alert.vue'
+import Banner from '../components/Banner.vue'
 export default {
   components: {
-    Navbar,
-    Footer,
-    Alert
+    Alert,
+    Banner
   },
   data () {
     return {
+      bannerImg: {
+        backgroundImage: "url('https://images.unsplash.com/photo-1577218546063-5e53e820851e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80')"
+      },
+      pageTitle: 'Get the party started',
       coupons: [
         {
           due_date: '2020-09-06',
@@ -399,13 +390,6 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
-* {
-  font-family: 'Berkshire Swash', cursive;
-}
-
-.page-title{
-   font-family: 'Tangerine', cursive;
-}
 
 .start-btn {
   position: absolute;
@@ -478,7 +462,6 @@ export default {
   display: inline-block;
   width: auto !important;
   border-radius: 15px;
-  font-family: "cwTeXYen", sans-serif;
   .front {
     background-position: center;
     background-image: url(https://i.pinimg.com/564x/c1/59/b4/c159b4738dae9c9d8d6417228024de8d.jpg);
@@ -559,6 +542,7 @@ export default {
   text-align: center;
   border: none;
   background: none;
+  font-family: "cwTeXYen", sans-serif;
 }
 .btn {
   border: solid;

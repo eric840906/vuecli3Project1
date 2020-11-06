@@ -1,21 +1,8 @@
 <template>
   <div>
     <Alert></Alert>
-    <Navbar></Navbar>
     <main role="main">
-      <section
-        class="jumbotron text-center"
-        style="border-radius: 0; padding-bottom: 104px;; margin-bottom:0; backgroundImage:url(https://images.unsplash.com/photo-1481437156560-3205f6a55735?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1371&q=80); background-size: cover; background-position: center;"
-      >
-        <div class="page-title" style="color: brown;">
-          <h1>
-            Information
-          </h1>
-          <br />
-          <p class="lead"></p>
-        </div>
-      </section>
-
+      <Banner :picture="bannerImg" :title="pageTitle"></Banner>
       <div class="album py-5">
         <div class="container">
           <div class="row">
@@ -99,27 +86,27 @@
         </div>
       </div>
     </main>
-
-    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
-import Navbar from '../components/HomeNav.vue'
-import Footer from '../components/Footer'
 import Alert from '../components/Alert.vue'
+import Banner from '../components/Banner'
 export default {
   components: {
-    Navbar,
-    Footer,
     LMap,
     LTileLayer,
     LMarker,
-    Alert
+    Alert,
+    Banner
   },
   data () {
     return {
+      bannerImg: {
+        backgroundImage: "url('https://images.unsplash.com/photo-1481437156560-3205f6a55735?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1371&q=80')"
+      },
+      pageTitle: 'Information',
       // 模擬資料
       data: [
         {
@@ -201,9 +188,7 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
-* {
-  font-family: 'Berkshire Swash', cursive;
-}
+
 .info-list::-webkit-scrollbar {
   width: 0.5em;
   height: 0.5em;

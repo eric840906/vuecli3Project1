@@ -7,66 +7,73 @@ const routes = [
   {
     // 預防使用者因為輸入不存在的路徑跑到空白頁面
     path: '*',
-    redirect: '/'
+    redirect: '/main'
   },
   {
-    path: '/',
-    name: 'Home',
-    component: () => import('../views/Home.vue')
-  },
-  {
-    path: '/shoppage',
-    name: 'ShopPage',
-    component: () => import('../views/ShopPage.vue'),
+    path: '/main',
+    name: 'Main',
+    component: () => import('../views/Main.vue'),
     children: [
       {
-        path: 'shoppingmain',
-        name: 'ShoppingMain',
-        component: () => import('../components/shopPage/ShoppingMain.vue')
+        path: '/',
+        name: 'Home',
+        component: () => import('../views/Home.vue')
       },
       {
-        path: 'product/:productId',
-        name: 'ShopProduct',
-        component: () => import('../components/shopPage/ShopProduct.vue')
-      }
-    ]
-  },
-  {
-    path: '/couponjackpot',
-    name: 'CouponJackpot',
-    component: () => import('../views/CouponJackpot.vue')
-  },
-  {
-    path: '/storeinfo',
-    name: 'Storeinfo',
-    component: () => import('../views/Storeinfo.vue')
-  },
-  {
-    path: '/contact',
-    name: 'Contact',
-    component: () => import('../views/Contact.vue')
-  },
-  {
-    path: '/paymentpage',
-    name: 'PaymentPage',
-    component: () => import('../views/PaymentPage.vue'),
-    children: [
-      {
-        path: 'paymentmake',
-        name: 'PaymentMake',
-        component: () => import('../components/payment/PaymentMake.vue')
+        path: '/shoppage',
+        name: 'ShopPage',
+        component: () => import('../views/ShopPage.vue'),
+        children: [
+          {
+            path: 'shoppingmain',
+            name: 'ShoppingMain',
+            component: () => import('../components/shopPage/ShoppingMain.vue')
+          },
+          {
+            path: 'product/:productId',
+            name: 'ShopProduct',
+            component: () => import('../components/shopPage/ShopProduct.vue')
+          }
+        ]
       },
       {
-        path: 'paymentconfirm/:orderId', // 要加上/:orderId動態帶入api抓來的訂單ID形成結帳頁面，少了冒號會因為網址被nav guard判斷不存在而跑回login
-        name: 'PaymentConfirm',
-        component: () => import('../components/payment/PaymentConfirm.vue')
+        path: '/couponjackpot',
+        name: 'CouponJackpot',
+        component: () => import('../views/CouponJackpot.vue')
+      },
+      {
+        path: '/storeinfo',
+        name: 'Storeinfo',
+        component: () => import('../views/Storeinfo.vue')
+      },
+      {
+        path: '/contact',
+        name: 'Contact',
+        component: () => import('../views/Contact.vue')
+      },
+      {
+        path: '/paymentpage',
+        name: 'PaymentPage',
+        component: () => import('../views/PaymentPage.vue'),
+        children: [
+          {
+            path: 'paymentmake',
+            name: 'PaymentMake',
+            component: () => import('../components/payment/PaymentMake.vue')
+          },
+          {
+            path: 'paymentconfirm/:orderId', // 要加上/:orderId動態帶入api抓來的訂單ID形成結帳頁面，少了冒號會因為網址被nav guard判斷不存在而跑回login
+            name: 'PaymentConfirm',
+            component: () => import('../components/payment/PaymentConfirm.vue')
+          }
+        ]
+      },
+      {
+        path: '/login',
+        name: 'login',
+        component: () => import('../views/Login.vue')
       }
     ]
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/Login.vue')
   },
   {
     path: '/admin',
