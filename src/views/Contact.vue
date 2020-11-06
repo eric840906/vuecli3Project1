@@ -449,11 +449,10 @@ export default {
     display: flex;
     justify-content: center;
     .indicator{
-      width: 10px;
-      height: 10px;
-      padding: 10px;
+      transition: 0.5s all;
+      width: 50px;
+      height: 2px;
       background-color: #fee6c2;
-      border-radius: 999px;
       margin: 20px;
     }
     .active{
