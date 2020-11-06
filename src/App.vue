@@ -68,8 +68,10 @@ export default {
 }
 .trans-enter{
   opacity: 0;
+  transform: scale(2)
 }
 .trans-leave-active {
   opacity: 0;
+  transform: scale(0)
 }
 </style>

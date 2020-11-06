@@ -65,6 +65,9 @@
                   </transition>
               </div>
             </div>
+            <div class="indicators">
+              <div class="indicator" v-for="num in staffInfo.length" :key="num" :class="{'active': cardShow===num-1}" @click.prevent="cardShow=num-1"></div>
+            </div>
           </div>
           <!-- <div id="carouselTeam" class="carousel slide" data-ride="carousel" data-interval="false">
             <div class="carousel-inner">
@@ -440,6 +443,21 @@ export default {
       display: flex;
       justify-content: space-around;
     }
+    }
+  }
+  .indicators{
+    display: flex;
+    justify-content: center;
+    .indicator{
+      width: 10px;
+      height: 10px;
+      padding: 10px;
+      background-color: #fee6c2;
+      border-radius: 999px;
+      margin: 20px;
+    }
+    .active{
+      background-color: #ffa64c !important;
     }
   }
   .card-footer {
