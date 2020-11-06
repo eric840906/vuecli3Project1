@@ -40,4 +40,36 @@ export default {
   opacity: 0;
   transform: translateX(200px);
 }
+
+.faderev-enter-active, .faderev-leave-active {
+    transition: all 0.3s;
+    transition-duration: .25s;
+  }
+
+.faderev-enter-active {
+  transition-delay: .25s;
+}
+.faderev-enter{
+  opacity: 0;
+  transform: translateX(200px);
+}
+.faderev-leave-active {
+  opacity: 0;
+  transform: translateX(-200px);
+}
+
+.trans-enter-active, .trans-leave-active {
+    transition: all 0.3s;
+    transition-duration: .25s;
+  }
+
+.trans-enter-active {
+  transition-delay: .15s;
+}
+.trans-enter{
+  opacity: 0;
+}
+.trans-leave-active {
+  opacity: 0;
+}
 </style>

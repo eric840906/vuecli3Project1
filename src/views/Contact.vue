@@ -5,7 +5,7 @@
       <Banner :picture="bannerImg" :title="pageTitle"></Banner>
       <div class="album py-5">
         <div class="container">
-          <div class="staff-cards">
+          <div class="staff-cards" v-if="screenSize > 425">
             <div class="staff-carousel">
               <div v-for="item in staffInfo" :key="item.name" class="staff-card">
                 <h6 class="position">{{item.position}}</h6>
@@ -27,6 +27,42 @@
                     ><font-awesome-icon :icon="['fab', 'instagram']"
                   /></a>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="staff-cards" v-if="screenSize <= 425">
+            <div class="staff-carousel">
+              <a href="#" class="staff-control-left" @click.prevent='staffChange(-1)'><font-awesome-icon :icon="['fas', 'chevron-left']" style="height: 100%;" /></a>
+              <a href="#" class="staff-control-right" @click.prevent='staffChange(+1)'><font-awesome-icon :icon="['fas', 'chevron-right']" style="height: 100%;" /></a>
+              <div class="staff-card">
+                  <h6 class="position">{{staffInfo[cardShow].position}}</h6>
+                  <transition name="faderev">
+                  <img
+                    :key="staffInfo[cardShow].profile"
+                    :src="staffInfo[cardShow].profile"
+                    class="card-img-top"
+                    alt=""
+                  />
+                  </transition>
+                  <transition name="fade">
+                  <h5 :key="staffInfo[cardShow].name" class="card-title">{{staffInfo[cardShow].name}}</h5>
+                  </transition>
+                  <transition name="faderev">
+                  <p :key="staffInfo[cardShow].intro" class="card-text">
+                    {{staffInfo[cardShow].intro}}
+                  </p>
+                  </transition>
+                  <transition name="trans">
+                  <div :key="cardShow" class="card-footer staff-links">
+                    <a href=""
+                      ><font-awesome-icon :icon="['fab', 'facebook']"
+                    /></a>
+                    <a href=""><font-awesome-icon :icon="['fab', 'twitter']"/></a>
+                    <a href=""
+                      ><font-awesome-icon :icon="['fab', 'instagram']"
+                    /></a>
+                  </div>
+                  </transition>
               </div>
             </div>
           </div>
@@ -306,7 +342,9 @@ export default {
           intro: 'If you are an artist, learn science. If you are a scientist, cultivate art'
         }
       ],
-      UserComments: {}
+      UserComments: {},
+      screenSize: undefined,
+      cardShow: 0
     }
   },
   methods: {
@@ -323,7 +361,23 @@ export default {
           setTimeout(() => vm.$router.push('/'), 2500)
         }
       })
+    },
+    resizeHandler () {
+      const vm = this
+      vm.screenSize = window.screen.availWidth
+    },
+    staffChange (change) {
+      const vm = this
+      vm.cardShow = (vm.cardShow + vm.staffInfo.length + change) % vm.staffInfo.length
     }
+  },
+  created () {
+    window.addEventListener('resize', this.resizeHandler)
+    const vm = this
+    vm.screenSize = window.screen.availWidth
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.resizeHandler)
   }
 }
 </script>
@@ -331,12 +385,38 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+%control-arrow{
+  font-size: 50px;
+  color: #0000003d;
+  opacity: 1;
+  top: 0;
+  position: absolute;
+  transition: 0.5s all;
+  animation: arrow-flash infinite 1s;
+}
+.staff-control-left{
+  @extend %control-arrow;
+  left: 0;
+}
+.staff-control-right{
+  @extend %control-arrow;
+  right: 0;
+}
+@keyframes arrow-flash {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
   .staff-carousel{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
   }
   .staff-cards{
+    position: relative;
     text-align: center;
     .staff-card{
     display: flex;
@@ -412,8 +492,9 @@ export default {
         flex-wrap: nowrap;
         justify-content: space-between;
         .staff-card{
-          max-width: 300px;
+          max-width: 100%;
           flex: 0 0 100%;
+          margin: 0;
         }
       }
     }
