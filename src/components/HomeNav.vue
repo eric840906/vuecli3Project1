@@ -77,6 +77,7 @@ export default {
   font-size: 30px;
 }
 .main-nav{
+  height: 8vh;
   transition: 0.5s;
 }
 

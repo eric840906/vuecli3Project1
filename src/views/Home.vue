@@ -593,6 +593,7 @@ a.banner, a.banner.router-link-active{
   .row{
     justify-content: space-between;
     @media (max-width: 425px) {
+      justify-content: center;
       .category-card+.category-card{
         margin-top: 20px;
       }
@@ -620,7 +621,7 @@ a.banner, a.banner.router-link-active{
         }
       }
       @media (max-width:425px) {
-        flex: 0 0 100%;
+        flex: 0 0 80%;
       }
     }
   }
