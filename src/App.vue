@@ -34,11 +34,11 @@ export default {
 }
 .fade-enter{
   opacity: 0;
-  transform: translateX(-200px);
+  transform: translateX(-400px);
 }
 .fade-leave-active {
   opacity: 0;
-  transform: translateX(200px);
+  transform: translateX(400px);
 }
 
 .faderev-enter-active, .faderev-leave-active {
@@ -51,11 +51,11 @@ export default {
 }
 .faderev-enter{
   opacity: 0;
-  transform: translateX(200px);
+  transform: translateX(400px);
 }
 .faderev-leave-active {
   opacity: 0;
-  transform: translateX(-200px);
+  transform: translateX(-400px);
 }
 
 .trans-enter-active, .trans-leave-active {
