@@ -1,5 +1,5 @@
 <template>
-    <div style="font-family: 'Berkshire Swash', cursive;">
+    <div>
         <footer class="bg-gray">
             <div class="container">
                 <div class="row">
@@ -31,12 +31,10 @@
                 </div>
             </div>
         </footer>
-        <div>
-            <div class="container" style="margin-top: 10px;">
-                <div class="row justify-content-center" style="font-size:16px">
-                <small class="d-block mb-3 text-muted">&copy; <span style="color: black;">Lächeln</span>  - Only for Self learning purpose</small>
-                </div>
-            </div>
+        <div class="container" style="margin-top: 10px;">
+          <div class="row justify-content-center" style="font-size:16px">
+          <small class="d-block mb-3 text-muted">&copy; <span style="color: black;">Lächeln</span>  - Only for Self learning purpose</small>
+          </div>
         </div>
     </div>
 </template>

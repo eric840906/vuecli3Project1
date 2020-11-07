@@ -1,0 +1,250 @@
+<template>
+  <div style="position:relative;">
+    <a href="#" class="outer-product-control-left" @click.prevent='scrollLeft()'><font-awesome-icon :icon="['fas', 'chevron-left']" style="height: 100%;" /></a>
+    <a href="#" class="outer-product-control-right" @click.prevent='scrollRight()'><font-awesome-icon :icon="['fas', 'chevron-right']" style="height: 100%;" /></a>
+    <div class="product-cards" v-if="size > 425">
+      <div class="product-carousel">
+        <div class="row">
+          <div v-for="item in carouselInfo" :key="item.name" class="product-card">
+            <img
+              :src="item.imageUrl"
+              class="card-img-top"
+              alt=""
+            />
+            <h5 class="product-title">{{item.title}}</h5>
+            <p class="card-text">
+              {{item.description}}
+            </p>
+            <div class="product-links">
+              <a href="#">View Product</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-cards" v-else>
+      <div class="product-carousel">
+        <a href="#" class="product-control-left" @click.prevent='carouselChange(-1,"faderev")'><font-awesome-icon :icon="['fas', 'chevron-left']" style="height: 100%;" /></a>
+        <a href="#" class="product-control-right" @click.prevent='carouselChange(+1, "fade" )'><font-awesome-icon :icon="['fas', 'chevron-right']" style="height: 100%;" /></a>
+        <transition :name="transitionName">
+          <div :key="carouselInfo[show].imageUrl" class="product-card">
+              <img
+                :src="carouselInfo[show].imageUrl"
+                class="card-img-top"
+                alt=""
+              />
+              <h5 class="card-title">{{carouselInfo[show].title}}</h5>
+              <p class="card-text">
+                {{carouselInfo[show].description}}
+              </p>
+              <div :key="show" class="product-links">
+                <a href="#">View Product</a>
+              </div>
+          </div>
+        </transition>
+      </div>
+      <div class="indicators">
+        <div class="indicator" v-for="num in carouselInfo.length" :key="num" :class="{'active': show===num-1}" @click.prevent="setShow(num-1)"></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['size', 'carouselInfo', 'show'],
+  data () {
+    return {
+      transitionName: ''
+    }
+  },
+  methods: {
+    carouselChange (change, transitionName) {
+      this.$emit('changeCarousel', change)
+      this.transitionName = transitionName
+    },
+    setShow (num) {
+      this.$emit('showCarousel', num)
+    },
+    scrollLeft () {
+      const scroll = this.$el.lastElementChild.scrollLeft - (this.$el.lastElementChild.offsetWidth)
+      const scrollTo = scroll === -930 ? 30000 : scroll
+      console.log(scroll)
+      this.$el.lastElementChild.scrollTo({
+        left: scrollTo,
+        behavior: 'smooth'
+      })
+    },
+    scrollRight () {
+      const singleLength = this.$el.lastElementChild.firstElementChild.firstElementChild.children[0].offsetWidth
+      const cardsNumber = this.$el.lastElementChild.firstElementChild.firstElementChild.children.length
+      const totalWidth = singleLength * cardsNumber
+      console.log('singleLength' + singleLength * cardsNumber)
+      const scroll = this.$el.lastElementChild.scrollLeft + (this.$el.lastElementChild.offsetWidth)
+      const scrollTo = scroll > totalWidth ? -930 : scroll
+      console.log(scroll)
+      this.$el.lastElementChild.scrollTo({
+        left: scrollTo,
+        behavior: 'smooth'
+      })
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
+
+$base: #e2baa8;
+$background: darken($base, 50%);
+$border-color: $base;
+$lighter-background: lighten($base, 15%);
+$link-text: darken($base, 60%);
+$link-text-hover: lighten($base, 10%);
+
+%control-arrow{
+  font-size: 50px;
+  color: #0000003d;
+  opacity: 1;
+  position: absolute;
+  transition: 0.5s all;
+  animation: arrow-flash infinite 1s;
+}
+.outer-product-control-left{
+  @extend %control-arrow;
+  top: -62px;
+  right: 64px;
+  @media (max-width: 425px) {
+    display: none;
+  }
+}
+.outer-product-control-right{
+  @extend %control-arrow;
+  top: -62px;
+  right: 0;
+  @media (max-width: 425px) {
+    display: none;
+  }
+}
+.product-control-left{
+  @extend %control-arrow;
+  top: 0;
+  left: 0;
+}
+.product-control-right{
+  @extend %control-arrow;
+  top: 0;
+  right: 0;
+}
+@keyframes arrow-flash {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+  .product-carousel{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .row{
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+  }
+  .product-cards{
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    .product-card{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 400px;
+      flex: 0 0 32%;
+      justify-content: space-between;
+      margin: 0.68%;
+      padding: 10px;
+      background-color: $lighter-background;
+      color: $link-text;
+    img{
+      margin: 20px;
+      width: 150px;
+      height: 150px;
+      border-radius: 150px;
+    }
+    .product-title{
+      margin: 0.75rem;
+    }
+    .product-links{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: $background;
+      padding: 0 1.25rem;
+      border: none;
+      font-size: 16px;
+      padding: 7px;
+      a{
+        color: lighten($background,65%);
+        &:hover{
+          color: $link-text-hover
+        }
+      }
+    }
+    }
+  }
+  .indicators{
+    display: flex;
+    justify-content: center;
+    .indicator{
+      transition: 0.5s all;
+      width: 10px;
+      height: 10px;
+      border-radius: 20px;
+      background-color: #fee6c2;
+      margin: 6px;
+    }
+    .active{
+      background-color: #ffa64c !important;
+    }
+  }
+  .card-footer {
+    font-size: xx-large;
+    background: $yellow;
+    a {
+      color: $black;
+      transition: ease-out 0.3s;
+      &:hover {
+        color: #e9d2b1;
+      }
+    }
+  }
+  .position {
+    background-color: white;
+    text-align: center;
+    padding: 5px 8px;
+    color: $black;
+    width: 50%;
+    border: 5px double $yellow;
+    border-top: none;
+    box-shadow: 0px -9px 0px 3px #ffffff;
+  }
+  @media (max-width: 425px) {
+    .product-cards{
+      overflow-x: auto;
+      overflow-y: hidden;
+      .product-carousel{
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        .product-card{
+          max-width: 100%;
+          flex: 0 0 100%;
+          margin: 0;
+        }
+      }
+    }
+  }
+</style>

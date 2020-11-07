@@ -1,7 +1,7 @@
 <template>
   <div id="app">
      <Navbar></Navbar>
-    <div style="padding-top: 6vh;"></div>
+    <div style="padding-top: 8vh;"></div>
     <transition name="fade">
       <router-view/>
     </transition>
@@ -73,5 +73,34 @@ export default {
 .trans-leave-active {
   opacity: 0;
   transform: scale(0)
+}
+
+.vanish-enter-active, .vanish-leave-active {
+    transition: all 0.3s;
+  }
+
+.vanish-enter-active {
+  transition-delay: 0.3s;
+}
+.vanish-enter{
+  transform: rotate3d(0, 1, 0, 90deg);
+  opacity: 0;
+}
+.vanish-leave-active {
+  transform: rotate3d(0, 1, 0, 90deg);
+  opacity: 0;
+}
+
+.flip-enter-active, .flip-leave-active{
+    transition: all 0.3s;
+  }
+.flip-enter-active{
+  transition-delay: 0.3s;
+}
+.flip-enter {
+  transform: rotate3d(0, 1, 0, 90deg);
+}
+.flip-leave-active {
+  transform: rotate3d(0, 1, 0, 90deg);
 }
 </style>

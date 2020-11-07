@@ -5,191 +5,7 @@
       <Banner :picture="bannerImg" :title="pageTitle"></Banner>
       <div class="album py-5">
         <div class="container">
-          <div class="staff-cards" v-if="screenSize > 425">
-            <div class="staff-carousel">
-              <div v-for="item in staffInfo" :key="item.name" class="staff-card">
-                <h6 class="position">{{item.position}}</h6>
-                <img
-                  :src="item.profile"
-                  class="card-img-top"
-                  alt=""
-                />
-                <h5 class="staff-title">{{item.name}}</h5>
-                <p class="card-text">
-                  {{item.intro}}
-                </p>
-                <div class="staff-links">
-                  <a href=""
-                    ><font-awesome-icon :icon="['fab', 'facebook']"
-                  /></a>
-                  <a href=""><font-awesome-icon :icon="['fab', 'twitter']"/></a>
-                  <a href=""
-                    ><font-awesome-icon :icon="['fab', 'instagram']"
-                  /></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="staff-cards" v-if="screenSize <= 425">
-            <div class="staff-carousel">
-              <a href="#" class="staff-control-left" @click.prevent='staffChange(-1)'><font-awesome-icon :icon="['fas', 'chevron-left']" style="height: 100%;" /></a>
-              <a href="#" class="staff-control-right" @click.prevent='staffChange(+1)'><font-awesome-icon :icon="['fas', 'chevron-right']" style="height: 100%;" /></a>
-              <div class="staff-card">
-                  <h6 class="position">{{staffInfo[cardShow].position}}</h6>
-                  <transition name="faderev">
-                  <img
-                    :key="staffInfo[cardShow].profile"
-                    :src="staffInfo[cardShow].profile"
-                    class="card-img-top"
-                    alt=""
-                  />
-                  </transition>
-                  <transition name="fade">
-                  <h5 :key="staffInfo[cardShow].name" class="card-title">{{staffInfo[cardShow].name}}</h5>
-                  </transition>
-                  <transition name="faderev">
-                  <p :key="staffInfo[cardShow].intro" class="card-text">
-                    {{staffInfo[cardShow].intro}}
-                  </p>
-                  </transition>
-                  <transition name="trans">
-                  <div :key="cardShow" class="staff-links">
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'facebook']"
-                    /></a>
-                    <a href=""><font-awesome-icon :icon="['fab', 'twitter']"/></a>
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'instagram']"
-                    /></a>
-                  </div>
-                  </transition>
-              </div>
-            </div>
-            <div class="indicators">
-              <div class="indicator" v-for="num in staffInfo.length" :key="num" :class="{'active': cardShow===num-1}" @click.prevent="cardShow=num-1"></div>
-            </div>
-          </div>
-          <!-- <div id="carouselTeam" class="carousel slide" data-ride="carousel" data-interval="false">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <div class="card">
-                  <img
-                    src="https://images.unsplash.com/photo-1585418244931-4cb811b61092?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                    class="card-img-top"
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <div class="d-flex">
-                      <h5 class="card-title">B.H.Valdez</h5>
-                      <h6 class="position ml-auto">CEO</h6>
-                    </div>
-                    <hr style="margin-top:0;" />
-                    <p class="card-text">
-                      A brand is no longer what we tell the consumer it is -- it
-                      is what consumers tell each other it is
-                    </p>
-                  </div>
-                  <div class="card-footer d-flex justify-content-around">
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'facebook']"
-                    /></a>
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'twitter']"
-                    /></a>
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'instagram']"
-                    /></a>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="card">
-                  <img
-                    src="https://images.unsplash.com/photo-1547147607-6eab7b49f3ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                    class="card-img-top"
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <div class="d-flex">
-                      <h5 class="card-title">M.L.Valencia</h5>
-                      <h6 class="position ml-auto">COO</h6>
-                    </div>
-                    <hr style="margin-top:0;" />
-                    <p class="card-text">
-                      People often say that motivation doesn’t last. Well,
-                      neither does bathing. That’s why we recommend it daily
-                    </p>
-                  </div>
-                  <div class="card-footer d-flex justify-content-around">
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'facebook']"
-                    /></a>
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'twitter']"
-                    /></a>
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'instagram']"
-                    /></a>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="card">
-                  <img
-                    src="https://images.unsplash.com/photo-1551467302-8e70f83e8ec6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                    class="card-img-top"
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <div class="d-flex">
-                      <h5 class="card-title">C.S.Cassidy</h5>
-                      <h6 class="position ml-auto">CMO</h6>
-                    </div>
-                    <hr style="margin-top:0;" />
-                    <p class="card-text">
-                      If you are an artist, learn science. If you are a
-                      scientist, cultivate art
-                    </p>
-                  </div>
-                  <div class="card-footer d-flex justify-content-around">
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'facebook']"
-                    /></a>
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'twitter']"
-                    /></a>
-                    <a href=""
-                      ><font-awesome-icon :icon="['fab', 'instagram']"
-                    /></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <a
-              class="carousel-control-prev"
-              href="#carouselTeam"
-              role="button"
-              data-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a
-              class="carousel-control-next"
-              href="#carouselTeam"
-              role="button"
-              data-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div> -->
+          <staffCarousel :size="screenSize" :carouselInfo="staffInfo" :show="cardShow" @changeCarousel='staffChange' @showCarousel='setCarousel'></staffCarousel>
         </div>
         <hr>
         <div class="container">
@@ -312,12 +128,14 @@
 <script>
 import Alert from '../components/Alert.vue'
 import Gotop from '../components/GoTop.vue'
-import Banner from '../components/Banner'
+import Banner from '../components/Banner.vue'
+import staffCarousel from '../components/staffCarousel.vue'
 export default {
   components: {
     Alert,
     Gotop,
-    Banner
+    Banner,
+    staffCarousel
   },
   data () {
     return {
@@ -372,6 +190,10 @@ export default {
     staffChange (change) {
       const vm = this
       vm.cardShow = (vm.cardShow + vm.staffInfo.length + change) % vm.staffInfo.length
+    },
+    setCarousel (num) {
+      const vm = this
+      vm.cardShow = num
     }
   },
   created () {
@@ -388,6 +210,13 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+
+$card-base: #ddc2a9;
+$card-background: darken($card-base, 50%);
+$card-footer-background: darken($card-base, 10%);
+$card-footer-link: darken($card-base, 60%);
+$card-footer-link-hover: lighten($card-base, 10%);
+
 %control-arrow{
   font-size: 50px;
   color: #0000003d;
@@ -431,8 +260,8 @@ export default {
     flex: 0 0 25.333333%;
     margin: 10px;
     border: 5px double $yellow;
-    background-color: #e9d2b1;
-    color: hsl(35, 56%, 30%);
+    background-color: $card-base;
+    color: $card-background;
     img{
       width: 150px;
       height: 150px;
@@ -445,14 +274,14 @@ export default {
       width: 100%;
       display: flex;
       justify-content: space-around;
-      background: hsl(35, 56%, 70%);
+      background: $card-footer-background;
       padding: 0 1.25rem;
       border: none;
       font-size: xx-large;
       a{
-        color: hsl(35, 56%, 20%);
+        color: $card-footer-link;
         &:hover{
-          color: hsl(35, 56%, 80%);
+          color: $card-footer-link-hover
         }
       }
     }
