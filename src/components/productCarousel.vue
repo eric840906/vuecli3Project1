@@ -68,8 +68,8 @@ export default {
     },
     scrollLeft () {
       const scroll = this.$el.lastElementChild.scrollLeft - (this.$el.lastElementChild.offsetWidth)
-      const scrollTo = scroll === -930 ? 30000 : scroll
-      console.log(scroll)
+      const width = this.$el.lastElementChild.offsetWidth
+      const scrollTo = scroll === -width ? 30000 : scroll
       this.$el.lastElementChild.scrollTo({
         left: scrollTo,
         behavior: 'smooth'
@@ -79,10 +79,9 @@ export default {
       const singleLength = this.$el.lastElementChild.firstElementChild.firstElementChild.children[0].offsetWidth
       const cardsNumber = this.$el.lastElementChild.firstElementChild.firstElementChild.children.length
       const totalWidth = singleLength * cardsNumber
-      console.log('singleLength' + singleLength * cardsNumber)
       const scroll = this.$el.lastElementChild.scrollLeft + (this.$el.lastElementChild.offsetWidth)
-      const scrollTo = scroll > totalWidth ? -930 : scroll
-      console.log(scroll)
+      const width = this.$el.lastElementChild.offsetWidth
+      const scrollTo = scroll > totalWidth ? width : scroll
       this.$el.lastElementChild.scrollTo({
         left: scrollTo,
         behavior: 'smooth'
