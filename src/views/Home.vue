@@ -608,7 +608,7 @@ a.banner, a.banner.router-link-active{
       flex-direction: column;
       text-align: center;
       img{
-        height: 62%;
+        height: 285px;
       }
       a{
         width: 100%;
