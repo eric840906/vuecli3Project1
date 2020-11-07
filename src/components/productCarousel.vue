@@ -238,10 +238,10 @@ $link-text-hover: lighten($base, 10%);
       overflow-y: hidden;
       .product-carousel{
         flex-wrap: nowrap;
-        justify-content: space-between;
+        justify-content: center;
         .product-card{
           max-width: 100%;
-          flex: 0 0 100%;
+          flex: 0 0 80%;
           margin: 0;
         }
       }
