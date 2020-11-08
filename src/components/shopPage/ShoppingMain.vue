@@ -1,10 +1,9 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <nav
-      class="navbar navbar-expand navbar-light top-select justify-content-center"
+    <nav class="top-select"
     >
-      <ul class="navbar-nav">
+      <ul  class="select-nav">
         <li class="nav-item">
           <div class="top-select-item">
             <a
@@ -339,8 +338,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import "~bootstrap/scss/functions";
+<style lang="scss" scoped>
+@import 'src/assets/helpers/functionColors';
 @import "@/assets/helpers/_variables";
 .sidebar {
   top: 0;
@@ -349,16 +348,36 @@ export default {
   z-index: 100; /* Behind the navbar */
   padding: 0; /* Height of navbar */
 
-  .nav-item {
-    color: $yellow;
+  .nav-item{
+    color: lighten($background, 65%);
     &:hover {
-      background-color: $yellow;
+      background-color: lighten($background, 25%);
+    }
+    .nav-link{
+      color: $link-text;
+      &:hover{
+        color: lighten($background, 65%);
+      }
     }
     .active {
-      background-color: $black;
-      .nav-link a {
-        color: $yellow;
-      }
+      background-color: $background;
+    }
+  }
+}
+
+.select-nav{
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  a{
+    color: $link-text;
+  }
+  .top-select-item {
+    .active {
+      background-color: $background;
+      color: lighten($background, 65%);
     }
   }
 }
@@ -421,11 +440,6 @@ export default {
 
 .top-select {
   display: none;
-  .top-select-item {
-    .active {
-      border: 1px solid $black;
-    }
-  }
 }
 
 @media (max-width: 767.98px) {
@@ -454,7 +468,6 @@ export default {
 
 .sidebar .nav-link {
   font-weight: 500;
-  color: $gray-800;
 }
 
 .sidebar .nav-link:hover .feather,
@@ -468,7 +481,7 @@ export default {
 }
 
 .sidebar .nav-item .nav-link.active {
-  color: $yellow; // for example
+  color: lighten($background, 65%); // for example
 }
 
 </style>

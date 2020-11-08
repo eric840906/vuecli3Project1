@@ -3,6 +3,11 @@
     <Alert></Alert>
     <main role="main">
       <Banner :picture="bannerImg" :title="pageTitle"></Banner>
+      <div class="container" style="padding-top: 60px;">
+        <div class="row">
+          <router-view></router-view>
+        </div>
+      </div>
       <!-- <section class="banner"
         :style="bannerImg">
         <div class="page-title">
@@ -11,12 +16,11 @@
           <h1 class="lead"></h1>
         </div>
       </section> -->
-      <div class="album pt-5">
-        <div class="container">
-          <router-view></router-view>
-        </div>
+      <!-- <div class="album pt-5"> -->
+        <!-- <div class="container"> -->
+        <!-- </div> -->
         <GoTop></GoTop>
-      </div>
+      <!-- </div> -->
     </main>
   </div>
 </template>
@@ -52,14 +56,5 @@ export default {
 
 .card-footer {
   padding: 0;
-}
-
-.top-select {
-  display: none;
-  .top-select-item {
-    .active {
-      border: 1px solid $black;
-    }
-  }
 }
 </style>

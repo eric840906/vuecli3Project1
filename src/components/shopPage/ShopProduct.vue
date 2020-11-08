@@ -34,9 +34,12 @@
         <img :src="product.imageUrl" alt="" class="img-fluid" />
       </div>
     </div>
-    <div class="productsCarousel">
-      <h5>Other Products</h5>
-        <carousel :responsive="{ 0: { items:1, dots:false }, 600: { items:3 } }" :nav="false" :autoplay="true" :loop="false" :rewind="true" v-if="products.length>0">
+    <section>
+      <div class="container">
+        <h5>Other Products</h5>
+        <productCarousel :carouselInfo="products" :show="productShow" :size="screenSize" @changeCarousel="productChange" @showCarousel="setCarousel"></productCarousel>
+      </div>
+        <!-- <carousel :responsive="{ 0: { items:1, dots:false }, 600: { items:3 } }" :nav="false" :autoplay="true" :loop="false" :rewind="true" v-if="products.length>0">
           <template slot="prev"><font-awesome-icon class="prev" :icon="['fas', 'chevron-left']" style="height: 100%;" /></template>
             <div v-for="item in products" :key="item.id">
               <div
@@ -48,8 +51,8 @@
               </div>
             </div>
           <template slot="next"><font-awesome-icon class="next" :icon="['fas', 'chevron-right']" style="height: 100%;" /></template>
-        </carousel>
-    </div>
+        </carousel> -->
+    </section>
     <Cart
       :cartInfo="cartList"
       :isloading="productStatus.loading"
@@ -62,16 +65,18 @@
 <script>
 import $ from 'jquery'
 import Cart from '../Cart.vue'
+import productCarousel from '../productCarousel.vue'
 
 export default {
   components: {
-    Cart
+    Cart,
+    productCarousel
   },
   data () {
     return {
       produtId: '',
       product: {},
-      products: {},
+      products: [],
       productStatus: {
         loading: ''
       },
@@ -86,7 +91,9 @@ export default {
         slidesToShow: 4,
         slidesToScroll: 4
       },
-      isLoading: false
+      isLoading: false,
+      productShow: 0,
+      screenSize: undefined
     }
   },
   methods: {
@@ -189,13 +196,30 @@ export default {
           vm.$router.push(`${vm.product.id}`)
         }
       })
+    },
+    resizeHandler () {
+      const vm = this
+      vm.screenSize = window.screen.availWidth
+    },
+    productChange (change) {
+      const vm = this
+      vm.productShow = (vm.productShow + vm.products.length + change) % vm.products.length
+    },
+    setCarousel (num) {
+      const vm = this
+      vm.productShow = num
     }
   },
   created () {
+    window.addEventListener('resize', this.resizeHandler)
     this.productId = this.$route.params.productId // 這裡的$router.params.orderId是對應到我們在index.js的customercheckout後面自定義的動態orderId(就是訂單建立後給的ID)
     this.getProduct()
     this.getProducts()
     this.getCart()
+    this.resizeHandler()
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.resizeHandler)
   }
 }
 </script>
@@ -213,23 +237,6 @@ export default {
   width: 100%;
   border-style: none;
   border: 1px solid;
-}
-.productsCarousel{
-  position: relative;
-  .prev{
-    cursor: pointer;
-    position: absolute;
-    z-index: 7;
-    top: 4%;
-    left: -1%;
-  }
-  .next{
-    cursor: pointer;
-    position: absolute;
-    z-index: 7;
-    top: 4%;
-    right: -1%;
-  }
 }
 
 .owl-item{
