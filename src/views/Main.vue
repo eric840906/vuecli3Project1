@@ -1,6 +1,6 @@
 <template>
   <div>
-    <transition name="fade">
+    <transition name="page">
       <router-view/>
     </transition>
     <Footer></Footer>

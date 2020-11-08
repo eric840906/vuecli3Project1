@@ -1,9 +1,24 @@
 <template>
     <div>
-        <footer class="bg-gray">
+        <footer class="top-footer">
             <div class="container">
                 <div class="row">
-                    <div class="footer-item text-muted col-md-5 store-info">
+                  <h2 class="footer-logo" style="font-family: 'Tangerine', cursive;">Lächeln</h2>
+                  <div class="social-box">
+                    <a href="#"><font-awesome-icon class="social-item" :icon="['fab', 'twitter']" /></a>
+                    <a href="#"><font-awesome-icon class="social-item" :icon="['fab', 'facebook-f']" /></a>
+                    <a href="#"><font-awesome-icon class="social-item" :icon="['fab', 'google-plus-g']" /></a>
+                    <a href="#"><font-awesome-icon class="social-item" :icon="['fab', 'github']" /></a>
+                    <a href="#"><font-awesome-icon class="social-item" :icon="['fab', 'linkedin-in']" /></a>
+                    <a href="#"><font-awesome-icon class="social-item" :icon="['fab', 'instagram']" /></a>
+                  </div>
+                  <div class="email-box"><a href="mailto: info@Lächeln.Icecreram"><font-awesome-icon style="font-size: 14px; margin-right:0.5rem;" :icon="['far', 'envelope']" />info@Lächeln.Icecreram</a></div>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In error id rerum totam quam tempora consectetur alias ipsum quisquam voluptates, illo rem voluptatibus architecto, earum harum! Quis repellat suscipit omnis?</p>
+                  <form action="" class="subscription">
+                    <input type="text" id="email" class="email-input" placeholder="Enter Your E-mail" v-model="email">
+                    <button class="subscribe-btn" :disabled="!email" @click.prevent="toSubscribe">Subscribe</button>
+                  </form>
+                    <!-- <div class="footer-item text-muted col-md-5 store-info">
                         <div class="footer-logo" style="font-family: 'Tangerine', cursive;">Lächeln</div>
                         <p style="margin: 20px 0">Exercitation ullamco laboris nisi ut aliquip ex commodo consequat. Duis aute irure</p>
                         <div><a class="text-muted" href="mailto: info@Lächeln.Icecreram"><font-awesome-icon style="font-size: 14px; margin-right:0.5rem;" :icon="['far', 'envelope']" />info@Lächeln.Icecreram</a></div>
@@ -27,13 +42,13 @@
                             <a href="" class="text-muted"><font-awesome-icon class="social-item" :icon="['fab', 'instagram']" /></a>
                           </div>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </footer>
-        <div class="container" style="margin-top: 10px;">
-          <div class="row justify-content-center" style="font-size:16px">
-          <small class="d-block mb-3 text-muted">&copy; <span style="color: black;">Lächeln</span>  - Only for Self learning purpose</small>
+        <div class="lower-footer">
+          <div class="lower-text" style="font-size:16px">
+          <small>&copy; <span>Lächeln</span>  - Only for Self learning purpose</small>
           </div>
         </div>
     </div>
@@ -56,36 +71,52 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss">
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+@import 'src/assets/helpers/functionColors';
 
 footer{
-  background-color: #e1e1e1;
+  background-color: darken($lighter-background, 12%);
+  color: $darker-text-color;
   padding-top: 60px;
+  margin-top: 60px;
+  text-align: center;
+  *+*{
+    margin-top: 20px;
+  }
+  a{
+    color: darken($lighter-background, 62%);
+    &:hover{
+      color: darken($lighter-background, 32%);
+    }
+  }
 }
 
-.footer-item{
-  &:nth-child(1){
-    flex-basis: 200px;
-    flex-grow: 3;
-    text-align: left;
-  }
-  &:nth-child(2){
-    text-align: right;
-  }
-  h3{
-    font-size: 1.5rem;
+.top-footer{
+  .row{
+    flex-direction: column;
+    align-items: center;
+    p{
+      width: 85%;
+    }
   }
 }
-.social-item{
-  margin-left: 10px;
-  font-size: 20px;
+.email-box{
+  width: 100%;
 }
-.mb-25{
-  margin-bottom: 25px;
+.social-box{
+  width: 100%;
+  .social-item{
+    font-size: 30px;
+  }
+  a+a{
+    margin-left: 20px;
+  }
 }
 .subscription{
+  margin-bottom: 40px;
+  width: 100%;
   .email-input{
     padding: 2px;
     border-width: thin;
@@ -100,17 +131,29 @@ footer{
     border-radius: 0 37px 37px 0;
     margin-left:-4px;
     width:13%;
+    background-color: $background;
+    &:hover{
+      background-color: $link-text;
+      color: lighten($link-text, 30%);
+    }
   }
 }
 ul{
   line-height: 40px;
 }
-.store-info{
-  font-size: 16px;
-  .footer-logo{
-    font-size: 40px;
-  }
+
+.footer-logo{
+  font-size: 60px;
+  width: 100%;
+  margin: 0;
 }
+.lower-footer{
+  background-color: $link-text;
+  color: $lighter-background;
+  padding: 10px 0;
+  text-align: center;
+}
+
 @media (max-width: 768px){
   .subscription{
     .email-input{

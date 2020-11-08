@@ -11,7 +11,7 @@
           <h1 class="lead"></h1>
         </div>
       </section> -->
-      <div class="album pt-5 bg-light">
+      <div class="album pt-5">
         <div class="container">
           <router-view></router-view>
         </div>
@@ -46,31 +46,12 @@ export default {
 <style lang="scss">
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
-.banner{
-  background-size: cover;
-  background-position: center;
-  height: 50vh;
-  display: flex;
-  align-items: center;
-}
 .border-right {
   border-right: 1px solid $black;
 }
 
 .card-footer {
   padding: 0;
-}
-.page-title {
-  display: flex;
-  flex: 0 0 100%;
-  text-align: center;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: #0000007d;
-  h1{
-    color: #e0ddff;
-  }
 }
 
 .top-select {

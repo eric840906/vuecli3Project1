@@ -2,7 +2,7 @@
   <div>
     <loading :active.sync="isLoading"></loading>
     <nav
-      class="navbar navbar-expand navbar-light bg-light top-select justify-content-center"
+      class="navbar navbar-expand navbar-light top-select justify-content-center"
     >
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -58,7 +58,7 @@
     <div class="row">
       <nav
         id="sidebarMenu"
-        class="col-md-3 col-sm-2 d-md-block bg-light sidebar collapse"
+        class="col-md-3 col-sm-2 d-md-block sidebar collapse"
       >
         <ul class="nav flex-column sticky-top">
           <li><h3 style="margin-bottom: 2rem;">Product List</h3></li>

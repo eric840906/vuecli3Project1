@@ -17,7 +17,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import 'src/assets/helpers/functionColors';
 .banner{
   background-size: cover;
   background-position: center;
@@ -33,8 +34,6 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: #0000007d;
-  h1{
-    color: #e0ddff;
-  }
+  color: $lighter-background;
 }
 </style>

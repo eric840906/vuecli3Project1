@@ -2,9 +2,7 @@
   <div id="app">
      <Navbar></Navbar>
     <div style="padding-top: 7vh;"></div>
-    <transition name="fade">
       <router-view/>
-    </transition>
   </div>
 </template>
 
@@ -23,6 +21,10 @@ export default {
 @import "@/assets/all/all.scss";
 * {
   font-family: 'Berkshire Swash', cursive;
+}
+body{
+  background-color: $lighter-background;
+  color: $link-text;
 }
 .fade-enter-active, .fade-leave-active {
     transition: all 0.3s;
@@ -82,12 +84,28 @@ export default {
 .vanish-enter-active {
   transition-delay: 0.3s;
 }
-.vanish-enter{
+.vanish-enter, .page-enter{
   transform: rotate3d(0, 1, 0, 90deg);
   opacity: 0;
 }
-.vanish-leave-active {
+.vanish-leave-active, .page-leave-active {
   transform: rotate3d(0, 1, 0, 90deg);
+  opacity: 0;
+}
+
+.page-enter-active, .page-leave-active {
+    transition: all 1s;
+  }
+
+.page-enter-active {
+  transition-delay: 1s;
+}
+.page-leave-active {
+  transform: rotate3d(0, 1, -90deg);
+  opacity: 0;
+}
+.page-enter{
+  transform: rotate3d(0, 1, 90deg);
   opacity: 0;
 }
 

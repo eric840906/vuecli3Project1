@@ -125,6 +125,8 @@
           </div>
         </carousel>
       </div>
+
+      <hr class="featurette-divider" style="border:none" />
     </main>
   </div>
 </template>
@@ -302,7 +304,13 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
-@import 'src/assets/helpers/functionColors';
+// GLOBAL STYLES
+$base: #e2baa8;
+$background: darken($base, 50%);
+$border-color: $base;
+$lighter-background: lighten($base, 15%);
+$link-text: darken($base, 60%);
+$link-text-hover: lighten($base, 10%);
 // --------------------------------------------------
 /* Padding below the footer and lighter body text */
 .row+.row{
@@ -310,6 +318,19 @@ export default {
 }
 h1 {
   font-size: 3.5rem;
+}
+.mr-0 {
+  margin: 0;
+}
+
+body {
+  padding-top: 3rem;
+  padding-bottom: 0;
+  color: #5a5a5a;
+}
+.user-image {
+  width: 140px;
+  border-radius: 150px;
 }
 section{
   margin: 50px 0;
@@ -320,7 +341,7 @@ section{
 .concept {
   opacity: 0;
   text-align: center;
-  color: lighten($background,65%);
+  color: $white;
   .row{
     justify-content: center;
   }
@@ -335,14 +356,116 @@ section{
     color: $link-text-hover;
   }
 }
+.hottest{
+  opacity: 0;
+}
+.hottest-move{
+  animation-fill-mode: forwards;
+  animation: float 0.5s linear;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 4rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+}
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
+}
+
+.carousel-fade {
+  .carousel-inner {
+    .item {
+      transition: 0.5s opacity;
+    }
+
+    .item,
+    .active.left,
+    .active.right {
+      opacity: 0;
+    }
+
+    .active,
+    .next.left,
+    .prev.right {
+      opacity: 1;
+    }
+
+    .next,
+    .prev,
+    .active.left,
+    .active.right {
+      left: 0;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .carousel-control {
+    z-index: 2;
+  }
+}
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: 400;
+}
+.marketing .col-lg-4 p {
+  margin-right: 0.75rem;
+  margin-left: 0.75rem;
+}
 .grading {
   margin: 8px 0;
   color: $yellow;
   font-size: 25px;
 }
 
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.05rem;
+}
+
+.homeImage {
+  position: relative;
+  width: 74%;
+  padding: 60% 43%;
+  background-position: center 60%;
+  background-size: cover;
+}
+
 a.banner, a.banner.router-link-active{
-  color: lighten($background,65%);
+  color: white;
 }
 %arrows{
   position: absolute;
@@ -361,6 +484,9 @@ a.banner, a.banner.router-link-active{
   .banner-right{
     @extend %arrows;
     right: 0;
+  }
+  a{
+    color: white;
   }
 }
 .banner{
@@ -439,10 +565,12 @@ a.banner, a.banner.router-link-active{
         flex-direction: column;
         transition: all 0.5s;
         align-items: center;
-        color: lighten($background,65%);
+        h3{
+          color: white;
+        }
       }
       h4{
-        color: lighten($background,65%);
+        color: white;
         opacity: 0;
         top: 50%;
         position: absolute;
@@ -496,6 +624,155 @@ a.banner, a.banner.router-link-active{
         flex: 0 0 80%;
       }
     }
+  }
+}
+.responsive-mt{
+  margin-top: 17%;
+}
+
+.hot-product-info{
+  display: flex;
+  flex-direction: column;
+  .notice-btn{
+    .moving-arrow-right{
+      transform: translateX(33px);
+      animation: color-change 0.5s infinite;
+    }
+    .moving-arrow-left{
+      transform: translateX(-33px);
+      animation: color-change 0.5s infinite;
+    }
+    &:hover{
+      .moving-arrow-right{
+      animation: arrow-shift-right 0.65s infinite;
+      }
+      .moving-arrow-left{
+      animation: arrow-shift-left 0.65s infinite;
+      }
+    }
+  }
+  h3{
+    margin-top: auto;
+  }
+  a{
+    width: 100%;
+    margin-top: auto;
+  }
+}
+@keyframes color-change {
+  0% {
+    color: transparent;
+  }
+  50% {
+    color: $red;
+  }
+  75% {
+    color: $white;
+  }
+  100% {
+    color: transparent;
+  }
+}
+
+@keyframes arrow-shift-right {
+  0% {
+    transform: translateX(33px);
+  }
+  100% {
+    transform: translateX(250px);
+    color: transparent;
+  }
+}
+@keyframes arrow-shift-left {
+  0% {
+    transform: translateX(-33px);
+  }
+  100% {
+    transform: translateX(-250px);
+    color: transparent;
+  }
+}
+@keyframes float {
+  0% {
+    transform: translateY(20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 40em) {
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 62em) {
+  .featurette-heading {
+    margin-top: 7rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .carousel-inner {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+
+    &::before {
+      display: block;
+      content: "";
+    }
+
+    .embed-responsive-item,
+    iframe,
+    embed,
+    object,
+    video {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  }
+}
+@media (max-width: 768px){
+  .responsive-mt{
+    margin-top: 41%;
+  }
+}
+
+@media (max-width: 425px) {
+  .mb-10 {
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 320px) {
+  .xs-left{
+    transform: translateX(-6%);
+  }
+}
+
+@media (min-width: 1440px) {
+  .carousel-caption{
+    bottom: 10rem;
   }
 }
 </style>

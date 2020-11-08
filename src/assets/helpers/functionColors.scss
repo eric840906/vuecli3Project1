@@ -1,0 +1,17 @@
+@import "~bootstrap/scss/functions";
+
+$base: #e2baa8;
+$background: darken($base, 50%);
+$border-color: $base;
+$lighter-background: lighten($base, 15%);
+$text-color: darken($lighter-background, 62%);
+$darker-text-color: darken($lighter-background, 62%);
+$link-text: darken($base, 60%);
+$link-text-hover: lighten($link-text, 43%);
+
+$card1: adjust-hue($base, 8);
+$card-base: desaturate($card1, 7%);
+$card-background: darken($card-base, 50%);
+$card-footer-background: darken($card-base, 10%);
+$card-footer-link: darken($card-base, 60%);
+$card-footer-link-hover: lighten($card-base, 10%);

@@ -77,12 +77,7 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
-
-$card-base: #ddc2a9;
-$card-background: darken($card-base, 50%);
-$card-footer-background: darken($card-base, 10%);
-$card-footer-link: darken($card-base, 60%);
-$card-footer-link-hover: lighten($card-base, 10%);
+@import 'src/assets/helpers/functionColors';
 
 %control-arrow{
   font-size: 50px;
@@ -161,11 +156,11 @@ $card-footer-link-hover: lighten($card-base, 10%);
       transition: 0.5s all;
       width: 50px;
       height: 2px;
-      background-color: #fee6c2;
+      background-color: darken($lighter-background, 12%);
       margin: 20px;
     }
     .active{
-      background-color: #ffa64c !important;
+      background-color: $darker-text-color !important;
     }
   }
   .card-footer {
@@ -180,14 +175,14 @@ $card-footer-link-hover: lighten($card-base, 10%);
     }
   }
   .position {
-    background-color: white;
+    background-color: $lighter-background;
     text-align: center;
     padding: 5px 8px;
     color: $black;
     width: 50%;
     border: 5px double $yellow;
     border-top: none;
-    box-shadow: 0px -9px 0px 3px #ffffff;
+    box-shadow: 0px -9px 0px 3px $lighter-background;
   }
   @media (max-width: 425px) {
     .staff-cards{

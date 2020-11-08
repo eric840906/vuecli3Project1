@@ -94,13 +94,7 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
-
-$base: #e2baa8;
-$background: darken($base, 50%);
-$border-color: $base;
-$lighter-background: lighten($base, 15%);
-$link-text: darken($base, 60%);
-$link-text-hover: lighten($base, 10%);
+@import 'src/assets/helpers/functionColors';
 
 %control-arrow{
   font-size: 50px;
@@ -166,6 +160,7 @@ $link-text-hover: lighten($base, 10%);
       justify-content: space-between;
       margin: 0.68%;
       padding: 10px;
+      border: 5px double $border-color;
       background-color: $lighter-background;
       color: $link-text;
     img{
@@ -203,11 +198,11 @@ $link-text-hover: lighten($base, 10%);
       width: 10px;
       height: 10px;
       border-radius: 20px;
-      background-color: #fee6c2;
+      background-color: darken($lighter-background, 12%);
       margin: 6px;
     }
     .active{
-      background-color: #ffa64c !important;
+      background-color: $darker-text-color !important;
     }
   }
   .card-footer {
