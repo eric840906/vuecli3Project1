@@ -281,7 +281,7 @@ export default {
         }
       })
     })
-    window.setInterval(() => { this.bannerChange(+1) }, 5000)
+    // window.setInterval(() => { this.bannerChange(+1) }, 5000)
   },
   beforeCreate () {
     $('#loadingModal').modal('hide')
