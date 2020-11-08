@@ -371,11 +371,18 @@ export default {
     }
   },
   mounted () {
+    const scroll = this.$el.children[1].children[1].firstChild.firstChild.offsetTop
     $('.card').click(function (e) {
       $(e.currentTarget).addClass('flip')
       $('.card').off()
     })
     $('#start-modal').modal('show')
+    $('#start-modal').click(function () {
+      window.scrollTo({
+        top: scroll,
+        behavior: 'smooth'
+      })
+    })
     $('body').click(function (e) {
       $('#start-modal').modal('hide')
     })

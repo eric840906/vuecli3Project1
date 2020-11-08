@@ -104,7 +104,8 @@
       </section>
       <div class="container marketing">
         <h2>Customer Comments</h2>
-       <carousel :responsive="{ 0:  {items: 1, dots: false }, 600: { items: 3 } }" :nav="false" :autoplay="true" :loop="true" :rewind="true" v-if="UserComments.length>0">
+        <template v-if="randomCarousel.length>0">
+        <carousel :responsive="{ 0:  {items: 1, dots: false }, 600: { items: 3 } }" :nav="false" :autoplay="true" :loop="true" :rewind="true">
           <div v-for="item in UserComments" :key="item.id">
             <div class="col-12 text-center">
               <img
@@ -124,6 +125,7 @@
             </div>
           </div>
         </carousel>
+        </template>
       </div>
     </main>
   </div>
@@ -210,16 +212,15 @@ export default {
       const vm = this
       const api = 'https://json-server-test999.herokuapp.com/posts'
       vm.$http.get(api).then(response => {
-        vm.comparisonA = Math.random()
-        vm.comparisonB = Math.random()
+        // vm.comparisonA = Math.random()
+        // vm.comparisonB = Math.random()
         vm.UserComments = response.data
-        vm.shuffleCarousel()
-        // vm.getNewCarousel()
+        vm.getNewCarousel()
       })
     },
-    shuffleCarousel () {
+    shuffleCarousel (targetArr) {
       const vm = this
-      vm.UserComments.sort(function () {
+      targetArr.sort(function () {
         if (vm.comparisonA > vm.comparisonB) {
           return -1
         }
@@ -232,15 +233,8 @@ export default {
     },
     getNewCarousel () {
       const vm = this
-      if (vm.UserComments.length > 3) {
-        for (let i = 0; i < 5; i++) {
-          const a = parseInt(Math.random() * vm.UserComments.length)
-          vm.randomCarousel.push(vm.UserComments[a])
-          vm.UserComments.splice(a, 1)
-        }
-      } else {
-        vm.randomCarousel = vm.UserComments
-      }
+      vm.randomCarousel = vm.UserComments.slice()
+      vm.shuffleCarousel(vm.randomCarousel)
     },
     resizeHandler () {
       const vm = this
@@ -281,7 +275,7 @@ export default {
         }
       })
     })
-    // window.setInterval(() => { this.bannerChange(+1) }, 5000)
+    window.setInterval(() => { this.bannerChange(+1) }, 5000)
   },
   beforeCreate () {
     $('#loadingModal').modal('hide')

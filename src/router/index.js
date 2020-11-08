@@ -7,11 +7,10 @@ const routes = [
   {
     // 預防使用者因為輸入不存在的路徑跑到空白頁面
     path: '*',
-    redirect: '/main'
+    redirect: '/home'
   },
   {
-    path: '/main',
-    name: 'Main',
+    path: '/home',
     component: () => import('../views/Main.vue'),
     children: [
       {
