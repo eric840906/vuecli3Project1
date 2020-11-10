@@ -1,157 +1,159 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <nav class="top-select"
-    >
-      <ul  class="select-nav">
-        <li class="nav-item">
-          <div class="top-select-item">
-            <a
-              class="nav-link "
-              href="#"
-              @click.prevent="visibility = 'all'"
-              :class="{ active: visibility == 'all' }"
-            >
-              All
-            </a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <div class="top-select-item">
-            <a
-              class="nav-link"
-              href="#"
-              @click.prevent="visibility = 'Popsicle'"
-              :class="{ active: visibility == 'Popsicle' }"
-            >
-              Popsicle
-            </a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <div class="top-select-item">
-            <a
-              class="nav-link"
-              href="#"
-              @click.prevent="visibility = 'Ice Cream'"
-              :class="{ active: visibility == 'Ice Cream' }"
-            >
-              Ice Cream
-            </a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <div class="top-select-item">
-            <a
-              class="nav-link"
-              href="#"
-              @click.prevent="visibility = 'High Class'"
-              :class="{ active: visibility == 'High Class' }"
-            >
-              High Class
-            </a>
-          </div>
-        </li>
-      </ul>
-    </nav>
-    <div class="row">
-      <nav
-        id="sidebarMenu"
-        class="col-md-3 col-sm-2 d-md-block sidebar collapse"
-      >
-        <ul class="nav flex-column sticky-top">
-          <li><h3 style="margin-bottom: 2rem;">Product List</h3></li>
-          <li class="nav-item">
-            <a
-              class="nav-link "
-              href="#"
-              @click.prevent="visibility = 'all'"
-              :class="{ active: visibility == 'all' }"
-            >
-              All
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              href="#"
-              @click.prevent="visibility = 'Popsicle'"
-              :class="{ active: visibility == 'Popsicle' }"
-            >
-              Popsicle
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              href="#"
-              @click.prevent="visibility = 'Ice Cream'"
-              :class="{ active: visibility == 'Ice Cream' }"
-            >
-              Ice Cream
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              href="#"
-              @click.prevent="visibility = 'High Class'"
-              :class="{ active: visibility == 'High Class' }"
-            >
-              High Class
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="col-md-9" style="display: flex; flex-wrap: wrap;">
-        <div
-          class="col-md-6 mb-4 col-lg-4"
-          v-for="item in filterProducts"
-          :key="item.id"
-          style="height:390px; cursor:pointer;"
-        >
-          <div class="card border-0 shadow-sm" style="height: 100%;">
-            <div class="cover" @click="toProduct(item.id)">
-              <div style="color: aliceblue; transform: translateY(220%);">More Detail</div>
-            </div>
-            <div class="shopping-buttons">
-                <button
-                  :disabled='productStatus.loading == item.id'
-                  type="button"
-                  class="btn-shop lower-radius"
-                  @click="addCart(item.id)"
-                  style="font-size: 0.875rem;"
+    <Banner :picture="bannerImg" :title="pageTitle"></Banner>
+    <div class="container" style="padding-top: 60px;">
+      <div class="row">
+        <nav class="top-select">
+          <ul  class="select-nav">
+            <li class="nav-item">
+              <div class="top-select-item">
+                <a
+                  class="nav-link "
+                  href="#"
+                  @click.prevent="visibility = 'all'"
+                  :class="{ active: visibility == 'all' }"
                 >
-                  <font-awesome-icon
-                    v-if="productStatus.loading !== item.id"
-                    :icon="['fas', 'plus']"
-                  />
-                  <font-awesome-icon
-                    class="fa-pulse"
-                    v-else
-                    :icon="['fas', 'spinner']"
-                  />
-                  Add to Cart
-                </button>
+                  All
+                </a>
               </div>
+            </li>
+            <li class="nav-item">
+              <div class="top-select-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  @click.prevent="visibility = 'Popsicle'"
+                  :class="{ active: visibility == 'Popsicle' }"
+                >
+                  Popsicle
+                </a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="top-select-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  @click.prevent="visibility = 'Ice Cream'"
+                  :class="{ active: visibility == 'Ice Cream' }"
+                >
+                  Ice Cream
+                </a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="top-select-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  @click.prevent="visibility = 'High Class'"
+                  :class="{ active: visibility == 'High Class' }"
+                >
+                  High Class
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <div class="row">
+          <nav
+            id="sidebarMenu"
+            class="col-md-3 col-sm-2 d-md-block sidebar collapse"
+          >
+            <ul class="nav flex-column sticky-top">
+              <li><h3 style="margin-bottom: 2rem;">Product List</h3></li>
+              <li class="nav-item">
+                <a
+                  class="nav-link "
+                  href="#"
+                  @click.prevent="visibility = 'all'"
+                  :class="{ active: visibility == 'all' }"
+                >
+                  All
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  @click.prevent="visibility = 'Popsicle'"
+                  :class="{ active: visibility == 'Popsicle' }"
+                >
+                  Popsicle
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  @click.prevent="visibility = 'Ice Cream'"
+                  :class="{ active: visibility == 'Ice Cream' }"
+                >
+                  Ice Cream
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  @click.prevent="visibility = 'High Class'"
+                  :class="{ active: visibility == 'High Class' }"
+                >
+                  High Class
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="col-md-9 product-block">
             <div
-              style="height: 150px; background-size: cover; background-position: center"
-              :style="{ backgroundImage: `url(${item.imageUrl})` }"
-            ></div>
-            <div class="card-body">
-              <span class="badge badge-product float-right">
-                <span style="position: absolute; top: -62px; transform: rotate(-46deg); left: 6px;">
-                {{ item.category }}
-                </span>
-              </span>
-              <h5 class="card-title">
-                <a href="#" class="text-dark">{{ item.title }}</a>
-              </h5>
-              <p class="card-text">{{ item.description }}</p>
-            </div>
-            <div class="card-footer d-flex justify-content-end">
-              <div class="price-tag">{{ item.price | currency }}</div>
+              class="col-md-4 mb-4"
+              v-for="item in filterProducts"
+              :key="item.id"
+              style="cursor:pointer;"
+            >
+              <div class="product-card">
+                <div class="cover" @click="toProduct(item.id)">
+                  <h5 style="transform: translateY(220%);">More Detail</h5>
+                </div>
+                <div class="shopping-buttons">
+                    <button
+                      :disabled='productStatus.loading == item.id'
+                      type="button"
+                      class="btn-shop lower-radius"
+                      @click="addCart(item.id)"
+                      style="font-size: 0.875rem;"
+                    >
+                      <font-awesome-icon
+                        v-if="productStatus.loading !== item.id"
+                        :icon="['fas', 'plus']"
+                      />
+                      <font-awesome-icon
+                        class="fa-pulse"
+                        v-else
+                        :icon="['fas', 'spinner']"
+                      />
+                      Add to Cart
+                    </button>
+                  </div>
+                <div
+                  style="height: 150px; background-size: cover; background-position: center"
+                  :style="{ backgroundImage: `url(${item.imageUrl})` }"
+                ></div>
+                <div class="card-body">
+                  <span class="badge badge-product float-right">
+                    <span style="position: absolute; top: -62px; transform: rotate(-46deg); left: 6px;">
+                    {{ item.category }}
+                    </span>
+                  </span>
+                  <h5 class="card-title">
+                    <a href="#" class="text-dark">{{ item.title }}</a>
+                  </h5>
+                  <p class="card-text">{{ item.description }}</p>
+                </div>
+                <h5 class="price-tag">{{ item.price | currency }}</h5>
+              </div>
             </div>
           </div>
         </div>
@@ -169,13 +171,19 @@
 <script>
 import $ from 'jquery'
 import Cart from '../Cart.vue'
+import Banner from '../Banner.vue'
 
 export default {
   components: {
-    Cart
+    Cart,
+    Banner
   },
   data () {
     return {
+      bannerImg: {
+        backgroundImage: "url('https://images.unsplash.com/photo-1573991288363-aa2067bc6a73?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80')"
+      },
+      pageTitle: 'Choose Your Favourites',
       products: [],
       product: {},
       productStatus: {
@@ -295,8 +303,9 @@ export default {
       })
     },
     toProduct (id) {
+      console.log(id)
       const vm = this
-      vm.$router.push(`product/${id}`)
+      vm.$router.push(`/product/${id}`)
     }
   },
   created () {
@@ -385,10 +394,15 @@ export default {
     margin-top: -125px;
     padding-top: 125px;
 }
+.product-block{
+  display: flex;
+  flex-wrap: wrap;
+}
 .badge{
   padding: 0;
 }
 .badge-product{
+  color: $lighter-background;
   position: absolute;
   border-color: #0f0f0fab transparent transparent transparent;
   border-style: solid solid solid solid;
@@ -402,8 +416,13 @@ export default {
   border-radius: 0;
 }
 
-.card{
+.product-card{
+  background-color: darken($lighter-background, 5%);
+  height: 100%;
   position: relative;
+  box-shadow: 0px 16px 3px -11px rgba(0, 0, 0, 0.075);
+  display: flex;
+  flex-direction: column;
   .cover{
     text-align: center;
     display: none;
@@ -419,23 +438,29 @@ export default {
       justify-content: space-around;
       bottom: 0%;
       button{
-        flex: 1;
-        padding: 10px 0 10px 0;
+        padding: 0.75rem 1.25rem;
+        width: 100%;
       }
     }
   &:hover{
     .cover{
       display: block;
       transition: 0.5s all;
+      h5{
+        color: $lighter-background;
+      }
     }
     .shopping-buttons{
-      display: flex;
+      display: block;
     }
   }
 }
 .price-tag{
-  margin: 5px 10px;
+  margin: 0;
+  padding: 5px 10px;
   font-size: 1.25rem;
+  background-color: $background;
+  color: $lighter-background;
 }
 
 .top-select {

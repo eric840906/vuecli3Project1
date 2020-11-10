@@ -20,7 +20,7 @@ export default {
 <style lang="scss">
 @import "@/assets/all/all.scss";
 * {
-  font-family: 'Berkshire Swash', cursive;
+  font-family: 'Josefin Slab', serif;
 }
 body{
   background-color: $lighter-background;

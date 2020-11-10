@@ -1,58 +1,45 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <router-link to="/shoppage/shoppingmain" style="margin: 20px 0; display: inline-block;"><font-awesome-icon :icon="['fas', 'chevron-left']" /> Back to Products</router-link>
-    <div class="row flex-xs-column-reverse">
-      <div class="col-md-4 md-mt-20">
-        <h3>{{ product.title }}</h3>
-        <h4 style="text-align:end;">
-          List Price: {{ product.origin_price | currency }}
-        </h4>
-        <h5>Quantity</h5>
-        <select name="" class="form-control" v-model="quantity">
-          <option v-for="item in 10" :value="item" :key="item"
-            >{{ item }}{{ product.unit }}</option
-          >
-        </select>
-        <br />
-        <h5 v-if="quantity">
-          Total: {{ (quantity * product.price) | currency }}
-        </h5>
-        <br />
-        <h5>Description</h5>
-        <p>{{ product.description }}</p>
-
-        <button
-          :disabled='productStatus.loading == product.id || !quantity'
-          class="addCart-btn btn-shop"
-          @click="addCart(product.id, quantity)"
-        >
-          Add to Cart
-        </button>
-      </div>
-      <div class="col-md-8 .container-fluid">
-        <img :src="product.imageUrl" alt="" class="img-fluid" />
-      </div>
-    </div>
-    <section>
-      <div class="container">
-        <h5>Other Products</h5>
-        <productCarousel :carouselInfo="products" :show="productShow" :size="screenSize" @changeCarousel="productChange" @showCarousel="setCarousel"></productCarousel>
-      </div>
-        <!-- <carousel :responsive="{ 0: { items:1, dots:false }, 600: { items:3 } }" :nav="false" :autoplay="true" :loop="false" :rewind="true" v-if="products.length>0">
-          <template slot="prev"><font-awesome-icon class="prev" :icon="['fas', 'chevron-left']" style="height: 100%;" /></template>
-            <div v-for="item in products" :key="item.id">
-              <div
-                  style="height: 250px; background-size: cover; background-position: center"
-                  :style="{ backgroundImage: `url(${item.imageUrl})` }"
-                ></div>
-              <div class="cover" @click="toProduct(item.id)">
-                <div style="color:white; transform: translateY(450%);">View Product</div>
-              </div>
+    <div class="container" style="padding-top:60px">
+      <router-link to="/shoppingmain" class="bread-crumb"><font-awesome-icon :icon="['fas', 'chevron-left']" /> Back to Products</router-link>
+      <section>
+        <div class="container product">
+          <div class="row">
+            <div class="product-info col-md-4">
+              <h4>{{ product.title }}</h4>
+              <h5 class="price">List Price: {{ product.origin_price | currency }}</h5>
+              <h5>Quantity</h5>
+              <select name="" class="form-control quantity" v-model="quantity">
+                <option v-for="item in 10" :value="item" :key="item"
+                  >{{ item }}{{ product.unit }}</option
+                >
+              </select>
+              <h5 v-if="quantity" class="price">
+                Total: {{ (quantity * product.price) | currency }}
+              </h5>
+              <br />
+              <h5>Description</h5>
+              <p>{{ product.description }}</p>
+              <a
+                :disabled='productStatus.loading == product.id || !quantity'
+                class="add-btn new-btn"
+                @click="addCart(product.id, quantity)"
+              >
+                Add to Cart
+              </a>
             </div>
-          <template slot="next"><font-awesome-icon class="next" :icon="['fas', 'chevron-right']" style="height: 100%;" /></template>
-        </carousel> -->
-    </section>
+            <img :src="product.imageUrl" alt="" class="col-md-8 product-img">
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="container other-products">
+          <h4 class="section-title">Other Products</h4>
+          <productCarousel :carouselInfo="carouselArr" :show="productShow" :size="screenSize" @changeCarousel="productChange" @showCarousel="setCarousel" @movePage="toProduct"></productCarousel>
+        </div>
+      </section>
+    </div>
     <Cart
       :cartInfo="cartList"
       :isloading="productStatus.loading"
@@ -93,9 +80,22 @@ export default {
       },
       isLoading: false,
       productShow: 0,
-      screenSize: undefined
+      screenSize: undefined,
+      otherProducts: []
     }
   },
+  // beforeRouteEnter (to, from, next) {
+  //   this.getProduct(to.params.id, (err, post) => {
+  //     next(vm => vm.setData(err, post))
+  //   })
+  // },
+  // beforeRouteUpdate (to, from, next) {
+  //   this.post = null
+  //   this.getProduct(to.params.id, (err, post) => {
+  //     this.setData(err, post)
+  //     next()
+  //   })
+  // },
   methods: {
     getProducts (page = 1) {
       // 參數直接寫page=1代表page預設值為1
@@ -114,6 +114,10 @@ export default {
         if (response.data.success) {
           vm.product = response.data.product
           vm.productStatus.loading = ''
+          // const productId = vm.product.id
+          // console.log('idfound')
+          // return productId
+          // vm.otherProducts = vm.products.filter((item) => item.id !== productId)
         }
       })
     },
@@ -193,7 +197,7 @@ export default {
         if (response.data.success) {
           vm.product = response.data.product
           vm.productStatus.loading = ''
-          vm.$router.push(`${vm.product.id}`)
+          vm.$router.push(`/product/${vm.product.id}`)
         }
       })
     },
@@ -208,7 +212,17 @@ export default {
     setCarousel (num) {
       const vm = this
       vm.productShow = num
+    },
+    test () {
+      location.reload()
     }
+    // setData (err, post) {
+    //   if (err) {
+    //     this.error = err.toString()
+    //   } else {
+    //     this.post = post
+    //   }
+    // }
   },
   created () {
     window.addEventListener('resize', this.resizeHandler)
@@ -217,6 +231,15 @@ export default {
     this.getProducts()
     this.getCart()
     this.resizeHandler()
+  },
+  // watch: {
+  //   // 如果路由有变化，会再次执行该方法
+  //   $route: 'getProduct'
+  // },
+  computed: {
+    carouselArr () {
+      return this.products.filter((item) => item.id !== this.product.id)
+    }
   },
   destroyed () {
     window.removeEventListener('resize', this.resizeHandler)
@@ -227,45 +250,44 @@ export default {
 <style lang="scss">
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
-.image-frame{
-  height: 200px;
-  width: 200px;
-  margin:0 auto;
-}
-.addCart-btn {
-  margin: 70px 0;
-  width: 100%;
-  border-style: none;
-  border: 1px solid;
-}
+@import 'src/assets/helpers/functionColors';
 
-.owl-item{
-  position: relative;
-  padding: 0px 10px;
-  .cover{
-    text-align: center;
-    left: 0;
-    top: 0;
-    display: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: $cover;
-    cursor: pointer;
-  }
+section+section{
+  margin-top: 60px;
+}
+.bread-crumb{
+  color: $link-text;
   &:hover{
-    .cover{
-      display: block;
-      transition: 0.5s all;
+    color: $link-text-hover;
+  }
+}
+.product{
+  .product-info{
+    @media (max-width:425px) {
+      margin-top: 20px;
+      order: 2;
     }
   }
+  .product-img{
+    height: 70vh;
+    @media (max-width:425px) {
+      height: 35vh;
+      order: 1;
+    }
+  }
+  .price{
+  text-align: end;
+  }
+  .quantity{
+    width: 50%;
+  }
+  .add-btn{
+    width: 100%;
+    text-align: center;
+  }
 }
-@media (max-width: 425px) {
-  .md-mt-20 {
-    margin-top: 20px;
-  }
-  .flex-xs-column-reverse {
-    flex-direction: column-reverse;
-  }
+
+.section-title{
+  text-align: center;
 }
 </style>

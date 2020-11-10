@@ -6,7 +6,7 @@
         <transition name="vanish">
           <router-link :key="banner[bannerShow].link" class="banner" :to="banner[bannerShow].link" :style="`backgroundImage: url(${screenSize > 425 ? banner[bannerShow].image: banner[bannerShow].rwdImage})`">
             <div class="banner-cover">
-              <h1>{{banner[bannerShow].title}}</h1>
+              <h1 :class="{'brand-font' : banner[bannerShow].title==='Lächeln'}">{{banner[bannerShow].title}}</h1>
               <h2>{{banner[bannerShow].subTitle}}</h2>
             </div>
           </router-link>
@@ -99,7 +99,7 @@
       <section>
         <div class="container">
           <h2 class="section-title">Hot Products</h2>
-          <productCarousel :carouselInfo="products" :show="productShow" :size="screenSize" @changeCarousel="productChange" @showCarousel="setCarousel"></productCarousel>
+          <productCarousel :carouselInfo="products" :show="productShow" :size="screenSize" @changeCarousel="productChange" @showCarousel="setCarousel" @movePage="toProduct"></productCarousel>
         </div>
       </section>
       <div class="container marketing">
@@ -156,7 +156,7 @@ export default {
         {
           title: 'Delicacies',
           subTitle: "You can't buy happiness, but you can buy ice cream and that is pretty much the same thing",
-          link: '/shoppage/shoppingmain',
+          link: '/shoppingmain',
           image: 'https://images.unsplash.com/photo-1560801530-34efebfecba8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
           rwdImage: 'https://images.unsplash.com/photo-1531361171768-37170e369163?ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80'
         },
@@ -236,6 +236,11 @@ export default {
       vm.randomCarousel = vm.UserComments.slice()
       vm.shuffleCarousel(vm.randomCarousel)
     },
+    toProduct (id) {
+      console.log(id)
+      const vm = this
+      vm.$router.push(`/product/${id}`)
+    },
     resizeHandler () {
       const vm = this
       vm.screenSize = window.screen.availWidth
@@ -299,6 +304,10 @@ export default {
 @import 'src/assets/helpers/functionColors';
 // --------------------------------------------------
 /* Padding below the footer and lighter body text */
+.brand-font{
+  font-family: Tangerine, cursive;
+  font-size: 100px;
+}
 .row+.row{
   margin-top: 20px;
 }
@@ -317,16 +326,6 @@ section{
   color: lighten($background,65%);
   .row{
     justify-content: center;
-  }
-}
-.new-btn{
-  padding: 10px;
-  border-radius: 2px;
-  background-color: $lighter-background;
-  color: $link-text;
-  &:hover{
-    background-color: $background;
-    color: $link-text-hover;
   }
 }
 .grading {

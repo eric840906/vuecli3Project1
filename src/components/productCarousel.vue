@@ -2,10 +2,10 @@
   <div style="position:relative;">
     <a href="#" class="outer-product-control-left" @click.prevent='scrollLeft()'><font-awesome-icon :icon="['fas', 'chevron-left']" style="height: 100%;" /></a>
     <a href="#" class="outer-product-control-right" @click.prevent='scrollRight()'><font-awesome-icon :icon="['fas', 'chevron-right']" style="height: 100%;" /></a>
-    <div class="product-cards" v-if="size > 425">
+    <div class="product-cards">
       <div class="product-carousel">
         <div class="row">
-          <div v-for="item in carouselInfo" :key="item.name" class="product-card">
+          <div v-for="item in carouselInfo" :key="item.id" class="product-card">
             <img
               :src="item.imageUrl"
               class="card-img-top"
@@ -16,35 +16,10 @@
               {{item.description}}
             </p>
             <div class="product-links">
-              <a href="#">View Product</a>
+              <a href="#" @click="pageMove(item.id)">View Product</a>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="product-cards" v-else>
-      <div class="product-carousel">
-        <a href="#" class="product-control-left" @click.prevent='carouselChange(-1,"faderev")'><font-awesome-icon :icon="['fas', 'chevron-left']" style="height: 100%;" /></a>
-        <a href="#" class="product-control-right" @click.prevent='carouselChange(+1, "fade" )'><font-awesome-icon :icon="['fas', 'chevron-right']" style="height: 100%;" /></a>
-        <transition :name="transitionName">
-          <div :key="carouselInfo[show].imageUrl" class="product-card">
-              <img
-                :src="carouselInfo[show].imageUrl"
-                class="card-img-top"
-                alt=""
-              />
-              <h5 class="card-title">{{carouselInfo[show].title}}</h5>
-              <p class="card-text">
-                {{carouselInfo[show].description}}
-              </p>
-              <div :key="show" class="product-links">
-                <a href="#">View Product</a>
-              </div>
-          </div>
-        </transition>
-      </div>
-      <div class="indicators">
-        <div class="indicator" v-for="num in carouselInfo.length" :key="num" :class="{'active': show===num-1}" @click.prevent="setShow(num-1)"></div>
       </div>
     </div>
   </div>
@@ -81,11 +56,18 @@ export default {
       const totalWidth = singleLength * cardsNumber
       const scroll = this.$el.lastElementChild.scrollLeft + (this.$el.lastElementChild.offsetWidth)
       const width = this.$el.lastElementChild.offsetWidth
-      const scrollTo = scroll > totalWidth ? -width : scroll
+      console.log('a=' + this.$el.lastElementChild.scrollLeft)
+      console.log('b=' + this.$el.lastElementChild.offsetWidth)
+      console.log('width=' + width + ',' + 'scroll=' + Math.ceil(scroll))
+      console.log('totalwidth=' + totalWidth)
+      const scrollTo = scroll + cardsNumber >= totalWidth ? -width : scroll
       this.$el.lastElementChild.scrollTo({
         left: scrollTo,
         behavior: 'smooth'
       })
+    },
+    pageMove (id) {
+      this.$emit('movePage', id)
     }
   }
 }
@@ -109,7 +91,7 @@ export default {
   top: -62px;
   right: 64px;
   @media (max-width: 425px) {
-    display: none;
+    left: 0;
   }
 }
 .outer-product-control-right{
@@ -117,7 +99,6 @@ export default {
   top: -62px;
   right: 0;
   @media (max-width: 425px) {
-    display: none;
   }
 }
 .product-control-left{
@@ -163,6 +144,9 @@ export default {
       border: 5px double $border-color;
       background-color: $lighter-background;
       color: $link-text;
+      @media (max-width:425px) {
+        border: none;
+      }
     img{
       margin: 20px;
       width: 150px;
@@ -235,7 +219,7 @@ export default {
         justify-content: center;
         .product-card{
           max-width: 100%;
-          flex: 0 0 80%;
+          flex: 0 0 100%;
           margin: 0;
         }
       }

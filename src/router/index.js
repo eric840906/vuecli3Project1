@@ -19,21 +19,14 @@ const routes = [
         component: () => import('../views/Home.vue')
       },
       {
-        path: '/shoppage',
-        name: 'ShopPage',
-        component: () => import('../views/ShopPage.vue'),
-        children: [
-          {
-            path: 'shoppingmain',
-            name: 'ShoppingMain',
-            component: () => import('../components/shopPage/ShoppingMain.vue')
-          },
-          {
-            path: 'product/:productId',
-            name: 'ShopProduct',
-            component: () => import('../components/shopPage/ShopProduct.vue')
-          }
-        ]
+        path: '/shoppingmain',
+        name: 'ShoppingMain',
+        component: () => import('../components/shopPage/ShoppingMain.vue')
+      },
+      {
+        path: '/product/:productId',
+        name: 'ShopProduct',
+        component: () => import('../components/shopPage/ShopProduct.vue')
       },
       {
         path: '/couponjackpot',

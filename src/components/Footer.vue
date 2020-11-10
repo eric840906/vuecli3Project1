@@ -12,37 +12,12 @@
                     <a href="#"><font-awesome-icon class="social-item" :icon="['fab', 'linkedin-in']" /></a>
                     <a href="#"><font-awesome-icon class="social-item" :icon="['fab', 'instagram']" /></a>
                   </div>
-                  <div class="email-box"><a href="mailto: info@Lächeln.Icecreram"><font-awesome-icon style="font-size: 14px; margin-right:0.5rem;" :icon="['far', 'envelope']" />info@Lächeln.Icecreram</a></div>
+                  <div class="email-box"><a href="mailto: info@Lächeln.Icecream"><font-awesome-icon style="font-size: 14px; margin-right:0.5rem;" :icon="['far', 'envelope']" />info@Lächeln.Icecreram</a></div>
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In error id rerum totam quam tempora consectetur alias ipsum quisquam voluptates, illo rem voluptatibus architecto, earum harum! Quis repellat suscipit omnis?</p>
                   <form action="" class="subscription">
                     <input type="text" id="email" class="email-input" placeholder="Enter Your E-mail" v-model="email">
                     <button class="subscribe-btn" :disabled="!email" @click.prevent="toSubscribe">Subscribe</button>
                   </form>
-                    <!-- <div class="footer-item text-muted col-md-5 store-info">
-                        <div class="footer-logo" style="font-family: 'Tangerine', cursive;">Lächeln</div>
-                        <p style="margin: 20px 0">Exercitation ullamco laboris nisi ut aliquip ex commodo consequat. Duis aute irure</p>
-                        <div><a class="text-muted" href="mailto: info@Lächeln.Icecreram"><font-awesome-icon style="font-size: 14px; margin-right:0.5rem;" :icon="['far', 'envelope']" />info@Lächeln.Icecreram</a></div>
-                    </div>
-                    <div class="ml-auto footer-item col-md-7">
-                        <h3>Sign Up Newsletter</h3>
-                        <ul class="list-unstyled">
-                        <div>
-                            <form action="" style="margin: 40px 0" class="subscription">
-                                <input type="text" id="email" class="email-input" placeholder="Enter Your E-mail" v-model="email">
-                                <button class="subscribe-btn bg-secondary" :disabled="!email" @click.prevent="toSubscribe">Subscribe</button>
-                            </form>
-                        </div>
-                        <h3>Follow Us</h3>
-                          <div>
-                            <a href="" class="text-muted"><font-awesome-icon class="social-item" :icon="['fab', 'twitter']" /></a>
-                            <a href="" class="text-muted"><font-awesome-icon class="social-item" :icon="['fab', 'facebook-f']" /></a>
-                            <a href="" class="text-muted"><font-awesome-icon class="social-item" :icon="['fab', 'google-plus-g']" /></a>
-                            <a href="" class="text-muted"><font-awesome-icon class="social-item" :icon="['fab', 'github']" /></a>
-                            <a href="" class="text-muted"><font-awesome-icon class="social-item" :icon="['fab', 'linkedin-in']" /></a>
-                            <a href="" class="text-muted"><font-awesome-icon class="social-item" :icon="['fab', 'instagram']" /></a>
-                          </div>
-                        </ul>
-                    </div> -->
                 </div>
             </div>
         </footer>

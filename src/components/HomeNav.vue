@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto top-links">
             <router-link class="nav-item nav-link" to="/">Home</router-link>
-            <router-link class="nav-item nav-link" to="/shoppage/shoppingmain"
+            <router-link class="nav-item nav-link" to="/shoppingmain"
               >Products</router-link
             >
             <router-link class="nav-item nav-link" to="/couponjackpot"
