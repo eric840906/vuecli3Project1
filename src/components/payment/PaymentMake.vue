@@ -1,52 +1,9 @@
 <template>
   <div>
-    <div class="container mt-100">
-      <table class="table checkout-list">
-        <thead>
-          <th></th>
-          <th>Products</th>
-          <th width="80">Quantity</th>
-          <th width="20" class="text-right">Price</th>
-        </thead>
-        <tbody>
-          <tr v-for="item in cartList.data.carts" :key="item.id">
-            <td class="align-middle">
-              <button
-                type="button"
-                class="btn btn-outline-danger btn-sm"
-                @click="removeCart(item.id)"
-              >
-                <font-awesome-icon :icon="['far', 'trash-alt']"/>
-              </button>
-            </td>
-            <td class="align-middle">
-              {{ item.product.title }}
-            </td>
-            <td class="align-middle text-center">{{ item.qty }}{{ item.product.unit }}</td>
-            <td class="align-middle text-center">{{ item.final_total | currency }}</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td colspan="2" class="text-right">Total</td>
-            <td class="text-right">{{ cartList.data.total | currency }}</td>
-          </tr>
-
-          <tr v-if="cartList.data.total != cartList.data.final_total">
-            <td class="text-left text-success">Coupon Applied</td>
-            <td colspan="2" class="text-right text-success">Final Price</td>
-            <td class="text-right text-success">
-              {{ Math.round(cartList.data.final_total) | currency }}
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-
     <div class="container">
-      <div class="my-5 row justify-content-center">
-        <form class="col-md-6" @submit.prevent="buildOrder">
+      <div class="row">
+      <div class="col-md-7 form-block">
+        <form class="userInfo" @submit.prevent="buildOrder">
           <div class="form-group">
             <label for="useremail">Email*</label>
             <input
@@ -118,10 +75,6 @@
               v-model="orderForm.message"
             ></textarea>
           </div>
-          <div class="row"></div>
-
-          <hr />
-
           <div class="d-block my-3">
             <label for="paymentMethod">Payment Options*</label>
             <div class="custom-control custom-radio">
@@ -223,10 +176,48 @@
             </div>
           </div>
           <div class="text-right">
-            <button class="btn btn-danger" style="width:100%;">Order</button>
+            <button class="checkout-btn">Order</button>
           </div>
         </form>
       </div>
+      <div class="col-md-5 list-block">
+        <table class="shop-list">
+          <h5>Your Shopping List</h5>
+          <thead>
+            <th>{{tableHead.product}}</th>
+            <th>{{tableHead.quantity}}</th>
+            <th>{{tableHead.price}}</th>
+          </thead>
+          <tbody>
+            <tr v-for="item in cartList.data.carts" :key="item.id">
+              <td class="list-item" :data-head="tableHead.product" >
+                {{ item.product.title }}
+              </td>
+              <td class="list-item" :data-head="tableHead.quantity">
+                {{ item.qty }}{{ item.product.unit }}
+              </td>
+              <td class="list-item" :data-head="tableHead.price">{{ item.final_total | currency }}</td>
+              <td class="delete-item">
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  @click="removeCart(item.id)"
+                >
+                  <font-awesome-icon :icon="['far', 'trash-alt']"/>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+         <div class="d-flex">
+            <p :class="{'line-cross': cartList.data.total != cartList.data.final_total}">Total Price: {{ cartList.data.total | currency }}</p>
+          </div>
+          <div class="applied-text" v-if="cartList.data.total != cartList.data.final_total">
+            <p class="text-right text-success">Coupon Applied !</p>
+            <p colspan="2" class="text-right text-success">Final Price: {{ Math.round(cartList.data.final_total) | currency }}</p>
+          </div>
+      </div>
+    </div>
     </div>
   </div>
 </template>
@@ -235,6 +226,11 @@
 export default {
   data () {
     return {
+      tableHead: {
+        product: 'Products',
+        quantity: 'Quantity',
+        price: 'Price'
+      },
       orderForm: {
         user: {
           name: '',
@@ -296,15 +292,75 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
+@import "~bootstrap/scss/functions";
+@import "@/assets/helpers/_variables";
+@import 'src/assets/helpers/customBtn';
 
+.line-cross{
+  text-decoration: line-through;
+}
 .checkout-list{
   margin: 30px auto;
-  width:50%
+}
+.shop-list{
+  width: 100%;
+  text-align: left;
+  margin-top: 15px;
+    thead{
+      display: none;
+    }
+    tr+tr{
+      margin-top: 3px;
+    }
+    tr{
+      display: block;
+      &:nth-child(2n){
+        background-color: $lighter-background;
+      }
+      &:nth-child(2n+1){
+        background-color: darken($lighter-background, 5%);
+      }
+    }
+    .list-item{
+      display: block;
+      padding-left: 5em;
+      text-indent: -5em;
+      &:before{
+        text-align: right;
+        padding-right: 5px;
+        content: attr(data-head) ': ';
+        display: inline-block;
+        width: 5em;
+      }
+    }
+    .delete-item{
+      text-align: end;
+      display: block;
+    }
+}
+.userInfo{
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+}
+.checkout-btn{
+  @extend %no-hover-btn;
+  width:100%;
 }
 
 .mt-100 {
   margin-top: 100px;
+}
+@media (max-width: 768px) {
+  .form-block{
+    order: 2;
+  }
+  .list-block{
+    order: 1;
+  }
 }
 
 @media (max-width: 320px) {

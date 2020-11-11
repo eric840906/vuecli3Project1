@@ -12,7 +12,6 @@
                   v-for="item in data"
                   :key="item.id"
                   class="info"
-                  style="background-color: antiquewhite; height: 210px;"
                 >
                   <ul class="list-unstyled" style="text-align: center;">
                     <li style="border-bottom: 1px solid #d7cfcf;">
@@ -188,18 +187,19 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+@import 'src/assets/helpers/functionColors';
 
 .info-list::-webkit-scrollbar {
   width: 0.5em;
-  height: 0.5em;
+  height: 0;
 }
 .info-list::-webkit-scrollbar-track {
   box-shadow: transparent;
 }
 
 .info-list::-webkit-scrollbar-thumb {
-  background-image: radial-gradient($yellow, transparent);
-  outline: 1px solid $white;
+  background-image: $lighter-background;
+  outline: 1px solid $background;
 }
 
 .info-list {
@@ -211,20 +211,28 @@ export default {
   border-radius: 5px;
   padding: 10px 14px;
   margin-bottom: 20px;
+  height: 210px;
+  background-color: darken($lighter-background, 5%);
+  a{
+    color: $link-text;
+    &:hover{
+      color: $link-text-hover;
+    }
+  }
 }
 .btn {
   width: 100%;
   margin-top: 10px;
   &:hover {
-    background-color: $black;
     border: none;
-    color: $yellow;
+    background-color: $background;
+    color: $lighter-background;
   }
 }
 
 @media (max-width: 769px) {
   .info-list {
-    height: 30vh;
+    height: 35vh;
     overflow-y: hidden;
   }
   .rwd-info-scroll {

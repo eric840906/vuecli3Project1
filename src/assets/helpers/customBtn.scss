@@ -3,11 +3,22 @@
 .btn-shop {
   background-color: $lighter-background;
   color: $link-text;
-  border:none; /*set the color you want here*/
+  border:none;
   transition: all .3s;
   &:hover{
     background-color: $background;
     color: $lighter-background;
+  }
+}
+
+%no-hover-btn {
+  background-color: $lighter-background;
+  color: $link-text;
+  border:none;
+  background-color: $background;
+  color: $lighter-background;
+  &:hover{
+    color: darken($lighter-background,20%);
   }
 }
 
@@ -22,13 +33,5 @@
     color: $yellow;
     background-color: $black;
   }
-}
-
-.submit-msg-btn{
-  font-size: 20px;
-  background-color: transparent;
-  border: none;
-  color: $yellow;
-  background-color: $black;
 }
 

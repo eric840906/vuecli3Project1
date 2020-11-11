@@ -114,26 +114,23 @@
                 required
               ></textarea>
             </div>
-            <button class="btn submit-msg-btn" style="width:100%;">
+            <button class="btn-msg" style="width:100%;">
               SEND
             </button>
           </form>
         </div>
       </div>
     </main>
-    <Gotop></Gotop>
   </div>
 </template>
 
 <script>
 import Alert from '../components/Alert.vue'
-import Gotop from '../components/GoTop.vue'
 import Banner from '../components/Banner.vue'
 import staffCarousel from '../components/staffCarousel.vue'
 export default {
   components: {
     Alert,
-    Gotop,
     Banner,
     staffCarousel
   },
@@ -210,6 +207,8 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+@import 'src/assets/helpers/functionColors';
+@import 'src/assets/helpers/customBtn';
 
 $card-base: #ddc2a9;
 $card-background: darken($card-base, 50%);
@@ -241,6 +240,9 @@ $card-footer-link-hover: lighten($card-base, 10%);
   100%{
     opacity: 0;
   }
+}
+.btn-msg{
+  @extend %no-hover-btn;
 }
   .staff-carousel{
     display: flex;

@@ -1,31 +1,51 @@
 <template>
   <div>
-    <div class="my-5 row justify-content-center">
+    <div class="comfirm-list">
       <form class="col-md-6" @submit.prevent="payConfirm">
-        <table class="table">
+        <table class="shop-list">
+          <h5>Your Shopping List</h5>
           <thead>
-            <th>Products</th>
-            <th>Quantity</th>
-            <th>Price</th>
+            <th>{{tableHead.product}}</th>
+            <th>{{tableHead.quantity}}</th>
+            <th>{{tableHead.price}}</th>
           </thead>
           <tbody>
             <tr v-for="item in orders.products" :key="item.id">
-              <td class="align-middle">{{ item.product.title }}</td>
-              <td class="align-middle">
-                {{ item.qty }}
+              <td class="list-item" :data-head="tableHead.product" >
+                {{ item.product.title }}
               </td>
-              <td class="align-middle text-right">{{ item.final_total | currency }}</td>
+              <td class="list-item" :data-head="tableHead.quantity">
+                {{ item.qty }}{{ item.product.unit }}
+              </td>
+              <td class="list-item" :data-head="tableHead.price">{{ item.final_total | currency }}</td>
             </tr>
           </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="2" class="text-right">Final Total</td>
-              <td class="text-right">{{ orders.total | currency }}</td>
-            </tr>
-          </tfoot>
         </table>
-
-        <table class="table">
+        <div class="d-flex">
+          <h5 class="price-tag text-success">Price: {{ Math.round(orders.total) | currency }}</h5>
+        </div>
+        <div class="user-info">
+          <div>
+            <h5>Email: </h5> <p>{{ orders.user.email }}</p>
+          </div>
+          <div>
+            <h5>Name: </h5>
+            <p>{{orders.user.name}}</p>
+          </div>
+          <div>
+            <h5>Phone number: </h5>
+            <p>{{orders.user.tel}}</p>
+          </div>
+          <div>
+            <h5>Billing Address: </h5>
+            <p>{{orders.user.address}}</p>
+          </div>
+          <div>
+            <span v-if="!orders.is_paid" class="text-danger">Not Complete</span>
+            <span v-else class="text-success">Completed</span>
+          </div>
+        </div>
+        <!-- <table class="table">
           <tbody>
             <tr>
               <th width="100">Email</th>
@@ -51,9 +71,9 @@
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
         <div class="text-right">
-          <button class="btn btn-danger" v-if="orders.is_paid == false">
+          <button class="comfirm-btn" v-if="orders.is_paid == false">
             Payment Confirm
           </button>
         </div>
@@ -89,6 +109,11 @@ import $ from 'jquery'
 export default {
   data () {
     return {
+      tableHead: {
+        product: 'Products',
+        quantity: 'Quantity',
+        price: 'Price'
+      },
       orderId: '',
       orders: {
         products: {},
@@ -108,14 +133,14 @@ export default {
     payConfirm () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/pay/${vm.orderId}`// 'https://vue-course-api.hexschool.io/api/eric840906/products'
-      $('#loadingModal').modal('toggle')
+      $('#loadingModal').modal('show')
       vm.loadingMessage = 'Sending Order'
       vm.$http.post(api).then(response => {
         if (response.data.success) {
           vm.loadingMessage = 'Payment comfirmed, back to homepage'
-          setTimeout(() => $('#loadingModal').modal('toggle'), 10000)
+          setTimeout(() => $('#loadingModal').modal('hide'), 1000)
           vm.getOrder()
-          setTimeout(() => vm.$router.push('/'), 5000)
+          setTimeout(() => vm.$router.push('/'), 2000)
         } else {
           vm.loadingMessage = 'Connection fail'
         }
@@ -132,9 +157,55 @@ export default {
 <style lang="scss">
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+@import 'src/assets/helpers/customBtn';
 
 .mt-100 {
   margin-top: 100px;
+}
+.price-tag{
+  width: 100%;
+  text-align: end;
+}
+.comfirm-btn{
+  @extend %no-hover-btn;
+  border-radius: 0.15rem;
+  padding: 5px;
+}
+.comfirm-list{
+  display: flex;
+  justify-content: center;
+}
+.shop-list{
+  width: 100%;
+  text-align: left;
+  margin-top: 15px;
+    thead{
+      display: none;
+    }
+    tr+tr{
+      margin-top: 3px;
+    }
+    tr{
+      display: block;
+      &:nth-child(2n){
+        background-color: $lighter-background;
+      }
+      &:nth-child(2n+1){
+        background-color: darken($lighter-background, 5%);
+      }
+    }
+    .list-item{
+      display: block;
+      padding-left: 5em;
+      text-indent: -5em;
+      &:before{
+        text-align: right;
+        padding-right: 5px;
+        content: attr(data-head) ': ';
+        display: inline-block;
+        width: 5em;
+      }
+    }
 }
 
 //loading effect

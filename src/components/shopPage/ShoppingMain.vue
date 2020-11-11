@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
     <Banner :picture="bannerImg" :title="pageTitle"></Banner>
     <div class="container" style="padding-top: 60px;">
-      <div class="row">
+      <div class="d-flex flex-wrap">
         <nav class="top-select">
           <ul  class="select-nav">
             <li class="nav-item">
@@ -465,6 +465,7 @@ export default {
 
 .top-select {
   display: none;
+  width: 100%;
 }
 
 @media (max-width: 767.98px) {

@@ -128,6 +128,7 @@
         </template>
       </div>
     </main>
+    <Gotop></Gotop>
   </div>
 </template>
 
@@ -137,11 +138,13 @@ import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import Alert from '../components/Alert.vue'
 import productCarousel from '../components/productCarousel.vue'
+import Gotop from '../components/GoTop.vue'
 
 export default {
   components: {
     Alert,
-    productCarousel
+    productCarousel,
+    Gotop
   },
   data () {
     return {
@@ -280,10 +283,7 @@ export default {
         }
       })
     })
-    window.setInterval(() => { this.bannerChange(+1) }, 5000)
-  },
-  beforeCreate () {
-    $('#loadingModal').modal('hide')
+    window.setInterval(() => { this.bannerChange(+1) }, 10000)
   },
   created () {
     window.addEventListener('resize', this.resizeHandler)

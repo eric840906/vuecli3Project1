@@ -15,9 +15,7 @@
             <p class="card-text">
               {{item.description}}
             </p>
-            <div class="product-links">
-              <a href="#" @click="pageMove(item.id)">View Product</a>
-            </div>
+            <a class="product-links" href="#" @click="pageMove(item.id)">View Product</a>
           </div>
         </div>
       </div>
@@ -158,19 +156,17 @@ export default {
     }
     .product-links{
       width: 100%;
-      display: flex;
+      display: block;
       justify-content: space-around;
       background: $background;
       padding: 0 1.25rem;
       border: none;
       font-size: 16px;
       padding: 7px;
-      a{
-        color: lighten($background,65%);
-        &:hover{
+      color: lighten($background,65%);
+      &:hover{
           color: $link-text-hover
         }
-      }
     }
     }
   }

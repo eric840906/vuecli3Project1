@@ -4,19 +4,25 @@
       <div class="cartcount" v-if="cartInfo.data.total!==0">
         <div class="cartcounter">{{ cartInfo.data.carts.length }}</div>
       </div>
-
       <div class="cartlist">
+        <h5>SHOPPING LIST</h5>
         <div class="scroll-menu">
-          <table class="table shop-list">
+          <table class="shop-list">
             <thead>
-              <th></th>
-              <th>Products</th>
-              <th width="60">Quantity</th>
-              <th width="40">Price</th>
+              <th>{{tableHead.product}}</th>
+              <th>{{tableHead.quantity}}</th>
+              <th>{{tableHead.price}}</th>
             </thead>
             <tbody>
               <tr v-for="item in cartInfo.data.carts" :key="item.id">
-                <td class="align-middle text-center">
+                <td class="list-item" :data-head="tableHead.product" >
+                  {{ item.product.title }}
+                </td>
+                <td class="list-item" :data-head="tableHead.quantity">
+                  {{ item.qty }}{{ item.product.unit }}
+                </td>
+                <td class="list-item" :data-head="tableHead.price">{{ item.final_total | currency }}</td>
+                <td class="delete-item">
                   <button
                     type="button"
                     class="btn btn-outline-danger btn-sm"
@@ -25,47 +31,32 @@
                     <font-awesome-icon :icon="['far', 'trash-alt']"/>
                   </button>
                 </td>
-                <td class="align-middle">
-                  {{ item.product.title }}
-                </td>
-                <td class="align-middle text-center">
-                  {{ item.qty }}{{ item.product.unit }}
-                </td>
-                <td class="align-middle text-center">{{ item.final_total | currency }}</td>
               </tr>
             </tbody>
-            <tfoot>
-              <tr>
-                <td></td>
-                <td colspan="2" class="text-right">Total</td>
-                <td class="text-right">{{ cartInfo.data.total | currency }}</td>
-              </tr>
-              <tr v-if="cartInfo.data.total != cartInfo.data.final_total">
-                <td class="text-right text-success">Coupon Applied</td>
-                <td colspan="2" class="text-right text-success">Final Price</td>
-                <td class="text-right text-success">
-                  {{ Math.round(cartInfo.data.final_total) | currency }}
-                </td>
-              </tr>
-            </tfoot>
           </table>
         </div>
 
         <div
-          class="input-group input-group-sm justify-content-center"
-          style="margin:50px auto; width: 70%;"
+          class="list-bottom"
         >
+          <div class="d-flex">
+            <p :class="{'line-cross': cartInfo.data.total != cartInfo.data.final_total}">Total Price: {{ cartInfo.data.total | currency }}</p>
+          </div>
+          <div class="applied-text" v-if="cartInfo.data.total != cartInfo.data.final_total">
+            <p class="text-right text-success">Coupon Applied !</p>
+            <p colspan="2" class="text-right text-success">Final Price: {{ Math.round(cartInfo.data.final_total) | currency }}</p>
+          </div>
           <div class="d-flex">
             <input
               type="text"
               class="form-control"
               placeholder="Enter Coupon Codes"
               v-model="coupon_code"
-              style="flex:1;"
+              style="flex:1; border-radius: 0.15rem 0 0 0.15rem;"
             />
             <div class="input-group-append">
               <button
-                class="btn btn-outline-secondary"
+                class="apply-btn"
                 type="button"
                 @click="applyCoupon"
               >
@@ -75,7 +66,7 @@
           </div>
 
           <button
-            class="pay-btn btn-shop text-decoration-none"
+            class="pay-btn"
             @click.prevent="toPay"
             >&emsp;Checkout&emsp;</button
           >
@@ -95,7 +86,12 @@ export default {
   props: ['cartInfo', 'isloading'], // 用props將pagination資料帶入
   data () {
     return {
-      coupon_code: ''
+      coupon_code: '',
+      tableHead: {
+        product: 'Products',
+        quantity: 'Quantity',
+        price: 'Price'
+      }
     }
   },
   methods: {
@@ -151,26 +147,31 @@ export default {
 <style lang="scss">
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+@import 'src/assets/helpers/customBtn';
 .mb-5 {
   margin-bottom: 5rem !important;
 }
-
+.line-cross{
+  text-decoration: line-through;
+}
+.applied-text{
+  display: flex;
+  justify-content: space-between;
+}
 .scroll-menu {
   overflow-y: auto;
   height: 35vh;
 }
 .scroll-menu::-webkit-scrollbar {
-  width: 1em;
-  height: 1em;
+  width: 0.3em;
+  height: 0em;
 }
 .scroll-menu::-webkit-scrollbar-track {
   box-shadow: transparent;
 }
 
 .scroll-menu::-webkit-scrollbar-thumb {
-  background-image: radial-gradient($legend-prize, transparent);
-  outline: 1px solid $white;
-  border-radius: 135px;
+  background-image: radial-gradient(darken($lighter-background, 45%), transparent);
 }
 
 .cartcount {
@@ -199,7 +200,7 @@ export default {
   width: 50px;
   position: fixed;
   right: 10px;
-  bottom: 80px;
+  bottom: 17px;
   box-shadow: 0px 0px 11px $cover;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   z-index: 10;
@@ -212,8 +213,40 @@ export default {
     color: $black;
   }
 .shop-list{
-  margin: 30px auto;
+  margin: auto;
   width:70%;
+  text-align: left;
+    thead{
+      display: none;
+    }
+    tr+tr{
+      margin-top: 3px;
+    }
+    tr{
+      display: block;
+      &:nth-child(2n){
+        background-color: $lighter-background;
+      }
+      &:nth-child(2n+1){
+        background-color: darken($lighter-background, 5%);
+      }
+    }
+    .list-item{
+      display: block;
+      padding-left: 5em;
+      text-indent: -5em;
+      &:before{
+        text-align: right;
+        padding-right: 5px;
+        content: attr(data-head) ': ';
+        display: inline-block;
+        width: 5em;
+      }
+    }
+    .delete-item{
+      text-align: end;
+      display: block;
+    }
 }
 
   &:hover {
@@ -223,20 +256,30 @@ export default {
     }
   }
 }
-
+.list-bottom{
+  margin: 10px auto;
+  width: 70%;
+}
+.apply-btn{
+  @extend %no-hover-btn;
+  border-radius: 0 0.15rem 0.15rem 0;
+}
 .cartlist {
-  background: $white;
+  background: $lighter-background;
   position: absolute;
   right: 0;
   bottom: 95px;
   width: 450px;
   display: none;
+  text-align: center;
   box-shadow: 0 5px 12px 8px rgba(0, 0, 0, 0.5);
 }
 
 .pay-btn {
+  @extend %no-hover-btn;
   width: 100%;
   margin-top: 20px;
+  border-radius: 0.15rem;
 }
 
 .show {
@@ -257,7 +300,6 @@ export default {
   }
   .cartframe {
   left: 10px;
-  bottom: 80px;
   }
 }
 
@@ -265,9 +307,6 @@ export default {
   .cartlist {
     width: 364px;
     left: -42px;
-  }
-  .shop-list{
-    margin: 30px 13px;
   }
 }
 </style>
