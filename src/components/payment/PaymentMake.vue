@@ -209,13 +209,13 @@
             </tr>
           </tbody>
         </table>
-         <div class="d-flex">
-            <p :class="{'line-cross': cartList.data.total != cartList.data.final_total}">Total Price: {{ cartList.data.total | currency }}</p>
-          </div>
-          <div class="applied-text" v-if="cartList.data.total != cartList.data.final_total">
-            <p class="text-right text-success">Coupon Applied !</p>
-            <p colspan="2" class="text-right text-success">Final Price: {{ Math.round(cartList.data.final_total) | currency }}</p>
-          </div>
+        <div class="d-flex">
+          <p :class="{'line-cross': cartList.data.total != cartList.data.final_total}">Total Price: {{ cartList.data.total | currency }}</p>
+        </div>
+        <div class="applied-text" v-if="cartList.data.total != cartList.data.final_total">
+          <p class="text-right text-success">Coupon Applied !</p>
+          <p colspan="2" class="text-right text-success">Final Price: {{ Math.round(cartList.data.final_total) | currency }}</p>
+        </div>
       </div>
     </div>
     </div>
