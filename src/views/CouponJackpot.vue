@@ -49,7 +49,7 @@
                   >
                   <router-link
                   class="btn btn-lg notice-btn"
-                  to="/shoppage/shoppingmain"
+                  to="/shoppingmain"
                   >Shopping</router-link
                   >
                 </div>
@@ -108,7 +108,7 @@
                         >
                         <router-link
                           class="btn btn-lg notice-btn"
-                          to="/shoppage/shoppingmain"
+                          to="/shoppingmain"
                           >Shopping</router-link
                         >
                       </div>
@@ -159,7 +159,7 @@
                         >
                         <router-link
                           class="btn btn-lg notice-btn"
-                          to="/shoppage/shoppingmain"
+                          to="/shoppingmain"
                           >Shopping</router-link
                         >
                       </div>
@@ -210,7 +210,7 @@
                         >
                         <router-link
                           class="btn btn-lg notice-btn"
-                          to="/shoppage/shoppingmain"
+                          to="/shoppingmain"
                           >Shopping</router-link
                         >
                       </div>
