@@ -1,6 +1,6 @@
 <template>
   <div>
-    <transition name="page" mode="out-in">
+    <transition name="page">
       <router-view/>
     </transition>
     <Footer></Footer>

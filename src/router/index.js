@@ -21,42 +21,42 @@ const routes = [
       {
         path: '/shoppingmain',
         name: 'ShoppingMain',
-        component: () => import('../components/shopPage/ShoppingMain.vue')
+        component: () => import(/* webpackChunkName: "group-shopping" */ '../components/shopPage/ShoppingMain.vue')
       },
       {
         path: '/product/:productId',
         name: 'ShopProduct',
-        component: () => import('../components/shopPage/ShopProduct.vue')
+        component: () => import(/* webpackChunkName: "group-shopping" */'../components/shopPage/ShopProduct.vue')
       },
       {
         path: '/couponjackpot',
         name: 'CouponJackpot',
-        component: () => import('../views/CouponJackpot.vue')
+        component: () => import(/* webpackChunkName: "group-coupon" */ '../views/CouponJackpot.vue')
       },
       {
         path: '/storeinfo',
         name: 'Storeinfo',
-        component: () => import('../views/Storeinfo.vue')
+        component: () => import(/* webpackChunkName: "group-info" */'../views/Storeinfo.vue')
       },
       {
         path: '/contact',
         name: 'Contact',
-        component: () => import('../views/Contact.vue')
+        component: () => import(/* webpackChunkName: "group-contact" */'../views/Contact.vue')
       },
       {
         path: '/paymentpage',
         name: 'PaymentPage',
-        component: () => import('../views/PaymentPage.vue'),
+        component: () => import(/* webpackChunkName: "group-payment" */ '../views/PaymentPage.vue'),
         children: [
           {
             path: 'paymentmake',
             name: 'PaymentMake',
-            component: () => import('../components/payment/PaymentMake.vue')
+            component: () => import(/* webpackChunkName: "group-payment" */ '../components/payment/PaymentMake.vue')
           },
           {
             path: 'paymentconfirm/:orderId', // 要加上/:orderId動態帶入api抓來的訂單ID形成結帳頁面，少了冒號會因為網址被nav guard判斷不存在而跑回login
             name: 'PaymentConfirm',
-            component: () => import('../components/payment/PaymentConfirm.vue')
+            component: () => import(/* webpackChunkName: "group-payment" */ '../components/payment/PaymentConfirm.vue')
           }
         ]
       },
@@ -113,7 +113,10 @@ const routes = [
   }
 ]
 const router = new VueRouter({
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router
