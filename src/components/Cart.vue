@@ -73,7 +73,7 @@
         </div>
       </div>
       <a href="#" class="carttrigger">
-        <font-awesome-icon class="carticon" v-if="!isloading" :icon="['fas', 'shopping-cart']"/>
+        <font-awesome-icon class="icon" v-if="!isloading" :icon="['fas', 'shopping-cart']"/>
         <font-awesome-icon class="cartloading fa-pulse" v-else :icon="['fas', 'spinner']"/>
       </a>
     </div>
@@ -91,6 +91,9 @@ export default {
         product: 'Products',
         quantity: 'Quantity',
         price: 'Price'
+      },
+      productStatus: {
+        loading: ''
       }
     }
   },
@@ -99,7 +102,22 @@ export default {
       this.$emit('refreshCart')
     },
     removeItem (id) {
-      this.$emit('removeItem', id)
+      const vm = this
+      this.$store.dispatch('updateLoading', true)
+      vm.productStatus.loading = id
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${id}`
+      vm.$http.delete(api).then(response => {
+        if (response.data.success) {
+          vm.$bus.$emit('message:push', 'item removed', 'danger')
+          this.$store.dispatch('getCart')
+          vm.productStatus.loading = ''
+          this.$store.dispatch('updateLoading', false)
+        } else {
+          vm.$bus.$emit('message:push', 'connection fail', 'danger')
+          vm.productStatus.loading = ''
+          this.$store.dispatch('updateLoading', false)
+        }
+      })
     },
     applyCoupon () {
       const vm = this
@@ -181,37 +199,19 @@ export default {
   height: 23px;
   width: 23px;
   z-index: 10000;
-  border: 1px solid $black;
-  background-color: $black;
+  background-color: $background;
   border-radius: 25px;
   .cartcounter {
-    color: $yellow;
+    color: $lighter-background;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%) translateY(-18%);
+    transform: translateX(-50%) translateY(-10%);
   }
 }
 
 .cartframe {
-  border: 1px solid $black;
-  border-radius: 153px;
-  background-color: $white;
-  height: 50px;
-  width: 50px;
-  position: fixed;
+  @extend %fixed-btn;
   right: 10px;
-  bottom: 17px;
-  box-shadow: 0px 0px 11px $cover;
-  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
-  z-index: 10;
-  .carticon {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 25px;
-    color: $black;
-  }
 .shop-list{
   margin: auto;
   width:70%;
@@ -248,13 +248,6 @@ export default {
       display: block;
     }
 }
-
-  &:hover {
-    box-shadow: 0px 0px 11px $white;
-    .carticon{
-      color: $yellow;
-    }
-  }
 }
 .list-bottom{
   margin: 10px auto;
@@ -273,6 +266,15 @@ export default {
   display: none;
   text-align: center;
   box-shadow: 0 5px 12px 8px rgba(0, 0, 0, 0.5);
+  @media (max-width: 425px) {
+    right: -23px;
+  }
+  @media (max-width: 375px) {
+    right: -44px;
+  }
+  @media (max-width: 320px) {
+    right: -35px;
+  }
 }
 
 .pay-btn {
@@ -292,6 +294,7 @@ export default {
   top: 10.5%;
   transform: translate(-50%, -50%);
   font-size: 37px;
+  color: $background;
 }
 
 @media (max-width: 425px) {

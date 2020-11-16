@@ -128,7 +128,6 @@
         </template>
       </div>
     </main>
-    <Gotop></Gotop>
   </div>
 </template>
 
@@ -138,13 +137,11 @@ import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import Alert from '../components/Alert.vue'
 import productCarousel from '../components/productCarousel.vue'
-import Gotop from '../components/GoTop.vue'
 
 export default {
   components: {
     Alert,
-    productCarousel,
-    Gotop
+    productCarousel
   },
   data () {
     return {
@@ -197,19 +194,18 @@ export default {
           hoverText: 'Draw a Coupon'
         }
       ],
-      products: [],
       productShow: 0
     }
   },
   methods: {
     getProducts (page = 1) {
-      const vm = this
-      vm.isLoading = true
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/products` // 'https://vue-course-api.hexschool.io/api/eric840906/products'
-      vm.$http.get(api).then(response => {
-        vm.isLoading = false
-        vm.products = response.data.products
-      })
+      this.$store.dispatch('getProducts')
+      // const vm = this
+      // const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/products` // 'https://vue-course-api.hexschool.io/api/eric840906/products'
+      // vm.$http.get(api).then(response => {
+      //   vm.$store.dispatch('updateLoading', false)
+      //   vm.products = response.data.products
+      // })
     },
     commentGet () {
       const vm = this
@@ -259,6 +255,14 @@ export default {
     setCarousel (num) {
       const vm = this
       vm.productShow = num
+    }
+  },
+  beforeDestroy () {
+    this.$store.dispatch('updateLoading', true)
+  },
+  computed: {
+    products () {
+      return this.$store.state.products
     }
   },
   mounted () {
@@ -378,6 +382,9 @@ a.banner, a.banner.router-link-active{
 .welcome-sec{
   .row{
     justify-content: space-between;
+    @media (max-width: 425px) {
+      justify-content: center;
+    }
     &:last-child{
       justify-content: center;
       a+a{
@@ -387,17 +394,18 @@ a.banner, a.banner.router-link-active{
         }
       }
     }
+    .intro-block{
+      display: flex;
+      flex: 0 0 28%;
+      flex-direction: column;
+      text-align: center;
+      @media (max-width:425px) {
+        flex: 0 0 80%;
+      }
+    }
   }
 }
-.intro-block{
-  display: flex;
-  flex: 0 0 28%;
-  flex-direction: column;
-  text-align: center;
-  @media (max-width:425px) {
-    flex: 0 0 100%;
-  }
-}
+
 .pic-link{
   display: block;
   height: 35vh;

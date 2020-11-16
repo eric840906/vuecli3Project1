@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import axios from 'axios'
+import Vuex from 'vuex'
 import VueAxios from 'vue-axios'
 import Loading from 'vue-loading-overlay'
 import 'leaflet/dist/leaflet.css'
@@ -25,6 +26,7 @@ import currencyFilter from './filters/currency.js'
 import { Icon } from 'leaflet'
 import App from './App.vue'
 import router from './router'
+import store from './store'
 
 library.add(faMobileAlt, faStar, faMapMarkerAlt, faFacebook, faTwitter, faInstagram,
   faChevronLeft, faChevronRight, faAngleDoubleUp, faShoppingCart, faSpinner, faListAlt,
@@ -45,6 +47,7 @@ Vue.component('l-icon', LIcon)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.filter('currency', currencyFilter)
 Vue.use(VueAxios, axios)
+Vue.use(Vuex)
 Vue.use(VeeValidate, {
   events: 'input|blur'
 })
@@ -58,6 +61,7 @@ Icon.Default.mergeOptions({
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })
 // 路由守衛，更換頁面時觸發(同頁面重新整理無法觸發)，通常當作登入驗證

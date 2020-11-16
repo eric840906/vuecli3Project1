@@ -79,6 +79,19 @@ export default {
 @import "@/assets/helpers/_variables";
 @import 'src/assets/helpers/functionColors';
 
+.flip-enter-active, .flip-leave-active{
+    transition: all 0.3s;
+  }
+.flip-enter-active{
+  transition-delay: 0.3s;
+}
+.flip-enter {
+  transform: rotate3d(0, 1, 0, 90deg);
+}
+.flip-leave-active {
+  transform: rotate3d(0, 1, 0, 90deg);
+}
+
 %control-arrow{
   font-size: 50px;
   color: #0000003d;

@@ -54,10 +54,6 @@ export default {
       const totalWidth = singleLength * cardsNumber
       const scroll = this.$el.lastElementChild.scrollLeft + (this.$el.lastElementChild.offsetWidth)
       const width = this.$el.lastElementChild.offsetWidth
-      console.log('a=' + this.$el.lastElementChild.scrollLeft)
-      console.log('b=' + this.$el.lastElementChild.offsetWidth)
-      console.log('width=' + width + ',' + 'scroll=' + Math.ceil(scroll))
-      console.log('totalwidth=' + totalWidth)
       const scrollTo = scroll + cardsNumber >= totalWidth ? -width : scroll
       this.$el.lastElementChild.scrollTo({
         left: scrollTo,

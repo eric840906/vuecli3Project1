@@ -198,6 +198,12 @@ export default {
     const vm = this
     vm.screenSize = window.screen.availWidth
   },
+  mounted () {
+    this.$store.dispatch('updateLoading', false)
+  },
+  beforeDestroy () {
+    this.$store.dispatch('updateLoading', true)
+  },
   destroyed () {
     window.removeEventListener('resize', this.resizeHandler)
   }

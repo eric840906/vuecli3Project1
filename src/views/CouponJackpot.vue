@@ -370,7 +370,11 @@ export default {
       }
     }
   },
+  beforeDestroy () {
+    this.$store.dispatch('updateLoading', true)
+  },
   mounted () {
+    this.$store.dispatch('updateLoading', false)
     const scroll = this.$el.children[1].children[1].firstChild.firstChild.offsetTop
     $('.card').click(function (e) {
       $(e.currentTarget).addClass('flip')
@@ -549,7 +553,6 @@ export default {
   text-align: center;
   border: none;
   background: none;
-  font-family: "cwTeXYen", sans-serif;
 }
 .btn {
   border: solid;

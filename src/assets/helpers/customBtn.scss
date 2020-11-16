@@ -11,6 +11,34 @@
   }
 }
 
+%fixed-btn {
+  z-index: 1000;
+  background-color: $lighter-background;
+  border-radius: 153px;
+  position: fixed;
+  bottom: 20px;
+  box-shadow: 0px 0px 11px $black;
+  transition: 0.3s all;
+  height: 50px;
+  width: 50px;
+  .icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    color: $background;
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 11px $white;
+     background-color: $background;
+    .icon {
+      color: $lighter-background;
+    }
+  }
+}
+
 %no-hover-btn {
   background-color: $lighter-background;
   color: $link-text;

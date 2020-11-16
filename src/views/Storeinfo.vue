@@ -168,9 +168,13 @@ export default {
       // 一般情況下用flyTo直接用map.flyTo就行，但要在vue元件使用leaflet的功能都要有vm.$refs.ref(自己取的).mapObject.功能，例如這裡的vm.$refs.myMap.mapObject.flyTo()
     }
   },
+  beforeDestroy () {
+    this.$store.dispatch('updateLoading', true)
+  },
   mounted () {
     // 等地圖創建後執行
     this.$nextTick(() => {
+      this.$store.dispatch('updateLoading', false)
       // 獲得目前位置
       navigator.geolocation.getCurrentPosition(position => {
         const p = position.coords

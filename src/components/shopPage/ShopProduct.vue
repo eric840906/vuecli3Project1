@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
     <div class="container" style="padding-top:60px">
       <router-link to="/shoppingmain" class="bread-crumb"><font-awesome-icon :icon="['fas', 'chevron-left']" /> Back to Products</router-link>
       <section>
@@ -40,30 +39,20 @@
         </div>
       </section>
     </div>
-    <Cart
-      :cartInfo="cartList"
-      :isloading="productStatus.loading"
-      @refreshCart="getCart"
-      @removeItem="removeCart"
-    ></Cart>
   </div>
 </template>
 
 <script>
-import $ from 'jquery'
-import Cart from '../Cart.vue'
 import productCarousel from '../productCarousel.vue'
 
 export default {
   components: {
-    Cart,
     productCarousel
   },
   data () {
     return {
       produtId: '',
       product: {},
-      products: [],
       productStatus: {
         loading: ''
       },
@@ -78,34 +67,14 @@ export default {
         slidesToShow: 4,
         slidesToScroll: 4
       },
-      isLoading: false,
       productShow: 0,
       screenSize: undefined,
       otherProducts: []
     }
   },
-  // beforeRouteEnter (to, from, next) {
-  //   this.getProduct(to.params.id, (err, post) => {
-  //     next(vm => vm.setData(err, post))
-  //   })
-  // },
-  // beforeRouteUpdate (to, from, next) {
-  //   this.post = null
-  //   this.getProduct(to.params.id, (err, post) => {
-  //     this.setData(err, post)
-  //     next()
-  //   })
-  // },
   methods: {
     getProducts (page = 1) {
-      // 參數直接寫page=1代表page預設值為1
-      const vm = this
-      vm.isLoading = true
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/products`
-      vm.$http.get(api).then(response => {
-        vm.isLoading = false
-        vm.products = response.data.products
-      })
+      this.$store.dispatch('getProducts')
     },
     getProduct () {
       const vm = this
@@ -114,80 +83,21 @@ export default {
         if (response.data.success) {
           vm.product = response.data.product
           vm.productStatus.loading = ''
-          // const productId = vm.product.id
-          // console.log('idfound')
-          // return productId
-          // vm.otherProducts = vm.products.filter((item) => item.id !== productId)
         }
       })
     },
     getCart () {
       const vm = this
-      vm.isLoading = true
+      this.$store.dispatch('updateLoading', true)
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
       vm.$http.get(api).then(response => {
-        vm.isLoading = false
+        this.$store.dispatch('updateLoading', false)
         vm.cartList = response.data
       })
     },
     addCart (id, qty = 1) {
-      const vm = this
-      vm.productStatus.loading = id
-      vm.cartList.data.carts.filter(function (item) {
-        if (vm.productStatus.loading === item.product_id) {
-          vm.duplicate = true
-          vm.duplicateID = item.id
-          vm.quantity = qty + item.qty
-        }
-      })
-      if (vm.duplicate) {
-        const del = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${vm.duplicateID}`
-        const add = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
-        const duplicateItem = {
-          product_id: id,
-          qty: vm.quantity
-        }
-        vm.$http.delete(del).then(() => {
-          return vm.$http.post(add, { data: duplicateItem })
-        }).then((item) => {
-          vm.$bus.$emit('message:push', 'item added successfully', 'success')
-          vm.getCart()
-          vm.productStatus.loading = ''
-        })
-      } else {
-        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart`
-        const cart = {
-          product_id: id,
-          qty
-        }
-        vm.$http.post(api, { data: cart }).then(response => {
-          if (response.data.success) {
-            $('#productModal').modal('hide')
-            vm.productStatus.loading = ''
-            vm.$bus.$emit('message:push', 'item added successfully', 'success')
-            vm.getCart()
-          } else {
-            vm.$bus.$emit('message:push', 'connection fail', 'danger')
-            vm.productStatus.loading = ''
-          }
-        })
-      }
-      vm.quantity = 1
-    },
-    removeCart (id) {
-      const vm = this
-      vm.productStatus.loading = id
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_APIKEY}/cart/${id}`
-      vm.$http.delete(api).then(response => {
-        if (response.data.success) {
-          vm.$bus.$emit('message:push', 'item removed', 'danger')
-          vm.getCart()
-          vm.productStatus.loading = ''
-        } else {
-          vm.$bus.$emit('message:push', 'connection fail', 'danger')
-          vm.productStatus.loading = ''
-        }
-      })
+      const payload = { id: id, qty: qty }
+      this.$store.dispatch('addCart', payload)
     },
     toProduct (id) {
       const vm = this
@@ -216,13 +126,6 @@ export default {
     test () {
       location.reload()
     }
-    // setData (err, post) {
-    //   if (err) {
-    //     this.error = err.toString()
-    //   } else {
-    //     this.post = post
-    //   }
-    // }
   },
   created () {
     window.addEventListener('resize', this.resizeHandler)
@@ -232,14 +135,16 @@ export default {
     this.getCart()
     this.resizeHandler()
   },
-  // watch: {
-  //   // 如果路由有变化，会再次执行该方法
-  //   $route: 'getProduct'
-  // },
   computed: {
+    products () {
+      return this.$store.state.products
+    },
     carouselArr () {
-      return this.products.filter((item) => item.id !== this.product.id)
+      return this.products.filter((item) => item.id !== this.$route.params.productId)
     }
+  },
+  beforeDestroy () {
+    this.$store.dispatch('updateLoading', true)
   },
   destroyed () {
     window.removeEventListener('resize', this.resizeHandler)
