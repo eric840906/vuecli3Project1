@@ -267,7 +267,8 @@ export default {
   text-align: center;
   box-shadow: 0 5px 12px 8px rgba(0, 0, 0, 0.5);
   @media (max-width: 425px) {
-    right: -23px;
+    width: 364px;
+    right: -15px;
   }
   @media (max-width: 375px) {
     right: -44px;

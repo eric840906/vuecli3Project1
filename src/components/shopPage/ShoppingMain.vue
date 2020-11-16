@@ -107,7 +107,7 @@
 
           <div class="col-md-9 product-block">
             <div
-              class="col-md-4 mb-4"
+              class="col-md-4 mb-4 product-container"
               v-for="item in filterProducts"
               :key="item.id"
               style="cursor:pointer;"
@@ -325,6 +325,7 @@ export default {
 .product-block{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .badge{
   padding: 0;
@@ -343,7 +344,9 @@ export default {
 .lower-radius{
   border-radius: 0;
 }
-
+.product-container{
+  width: 290px;
+}
 .product-card{
   background-color: darken($lighter-background, 5%);
   height: 100%;
