@@ -297,19 +297,4 @@ export default {
   color: $background;
 }
 
-@media (max-width: 425px) {
-  .cartlist {
-    left: -32px;
-  }
-  .cartframe {
-  left: 10px;
-  }
-}
-
-@media (max-width: 320px) {
-  .cartlist {
-    width: 364px;
-    left: -42px;
-  }
-}
 </style>
