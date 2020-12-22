@@ -1,7 +1,7 @@
 <template>
   <div id="app">
      <Navbar></Navbar>
-    <div style="padding-top: 7vh;"></div>
+    <div style="padding-top: 8vh;"></div>
       <router-view/>
   </div>
 </template>

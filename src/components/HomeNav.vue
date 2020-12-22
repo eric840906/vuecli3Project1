@@ -62,6 +62,7 @@ export default {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.5);
   font-size: 30px;
+  line-height: 7vh;
   &:hover{
     text-decoration: none;
     color: rgba(255, 255, 255, 0.75);
