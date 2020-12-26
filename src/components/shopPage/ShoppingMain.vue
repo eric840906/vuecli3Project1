@@ -350,7 +350,7 @@ export default {
   background-color: darken($lighter-background, 5%);
   height: 100%;
   position: relative;
-  box-shadow: 0px 16px 3px -11px rgba(0, 0, 0, 0.075);
+  box-shadow: 0 15px 9px -4px #000000c9;
   display: flex;
   flex-direction: column;
   .cover{
