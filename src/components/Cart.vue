@@ -5,7 +5,7 @@
         <div class="cartcounter">{{ cartInfo.data.carts.length }}</div>
       </div>
       <div class="cartlist">
-        <h5>SHOPPING LIST</h5>
+        <h5 class="title">SHOPPING LIST</h5>
         <div class="scroll-menu">
           <table class="shop-list">
             <thead>
@@ -266,6 +266,11 @@ export default {
   display: none;
   text-align: center;
   box-shadow: 0 5px 12px 8px rgba(0, 0, 0, 0.5);
+  .title{
+    background-color: $background;
+    color: lighten($background,65%);
+    padding: 5px;
+  }
   @media (max-width: 425px) {
     width: 364px;
     right: -15px;

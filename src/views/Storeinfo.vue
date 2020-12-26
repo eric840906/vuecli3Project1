@@ -11,9 +11,26 @@
                 <div
                   v-for="item in data"
                   :key="item.id"
-                  class="info"
+                  class="col-12"
                 >
-                  <ul class="list-unstyled" style="text-align: center;">
+                  <div class="info">
+                    <h5 class="info-title">{{ item.name }}</h5>
+                    <div class="info-text">
+                      <p>
+                        <font-awesome-icon icon="mobile-alt" /><a :href="'tel:' + item.tel"> {{ item.tel }}</a>
+                      </p>
+                      <p>
+                        <font-awesome-icon icon="map-marker-alt" /> {{ item.address }}
+                      </p>
+                      <a
+                        href="#"
+                        class="btn"
+                        @click.prevent="Navigation(item.local[0], item.local[1])"
+                        >Navigation
+                      </a>
+                    </div>
+                  </div>
+                  <!-- <ul class="list-unstyled" style="text-align: center;">
                     <li style="border-bottom: 1px solid #d7cfcf;">
                       <h6>{{ item.name }}</h6>
                     </li>
@@ -32,7 +49,7 @@
                       @click.prevent="Navigation(item.local[0], item.local[1])"
                       >Navigation</a
                     >
-                  </ul>
+                  </ul> -->
                 </div>
               </div>
             </div>
@@ -194,29 +211,40 @@ export default {
 @import 'src/assets/helpers/functionColors';
 
 .info-list::-webkit-scrollbar {
-  width: 0.5em;
-  height: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 20px;
 }
 .info-list::-webkit-scrollbar-track {
-  box-shadow: transparent;
+  border-radius: 20px;
 }
 
 .info-list::-webkit-scrollbar-thumb {
-  background-image: $lighter-background;
-  outline: 1px solid $background;
+  background-image: radial-gradient(darken($lighter-background, 45%), transparent);
 }
 
 .info-list {
   overflow: scroll;
-  height: 50vh;
+  @media (min-width: 769px){
+    height: 50vh;
+  }
 }
 
 .info {
+  text-align: center;
   border-radius: 5px;
-  padding: 10px 14px;
   margin-bottom: 20px;
-  height: 210px;
   background-color: darken($lighter-background, 5%);
+  .info-title{
+    background-color: $background;
+    color: lighten($background,65%);
+    border-radius: 5px 5px 0 0;
+    padding: 8px;
+    margin: 0;
+  }
+  .info-text{
+    padding: 10px;
+  }
   a{
     color: $link-text;
     &:hover{
@@ -227,6 +255,7 @@ export default {
 .btn {
   width: 100%;
   margin-top: 10px;
+  border-radius: 5px;
   &:hover {
     border: none;
     background-color: $background;
@@ -236,7 +265,6 @@ export default {
 
 @media (max-width: 769px) {
   .info-list {
-    height: 35vh;
     overflow-y: hidden;
   }
   .rwd-info-scroll {
@@ -244,11 +272,6 @@ export default {
     display: flex;
     margin-right: -15px;
     margin-left: -15px;
-    .info {
-      flex: 0 0 100%;
-      max-width: 90%;
-      margin: 0 10px;
-    }
   }
 }
 </style>
