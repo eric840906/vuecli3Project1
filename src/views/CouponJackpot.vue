@@ -401,6 +401,7 @@ export default {
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "@/assets/helpers/_variables";
+@import 'src/assets/helpers/functionColors';
 
 .start-btn {
   position: absolute;
@@ -414,14 +415,16 @@ export default {
   .carousel-indicators{
     bottom: -28px;
     li{
-      background-color: $blue;
-      width: 10px;
-      height: 10px;
-      border-radius: 10px;
+      background-color: darken($lighter-background, 12%);
+      width: 50px;
+      height: 2px;
       border: none;
       &:nth-child(2){
         margin: 0 20px;
       }
+    }
+    .active{
+      background-color: $darker-text-color;
     }
   }
 }
@@ -472,15 +475,19 @@ export default {
   cursor: pointer;
   display: inline-block;
   width: auto !important;
-  border-radius: 15px;
+  background-color: $lighter-background;
   .front {
     background-position: center;
     background-image: url(https://i.pinimg.com/564x/c1/59/b4/c159b4738dae9c9d8d6417228024de8d.jpg);
+    box-shadow: 0 8px 10px -4px #00000091;
   }
   .back{
       height: 100%;
-      background-color: $card-background;
-      border-radius: 15px;
+      box-shadow: 0 8px 10px -4px #00000091;
+  }
+  .card-header{
+    background-color: $background;
+    color: lighten($background,65%);
   }
 }
 
@@ -556,8 +563,15 @@ export default {
 }
 .btn {
   border: solid;
-  color: inherit;
+  color: $background;
   margin: 10% auto 0 auto;
   width: 100%;
+  border-color: $background;
+  transition: ease 0.3s;
+  &:hover{
+    color: $lighter-background;
+    background-color: $background;
+    border-color: transparent;
+  }
 }
 </style>
