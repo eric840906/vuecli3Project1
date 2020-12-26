@@ -235,6 +235,7 @@ export default {
   border-radius: 5px;
   margin-bottom: 20px;
   background-color: darken($lighter-background, 5%);
+  box-shadow: 0 15px 9px -12px #000000c9;
   .info-title{
     background-color: $background;
     color: lighten($background,65%);
