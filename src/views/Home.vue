@@ -75,7 +75,7 @@
               <p>
                 Luxurious
               </p>
-              <a href="#">view products</a>
+              <router-link to="/shoppingmain">View Products</router-link>
             </div>
             <div class="category-card">
               <img class="img-fluid" src="https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=806&q=80" alt="">
@@ -83,7 +83,7 @@
               <p>
                 Elegant
               </p>
-              <a href="#">view products</a>
+              <router-link to="/shoppingmain">View Products</router-link>
             </div>
             <div class="category-card">
               <img class="img-fluid" src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
@@ -91,7 +91,7 @@
               <p>
                 Nostalgic
               </p>
-              <a href="#">view products</a>
+              <router-link to="/shoppingmain">View Products</router-link>
             </div>
           </div>
         </div>
