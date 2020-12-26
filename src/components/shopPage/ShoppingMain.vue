@@ -325,6 +325,9 @@ export default {
 .product-block{
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 }
 .badge{
   padding: 0;
