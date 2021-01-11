@@ -6,7 +6,9 @@
         <transition name="vanish">
           <router-link :key="banner[bannerShow].link" class="banner" :to="banner[bannerShow].link" :style="`backgroundImage: url(${screenSize > 425 ? banner[bannerShow].image: banner[bannerShow].rwdImage})`">
             <div class="banner-cover">
-              <h1 :class="{'brand-font' : banner[bannerShow].title==='Lächeln'}">{{banner[bannerShow].title}}</h1>
+              <h1 :class="{'brand-font' : banner[bannerShow].title==='Lächeln'}">
+                {{banner[bannerShow].title}}
+              </h1>
               <h2>{{banner[bannerShow].subTitle}}</h2>
             </div>
           </router-link>

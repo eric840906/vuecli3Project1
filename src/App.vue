@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <Navbar></Navbar>
+    <Navbar></Navbar>
     <div style="padding-top: 8vh;"></div>
       <router-view/>
   </div>
@@ -29,23 +29,28 @@ body{
 .fade-enter-active, .fade-leave-active {
     transition: all 0.3s;
     transition-duration: .25s;
-  }
+}
+.fade-enter .fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to, .fade-leave {
+  opacity: 1;
+}
 
-.fade-enter-active {
-  transition-delay: .25s;
+.drop-enter-active, .drop-leave-active {
+    transition: all 0.3s;
+    transition-duration: .25s;
 }
-.fade-enter{
-  opacity: 0;
-  transform: translateX(-400px);
+.drop-enter {
+  transform: translateY(-100%);
 }
-.fade-leave-active {
-  opacity: 0;
-  transform: translateX(400px);
+.drop-enter-to {
+  transform: translateY(0);
 }
 
 .faderev-enter-active, .faderev-leave-active {
-    transition: all 0.3s;
-    transition-duration: .25s;
+    transition: all 0.5s;
+    transition-duration: 0.5s;
   }
 
 .faderev-enter-active {
